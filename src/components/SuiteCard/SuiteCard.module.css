@@ -1,0 +1,121 @@
+.card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  min-width: 300px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* Front face */
+.front {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.frontOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+
+.frontIcon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.frontName {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  color: var(--color-white);
+  line-height: 1.2;
+}
+
+.frontLocation {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 2px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+/* Back face (hover reveal) */
+.back {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 28px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover .back {
+  opacity: 1;
+}
+
+.backIcon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 16px;
+  opacity: 0.85;
+}
+
+.backName {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--color-white);
+  margin-bottom: 12px;
+}
+
+.specs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.spec {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.backDesc {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 24px;
+}
+
+.viewLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-white);
+  transition: gap var(--transition-speed) ease;
+}
+
+.viewLink:hover {
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    min-width: 260px;
+  }
+}

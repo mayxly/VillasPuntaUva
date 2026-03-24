@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(file \"/Users/mayly/Developer/Villa Punta Uva/assets\"/*)",
+      "WebFetch(domain:awabeach.com)",
+      "Bash(npm --version)",
+      "Bash(npm create:*)",
+      "Bash(npx create-vite@5 . --template react)",
+      "Bash(npm install:*)",
+      "Bash(cp assets/logo-blue.png public/images/logos/)",
+      "Bash(cp assets/logo-blue-text.png public/images/logos/)",
+      "Bash(cp assets/logo-white.png public/images/logos/)",
+      "Bash(cp \"assets/logo-white-text.PNG\" public/images/logos/logo-white-text.png)",
+      "Bash(npx vite:*)"
+    ]
+  }
+}

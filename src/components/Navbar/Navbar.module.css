@@ -1,0 +1,240 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: background-color var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
+  color: var(--color-white);
+}
+
+.navbar.solid {
+  background-color: var(--color-white);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  color: var(--color-dark);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navLink {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: opacity var(--transition-speed) ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navLink:hover {
+  opacity: 0.7;
+}
+
+.navLink.active {
+  opacity: 0.7;
+}
+
+.chevron {
+  transition: transform var(--transition-speed) ease;
+}
+
+.chevron.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* Suites dropdown */
+.dropdownWrap {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 12px;
+  background: var(--color-white);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  min-width: 240px;
+  padding: 8px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(8px);
+  transition: opacity var(--transition-speed) ease,
+              transform var(--transition-speed) ease,
+              visibility var(--transition-speed) ease;
+}
+
+.dropdown.dropdownVisible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Invisible bridge so hover doesn't break between link and dropdown */
+.dropdownWrap::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.dropdownLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-dark);
+  transition: background-color var(--transition-speed) ease,
+              color var(--transition-speed) ease;
+}
+
+.dropdownLink:hover {
+  background-color: var(--color-bg-light);
+  color: var(--color-primary);
+}
+
+.dropdownLocation {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-text-light);
+}
+
+.bookBtn {
+  display: inline-block;
+  padding: 10px 28px;
+  background-color: var(--color-primary);
+  color: var(--color-white) !important;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background-color var(--transition-speed) ease;
+  white-space: nowrap;
+}
+
+.bookBtn:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 4px;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1001;
+}
+
+/* Drawer */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80%;
+  max-width: 350px;
+  background: var(--color-white);
+  z-index: 1002;
+  transform: translateX(100%);
+  transition: transform var(--transition-speed) ease;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.drawer.drawerOpen {
+  transform: translateX(0);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: var(--color-dark);
+  padding: 4px;
+  margin-bottom: 32px;
+}
+
+.drawerNav {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.drawerLink {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--color-dark);
+  transition: color var(--transition-speed) ease;
+}
+
+.drawerLink:hover {
+  color: var(--color-primary);
+}
+
+.drawerSub {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 0 0 16px;
+  border-left: 2px solid var(--color-secondary);
+  margin-left: 4px;
+}
+
+.drawerSubLink {
+  font-size: 0.9375rem;
+  color: var(--color-text-light);
+  transition: color var(--transition-speed) ease;
+}
+
+.drawerSubLink:hover {
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}

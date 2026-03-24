@@ -1,0 +1,42 @@
+.page {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--section-padding);
+  padding-top: calc(var(--nav-height) + 80px);
+  text-align: center;
+  gap: 12px;
+}
+
+.page h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+}
+
+.location {
+  color: var(--color-text-light);
+  font-size: 1.0625rem;
+}
+
+.coming {
+  color: var(--color-text-light);
+  margin-top: 8px;
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 28px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.backLink:hover {
+  background-color: var(--color-primary-dark);
+}
