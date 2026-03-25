@@ -40,7 +40,7 @@ export default function Navbar() {
           <Link to="/" className={styles.logoLink}>
             <img
               src={solid ? '/images/logos/logo-blue-text.png' : '/images/logos/logo-white-text.png'}
-              alt="Villas Arrecife"
+              alt="Villas Punta Uva"
               className={styles.logo}
             />
           </Link>

@@ -9,7 +9,7 @@ export default function AboutUs() {
         <div className={styles.textCol}>
           <h2 className={styles.heading}>About Us</h2>
           <p className={styles.text}>
-            At Villas Arrecife, we are passionate about sharing the magic of Costa Rica's Caribbean
+            At Villas Punta Uva, we are passionate about sharing the magic of Costa Rica's Caribbean
             coast with our guests. Our collection of hand-picked villas in Punta Uva and Arrecife
             offer the perfect blend of comfort and nature, each uniquely designed to provide an
             unforgettable escape surrounded by lush tropical gardens, pristine beaches, and abundant

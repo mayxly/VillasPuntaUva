@@ -25,6 +25,14 @@
   gap: 8px;
 }
 
+.field :global(.react-datepicker-wrapper) {
+  width: 100%;
+}
+
+.field :global(.react-datepicker__input-container) {
+  width: 100%;
+}
+
 .label {
   font-size: 0.8125rem;
   font-weight: 600;
@@ -69,8 +77,18 @@
 @media (max-width: 768px) {
   .card {
     flex-direction: column;
+    align-items: stretch;
     padding: 24px;
     gap: 16px;
+  }
+
+  .field {
+    width: 100%;
+    align-items: center;
+  }
+
+  .input {
+    width: 100%;
   }
 
   .btn {

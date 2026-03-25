@@ -48,7 +48,7 @@ export default function SuitesGallery() {
           Discover<br /><strong>our suites</strong>
         </h2>
         <p className={styles.subheading}>
-          We're more than a place to stay. Villas Arrecife is an invitation to pause, breathe, and
+          We're more than a place to stay. Villas Punta Uva is an invitation to pause, breathe, and
           reconnect. Explore our handcrafted villas designed for calm, where every element tells a story.
         </p>
       </div>

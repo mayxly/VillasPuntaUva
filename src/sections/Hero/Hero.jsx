@@ -10,7 +10,7 @@ export default function Hero() {
           alt=""
           className={styles.icon}
         />
-        <h1 className={styles.title}>Villas Arrecife</h1>
+        <h1 className={styles.title}>Villas Punta Uva</h1>
         <p className={styles.subtitle}>
           Private Beach Villas in Punta Uva & Arrecife, Costa Rica
         </p>

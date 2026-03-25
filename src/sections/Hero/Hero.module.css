@@ -5,15 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #3a7a87 0%, #5ca1b0 30%, #abd2d1 60%, #5ca1b0 100%);
-  background-size: 200% 200%;
-  animation: gradientShift 12s ease infinite;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  background: url('/images/exterior-home.jpg') center center / cover no-repeat;
 }
 
 .overlay {

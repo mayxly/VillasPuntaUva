@@ -99,7 +99,7 @@ export default function Reviews() {
     <section className={styles.section}>
       <div className={styles.container}>
         <p className={styles.intro}>
-          At Villas Arrecife in Punta Uva, Costa Rica, we offer a warm, authentic experience that
+          At Villas Punta Uva in Punta Uva, Costa Rica, we offer a warm, authentic experience that
           connects you with the nature and culture of Costa Rica's Southern Caribbean.
         </p>
 

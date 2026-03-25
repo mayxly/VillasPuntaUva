@@ -10,7 +10,7 @@ export default function Footer() {
           <div className={styles.brand}>
             <img
               src="/images/logos/logo-white-text.png"
-              alt="Villas Arrecife"
+              alt="Villas Punta Uva"
               className={styles.logo}
             />
             <p className={styles.tagline}>
@@ -51,7 +51,7 @@ export default function Footer() {
       </div>
 
       <div className={styles.bottom}>
-        <p>&copy; {new Date().getFullYear()} Villas Arrecife. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Villas Punta Uva. All rights reserved.</p>
       </div>
     </footer>
   )
