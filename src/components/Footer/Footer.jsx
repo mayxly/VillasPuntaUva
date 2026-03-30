@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FaInstagram, FaFacebookF, FaTripadvisor } from 'react-icons/fa'
+import { suites } from '../../data/suites'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -26,6 +27,15 @@ export default function Footer() {
               <Link to="/about">About Us</Link>
               <Link to="/amenities">Amenities</Link>
               <Link to="/contact">Contact Us</Link>
+            </nav>
+          </div>
+
+          <div className={styles.column}>
+            <h4 className={styles.columnTitle}>Suites</h4>
+            <nav className={styles.links}>
+              {suites.map((suite) => (
+                <Link key={suite.id} to={`/suites/${suite.slug}`}>{suite.name}</Link>
+              ))}
             </nav>
           </div>
 

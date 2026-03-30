@@ -6,8 +6,11 @@
   --color-text: #334155;
   --color-text-light: #64748b;
   --color-white: #ffffff;
-  --color-bg-light: #f8fafb;
-  --color-bg-footer: #1e293b;
+  --color-bg-light: #f5f0eb;
+  --color-bg-sand: #ece5dd;
+  --color-bg-blue: #e8f0f3;
+  --color-bg-taupe: #eae4dc;
+  --color-bg-footer: #3d7a87;
 
   --font-heading: 'DM Serif Display', serif;
   --font-body: 'Inter', sans-serif;
@@ -35,6 +38,7 @@ body {
   font-family: var(--font-body);
   color: var(--color-text);
   line-height: 1.6;
+  background-color: var(--color-bg-light);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
