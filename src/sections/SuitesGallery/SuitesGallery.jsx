@@ -81,6 +81,7 @@ export default function SuitesGallery() {
                   name={suite.name}
                   location={suite.location}
                   slug={suite.slug}
+                  image={suite.image}
                   bedrooms={suite.bedrooms}
                   bathrooms={suite.bathrooms}
                   description={suite.description}

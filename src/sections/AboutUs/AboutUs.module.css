@@ -1,46 +1,53 @@
 .section {
-  padding: var(--section-padding);
-  background-color: var(--color-bg-light);
-}
-
-.container {
-  max-width: var(--container-max-width);
-  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
+  grid-template-columns: 420px 1fr;
+  min-height: 560px;
 }
 
-.textCol {
+/* Left – photo with text overlay */
+.photoSide {
+  position: relative;
+  background: url('/images/interior-home.jpg') center center / cover no-repeat;
+  display: flex;
+  align-items: flex-end;
+}
+
+.photoSide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.15) 50%,
+    transparent 100%
+  );
+}
+
+.photoContent {
+  position: relative;
+  z-index: 1;
+  padding: 64px 80px;
+  max-width: 750px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.heading {
-  font-size: 2.25rem;
-}
-
 .text {
-  font-size: 1.0625rem;
-  line-height: 1.8;
-  color: var(--color-text);
-}
-
-.imageCol {
-  border-radius: var(--border-radius);
-  overflow: hidden;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .btn {
   display: inline-block;
   align-self: flex-start;
-  padding: 12px 32px;
+  padding: 10px 28px;
   background-color: var(--color-primary);
   color: var(--color-white);
   border-radius: 50px;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 600;
   transition: background-color var(--transition-speed) ease;
 }
@@ -49,21 +56,42 @@
   background-color: var(--color-primary-dark);
 }
 
+/* Left – dark brand panel */
+.brandSide {
+  background-color: #3e3632;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.logo {
+  width: 100%;
+  max-width: 800px;
+  opacity: 0.95;
+}
+
 @media (max-width: 768px) {
-  .container {
+  .section {
     grid-template-columns: 1fr;
-    gap: 32px;
   }
 
-  .textCol {
-    order: 1;
+  .photoSide {
+    min-height: 420px;
   }
 
-  .imageCol {
-    order: 2;
+  .photoContent {
+    padding: 40px 24px;
+    max-width: 100%;
   }
 
-  .heading {
-    font-size: 1.75rem;
+  .brandSide {
+    padding: 48px 24px;
+    min-height: 280px;
+  }
+
+  .logo {
+    width: 300px;
   }
 }

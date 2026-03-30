@@ -5,12 +5,18 @@ import { HiArrowRight } from 'react-icons/hi'
 import PlaceholderImage from '../PlaceholderImage/PlaceholderImage'
 import styles from './SuiteCard.module.css'
 
-export default function SuiteCard({ name, location, slug, bedrooms, bathrooms, description }) {
+export default function SuiteCard({ name, location, slug, image, bedrooms, bathrooms, description }) {
   return (
     <div className={styles.card}>
       {/* Front face — image + name overlay */}
       <div className={styles.front}>
-        <PlaceholderImage label={name} aspectRatio="3/4" />
+        {image ? (
+          <div className={styles.imageWrap}>
+            <img src={image} alt={name} className={styles.suiteImage} />
+          </div>
+        ) : (
+          <PlaceholderImage label={name} aspectRatio="3/4" />
+        )}
         <div className={styles.frontOverlay}>
           <img
             src="/images/logos/logo-white.png"
