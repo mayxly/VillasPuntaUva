@@ -129,7 +129,36 @@
 
 @media (max-width: 600px) {
   .imageWrap {
-    aspect-ratio: 5/4;
+    aspect-ratio: 4/5;
+  }
+
+  .back {
+    padding: 24px 20px;
+  }
+
+  .backIcon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 12px;
+  }
+
+  .backName {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+
+  .backDesc {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .spec {
+    font-size: 0.8125rem;
+  }
+
+  .viewLink {
+    font-size: 0.8125rem;
   }
 }
 

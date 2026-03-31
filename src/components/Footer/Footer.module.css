@@ -3,6 +3,45 @@
   color: rgba(255, 255, 255, 0.85);
 }
 
+.topBanner {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.topBannerInner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.topBannerHeading {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  color: var(--color-white);
+  line-height: 1.2;
+}
+
+.topBannerSub {
+  font-size: 1rem;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.topBannerPhone {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  color: var(--color-white);
+  white-space: nowrap;
+  transition: color var(--transition-speed) ease;
+}
+
+.topBannerPhone:hover {
+  color: var(--color-secondary);
+}
+
 .container {
   max-width: var(--container-max-width);
   margin: 0 auto;
@@ -99,6 +138,15 @@
 }
 
 @media (max-width: 768px) {
+  .topBannerInner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .topBannerPhone {
+    font-size: 2.5rem;
+  }
+
   .grid {
     grid-template-columns: 1fr 1fr;
     gap: 36px;
@@ -113,4 +161,5 @@
   .grid {
     grid-template-columns: 1fr;
   }
+
 }

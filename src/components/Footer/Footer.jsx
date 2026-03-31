@@ -6,6 +6,16 @@ import styles from './Footer.module.css'
 export default function Footer() {
   return (
     <footer className={styles.footer}>
+      <div className={styles.topBanner}>
+        <div className={styles.topBannerInner}>
+          <div className={styles.topBannerText}>
+            <h3 className={styles.topBannerHeading}>Ready to plan your escape?</h3>
+            <p className={styles.topBannerSub}>Give us a call — we'd love to hear from you.</p>
+          </div>
+          <a href="tel:+50661459916" className={styles.topBannerPhone}>+506 6145 9916</a>
+        </div>
+      </div>
+
       <div className={styles.container}>
         <div className={styles.grid}>
           <div className={styles.brand}>
@@ -42,10 +52,10 @@ export default function Footer() {
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>Contact</h4>
             <div className={styles.contactInfo}>
-              <p>Punta Uva, Limón</p>
+              <p>Punta Uva Puerto Viejo</p>
               <p>Costa Rica</p>
-              <p>+506 0000-0000</p>
-              <p>info@villasarrecife.com</p>
+              <p>+506 6145 9916</p>
+              <p>info@villaspuntauva.com</p>
             </div>
           </div>
 
