@@ -45,7 +45,7 @@ export default function SuitesGallery() {
           className={styles.icon}
         />
         <h2 className={styles.heading}>
-          Discover<br /><strong>our suites</strong>
+          Discover our suites
         </h2>
         <p className={styles.subheading}>
           We're more than a place to stay. Villas Punta Uva is an invitation to pause, breathe, and

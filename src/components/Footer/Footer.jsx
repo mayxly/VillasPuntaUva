@@ -10,7 +10,7 @@ export default function Footer() {
         <div className={styles.topBannerInner}>
           <div className={styles.topBannerText}>
             <h3 className={styles.topBannerHeading}>Ready to plan your escape?</h3>
-            <p className={styles.topBannerSub}>Give us a call — we'd love to hear from you.</p>
+            <p className={styles.topBannerSub}>Shoot us a text — we'd love to hear from you.</p>
           </div>
           <a href="tel:+50661459916" className={styles.topBannerPhone}>+506 6145 9916</a>
         </div>
@@ -35,7 +35,7 @@ export default function Footer() {
               <Link to="/">Home</Link>
               <Link to="/suites">Suites</Link>
               <Link to="/about">About Us</Link>
-              <Link to="/amenities">Amenities</Link>
+              <Link to="/attractions">Attractions</Link>
               <Link to="/contact">Contact Us</Link>
             </nav>
           </div>

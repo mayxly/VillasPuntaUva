@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage/HomePage'
 import SuitesPage from './pages/SuitesPage/SuitesPage'
 import SuiteDetailPage from './pages/SuiteDetailPage/SuiteDetailPage'
 import AboutPage from './pages/AboutPage/AboutPage'
-import AmenitiesPage from './pages/AmenitiesPage/AmenitiesPage'
+import AttractionsPage from './pages/AttractionsPage/AttractionsPage'
 import ContactPage from './pages/ContactPage/ContactPage'
 
 export default function App() {
@@ -19,7 +19,7 @@ export default function App() {
           <Route path="/suites" element={<SuitesPage />} />
           <Route path="/suites/:slug" element={<SuiteDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/amenities" element={<AmenitiesPage />} />
+          <Route path="/attractions" element={<AttractionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>

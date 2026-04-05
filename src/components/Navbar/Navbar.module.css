@@ -36,7 +36,7 @@
 }
 
 .logo {
-  height: 50px;
+  height: 40px;
   width: auto;
 }
 
@@ -235,6 +235,14 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    height: 56px;
+  }
+
+  .logo {
+    height: 30px;
+  }
+
   .desktopNav {
     display: none;
   }

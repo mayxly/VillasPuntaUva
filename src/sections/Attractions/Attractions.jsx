@@ -1,0 +1,28 @@
+import { Link } from 'react-router-dom'
+import { attractions } from '../../data/attractions'
+import styles from './Attractions.module.css'
+
+export default function Attractions() {
+  return (
+    <section className={styles.section}>
+      <div className={styles.container}>
+        <h2 className={styles.heading}>Explore Punta Uva</h2>
+        <p className={styles.subheading}>
+          Discover the best experiences the Caribbean coast has to offer
+        </p>
+        <div className={styles.grid}>
+          {attractions.map((item) => (
+            <div key={item.id} className={styles.card}>
+              <img src={item.image} alt={item.name} className={styles.image} />
+              <div className={styles.overlay} />
+              <h3 className={styles.title}>{item.name}</h3>
+            </div>
+          ))}
+        </div>
+        <div className={styles.btnWrap}>
+          <Link to="/attractions" className={styles.btn}>View Attractions</Link>
+        </div>
+      </div>
+    </section>
+  )
+}

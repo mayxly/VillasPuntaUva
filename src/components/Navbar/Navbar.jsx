@@ -29,7 +29,7 @@ export default function Navbar() {
     { to: '/', label: 'Home' },
     { to: '/suites', label: 'Suites', hasDropdown: true },
     { to: '/about', label: 'About Us' },
-    { to: '/amenities', label: 'Amenities' },
+    { to: '/attractions', label: 'Attractions' },
     { to: '/contact', label: 'Contact Us' },
   ]
 
@@ -39,7 +39,7 @@ export default function Navbar() {
         <div className={styles.container}>
           <Link to="/" className={styles.logoLink}>
             <img
-              src={solid ? '/images/logos/logo-blue-text.png' : '/images/logos/logo-white-text.png'}
+              src={solid ? '/images/logos/logo-black-text.png' : '/images/logos/logo-white-text.png'}
               alt="Villas Punta Uva"
               className={styles.logo}
             />
