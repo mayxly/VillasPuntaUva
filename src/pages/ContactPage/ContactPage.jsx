@@ -17,11 +17,6 @@ export default function ContactPage() {
             need to ensure your experience is nothing short of exceptional.
           </p>
         </div>
-        <img
-          src="/images/logos/logo-white.png"
-          alt=""
-          className={styles.watermark}
-        />
       </section>
 
       <section className={styles.info}>

@@ -117,11 +117,6 @@ export default function SuitesPage() {
             Browse private villas shaped for quiet mornings, salt-air afternoons, and effortless Caribbean stays.
           </p>
         </div>
-        <img
-          src="/images/logos/logo-white.png"
-          alt=""
-          className={styles.watermark}
-        />
       </section>
 
       <BookingWidget

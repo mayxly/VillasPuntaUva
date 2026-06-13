@@ -47,18 +47,6 @@
   text-align: center;
 }
 
-.watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 360px;
-  height: 360px;
-  opacity: 0.08;
-  z-index: 1;
-  pointer-events: none;
-}
-
 /* Info section */
 .info {
   padding: 80px 24px;
@@ -119,11 +107,6 @@
 
   .heroTitle {
     font-size: 2.25rem;
-  }
-
-  .watermark {
-    width: 240px;
-    height: 240px;
   }
 
   .cards {
