@@ -12,7 +12,13 @@ export default function SuiteCard({ name, location, slug, image, bedrooms, bathr
       <div className={styles.front}>
         {image ? (
           <div className={styles.imageWrap}>
-            <img src={image} alt={name} className={styles.suiteImage} />
+            <img
+              src={image}
+              alt={name}
+              className={styles.suiteImage}
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         ) : (
           <PlaceholderImage label={name} aspectRatio="3/4" />

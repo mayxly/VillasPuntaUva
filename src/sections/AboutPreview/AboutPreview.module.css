@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   min-height: 560px;
-  background: url('/images/beach-home.jpg') center center / cover no-repeat;
+  background: url('/images/hero/beach-home.webp') center center / cover no-repeat;
   display: flex;
   align-items: flex-end;
   padding: 0;

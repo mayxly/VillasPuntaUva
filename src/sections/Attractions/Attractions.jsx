@@ -13,7 +13,13 @@ export default function Attractions() {
         <div className={styles.grid}>
           {attractions.map((item) => (
             <div key={item.id} className={styles.card}>
-              <img src={item.image} alt={item.name} className={styles.image} />
+              <img
+                src={item.image}
+                alt={item.name}
+                className={styles.image}
+                loading="lazy"
+                decoding="async"
+              />
               <div className={styles.overlay} />
               <h3 className={styles.title}>{item.name}</h3>
             </div>

@@ -7,7 +7,7 @@
 /* Left – photo with text overlay */
 .photoSide {
   position: relative;
-  background: url('/images/interior-home.jpg') center center / cover no-repeat;
+  background: url('/images/hero/interior-home.webp') center center / cover no-repeat;
   display: flex;
   align-items: flex-end;
 }

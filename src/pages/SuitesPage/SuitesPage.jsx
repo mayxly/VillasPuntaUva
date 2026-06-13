@@ -22,7 +22,13 @@ function SuiteListingCard({ suite }) {
   return (
     <Link to={`/suites/${suite.slug}`} className={styles.suiteCard}>
       <div className={styles.cardImageWrap}>
-        <img src={suite.image} alt={suite.name} className={styles.cardImage} />
+        <img
+          src={suite.image}
+          alt={suite.name}
+          className={styles.cardImage}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
       <div className={styles.cardBody}>
         <div className={styles.cardHeader}>
