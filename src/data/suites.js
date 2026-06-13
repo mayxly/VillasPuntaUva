@@ -7,6 +7,8 @@ export const suites = [
     image: '/images/suites/mariposa.jpg',
     bedrooms: 3,
     bathrooms: 2,
+    sleeps: 6,
+    pricePerNight: 325,
     description: 'An elegant villa with butterfly gardens, modern amenities, and panoramic views of the Caribbean coast.',
   },
   {
@@ -17,6 +19,8 @@ export const suites = [
     image: '/images/suites/tucan.jpg',
     bedrooms: 2,
     bathrooms: 2,
+    sleeps: 4,
+    pricePerNight: 245,
     description: 'A vibrant jungle villa where toucans perch in the canopy above and the sounds of nature create the perfect soundtrack.',
   },
   {
@@ -27,6 +31,8 @@ export const suites = [
     image: '/images/suites/presidente.jpg',
     bedrooms: 4,
     bathrooms: 3,
+    sleeps: 8,
+    pricePerNight: 475,
     description: 'Our most spacious property featuring premium finishes, a private pool, and direct access to Punta Uva beach.',
   },
   {
@@ -37,6 +43,8 @@ export const suites = [
     image: '/images/suites/colibri.jpg',
     bedrooms: 2,
     bathrooms: 1,
+    sleeps: 4,
+    pricePerNight: 215,
     description: 'A cozy tropical retreat surrounded by lush vegetation, where hummingbirds visit daily and the beach is just moments away.',
   },
   {
@@ -47,6 +55,8 @@ export const suites = [
     image: '/images/suites/angel.jpg',
     bedrooms: 2,
     bathrooms: 2,
+    sleeps: 4,
+    pricePerNight: 255,
     description: 'A serene hideaway nestled among tropical gardens with stunning ocean views and a spacious open-air living area.',
   },
   {
@@ -57,6 +67,8 @@ export const suites = [
     image: '/images/suites/cacha.jpg',
     bedrooms: 3,
     bathrooms: 2,
+    sleeps: 6,
+    pricePerNight: 345,
     description: 'A stunning all natural wood home with a private natural pool, spacious grounds, and beautiful decks perfect for morning coffee.',
   },
   {
@@ -67,6 +79,8 @@ export const suites = [
     image: '/images/suites/carey.jpg',
     bedrooms: 3,
     bathrooms: 2,
+    sleeps: 6,
+    pricePerNight: 315,
     description: 'A charming beachside retreat with natural wood finishes and a private garden, just steps from the pristine Arrecife shoreline.',
   },
 ]
