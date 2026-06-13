@@ -37,8 +37,8 @@ function SuiteListingCard({ suite }) {
             <p className={styles.cardLocation}>{suite.location}, Costa Rica</p>
           </div>
           <p className={styles.price}>
-            {priceFormatter.format(suite.pricePerNight)}
-            <span>/night</span>
+            <span className={styles.priceMeta}>from</span> {priceFormatter.format(suite.pricePerNight)}
+            <span className={styles.priceNight}>/night</span>
           </p>
         </div>
         <div className={styles.specs} aria-label={`${suite.name} details`}>
@@ -125,21 +125,7 @@ export default function SuitesPage() {
         onSearch={handleSearch}
       />
 
-      <section className={styles.listings} aria-labelledby="suite-listings-title">
-        <div className={styles.listingHeader}>
-          <img
-            src="/images/logos/logo-blue.png"
-            alt=""
-            className={styles.listingIcon}
-          />
-          <h2 id="suite-listings-title" className={styles.listingTitle}>
-            Find your villa
-          </h2>
-          <p className={styles.listingText}>
-            Compare each stay at a glance and choose the space that fits your group.
-          </p>
-        </div>
-
+      <section className={styles.listings} aria-label="Suite listings">
         {error && (
           <p className={styles.message} role="alert">
             {error}

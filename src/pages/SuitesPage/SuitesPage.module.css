@@ -57,31 +57,6 @@
   padding: 56px 24px 96px;
 }
 
-.listingHeader {
-  max-width: 640px;
-  margin: 0 auto 40px;
-  text-align: center;
-}
-
-.listingIcon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 16px;
-}
-
-.listingTitle {
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  font-weight: 400;
-  color: var(--color-dark);
-  margin-bottom: 12px;
-}
-
-.listingText {
-  color: var(--color-text-light);
-  line-height: 1.7;
-}
-
 .message {
   max-width: 680px;
   margin: 0 auto 24px;
@@ -209,14 +184,22 @@
   text-align: right;
 }
 
-.price span {
-  display: block;
-  margin-top: 2px;
+.priceMeta,
+.priceNight {
   color: var(--color-text-light);
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+.priceMeta {
+  display: inline;
+}
+
+.priceNight {
+  display: block;
+  margin-top: 2px;
 }
 
 .specs {
@@ -281,10 +264,6 @@
     padding-top: 44px;
   }
 
-  .listingTitle {
-    font-size: 2rem;
-  }
-
   .filterBar {
     align-items: stretch;
     flex-direction: column;
@@ -314,11 +293,6 @@
 
   .price {
     text-align: left;
-  }
-
-  .price span {
-    display: inline;
-    margin-left: 4px;
   }
 
   .specs {

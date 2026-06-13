@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
+import ScrollRestoration from './components/ScrollRestoration/ScrollRestoration'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import HomePage from './pages/HomePage/HomePage'
 import SuitesPage from './pages/SuitesPage/SuitesPage'
@@ -12,6 +13,7 @@ import ContactPage from './pages/ContactPage/ContactPage'
 export default function App() {
   return (
     <>
+      <ScrollRestoration />
       <Navbar />
       <main>
         <Routes>
