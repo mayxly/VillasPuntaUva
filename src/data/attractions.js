@@ -1,22 +1,22 @@
 export const attractions = [
   {
     id: 1,
-    name: 'Beaches & Snorkeling',
+    name: 'Ocean Adventures',
     image: '/images/attractions/snorkeling.webp',
   },
   {
     id: 2,
-    name: 'Wildlife & Nature',
+    name: 'Jungle & Wildlife',
     image: '/images/attractions/wildlife.webp',
   },
   {
     id: 3,
-    name: 'Hiking & Trails',
-    image: '/images/attractions/hiking.webp',
+    name: 'Culture & Wellness',
+    image: '/images/attractions/wellness.webp',
   },
   {
     id: 4,
-    name: 'Local Cuisine',
-    image: '/images/attractions/cuisine.webp',
+    name: 'Tours & Nightlife',
+    image: '/images/attractions/night-3.webp',
   },
 ]
