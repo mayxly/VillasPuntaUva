@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('/images/hero/exterior-home.webp') center center / cover no-repeat;
+  background: url('/images/hero/interior-home.webp') center center / cover no-repeat;
 }
 
 .overlay {
