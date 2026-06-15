@@ -2,6 +2,7 @@ import styles from './AttractionsPage.module.css'
 
 const activitySections = [
   {
+    id: 'outdoor-adventures',
     title: 'Outdoor Adventures',
     subtitle: 'Water Activities',
     contact: 'MESSAGE 6145 9916 TO BOOK',
@@ -29,6 +30,7 @@ const activitySections = [
     ],
   },
   {
+    id: 'diving',
     title: 'Diving',
     subtitle: 'In the Caribbean',
     provider: 'Punta Uva, Dive Center',
@@ -57,6 +59,7 @@ const activitySections = [
     ],
   },
   {
+    id: 'canopy-tour',
     title: 'Canopy Tour',
     subtitle: 'Nativo Adventures',
     contact: 'MESSAGE 6145 9916 TO BOOK',
@@ -84,6 +87,7 @@ const activitySections = [
     ],
   },
   {
+    id: 'surf-lessons',
     title: 'Surf Lessons',
     contact: 'MESSAGE 6145 9916 TO BOOK',
     images: [
@@ -113,6 +117,7 @@ const activitySections = [
     ],
   },
   {
+    id: 'chocolate-tours',
     title: 'Chocolate Tours',
     schedule: 'Tours offered every Monday through Saturday at 10 am and 2pm. No tours on Sunday',
     contact: 'MESSAGE 6145 9916 TO BOOK',
@@ -157,6 +162,7 @@ const activitySections = [
     ],
   },
   {
+    id: 'horseback-riding',
     title: 'Horseback Riding',
     subtitle: 'Caribe Horse Riding Club',
     schedule: 'Monday to Friday from 9am - 5:30pm. Saturday from 9am - 12pm. Sunday closed',
@@ -188,6 +194,7 @@ const activitySections = [
     ],
   },
   {
+    id: 'nature',
     title: 'Nature',
     subtitle: 'Explore the Caribbean',
     images: [
@@ -214,6 +221,7 @@ const activitySections = [
     ],
   },
   {
+    id: 'activities',
     title: 'Activities',
     subtitle: 'Explore the Caribbean',
     images: [
@@ -245,6 +253,7 @@ const activitySections = [
     ],
   },
   {
+    id: 'night-life',
     title: 'Night Life',
     images: [
       '/images/attractions/cuisine.webp',
@@ -348,7 +357,7 @@ function ActivityItem({ item }) {
 
 function ActivitySection({ section, index }) {
   return (
-    <section className={`${styles.section} ${index % 2 ? styles.alt : ''}`}>
+    <section id={section.id} className={`${styles.section} ${index % 2 ? styles.alt : ''}`}>
       <div className={styles.sectionInner}>
         <div className={styles.sectionIntro}>
           {section.eyebrow && <p className={styles.eyebrow}>{section.eyebrow}</p>}

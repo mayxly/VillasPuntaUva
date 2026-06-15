@@ -12,7 +12,11 @@ export default function Attractions() {
         </p>
         <div className={styles.grid}>
           {attractions.map((item) => (
-            <div key={item.id} className={styles.card}>
+            <Link
+              key={item.id}
+              to={`/attractions#${item.targetId}`}
+              className={styles.card}
+            >
               <img
                 src={item.image}
                 alt={item.name}
@@ -22,7 +26,7 @@ export default function Attractions() {
               />
               <div className={styles.overlay} />
               <h3 className={styles.title}>{item.name}</h3>
-            </div>
+            </Link>
           ))}
         </div>
         <div className={styles.btnWrap}>
