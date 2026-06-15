@@ -43,18 +43,23 @@
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 12px;
 }
 
 .navLink {
+  position: relative;
   font-size: 0.9375rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  transition: opacity var(--transition-speed) ease;
+  transition: background-color var(--transition-speed) ease,
+              color var(--transition-speed) ease,
+              opacity var(--transition-speed) ease;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  padding: 8px 14px;
+  border-radius: 999px;
 }
 
 .navLink:hover {
@@ -62,7 +67,13 @@
 }
 
 .navLink.active {
-  opacity: 0.7;
+  opacity: 1;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.solid .navLink.active {
+  color: var(--color-primary-dark);
 }
 
 .chevron {
@@ -205,14 +216,22 @@
 }
 
 .drawerLink {
+  display: block;
   font-size: 1.125rem;
   font-weight: 500;
   color: var(--color-dark);
+  padding: 10px 14px;
+  border-radius: 999px;
   transition: color var(--transition-speed) ease;
 }
 
 .drawerLink:hover {
   color: var(--color-primary);
+}
+
+.drawerLinkActive {
+  color: var(--color-primary-dark);
+  font-weight: 800;
 }
 
 .drawerSub {

@@ -33,6 +33,20 @@ export default function Navbar() {
     { to: '/contact', label: 'Contact Us' },
   ]
 
+  const isActiveLink = (link) => {
+    if (link.hasDropdown) return location.pathname.startsWith(link.to)
+    return location.pathname === link.to
+  }
+
+  const handleNavClick = (event, link) => {
+    if (location.pathname !== link.to) return
+
+    event.preventDefault()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setMobileOpen(false)
+    setSuitesOpen(false)
+  }
+
   return (
     <>
       <header className={`${styles.navbar} ${solid ? styles.solid : ''}`}>
@@ -56,7 +70,8 @@ export default function Navbar() {
                 >
                   <Link
                     to={link.to}
-                    className={`${styles.navLink} ${location.pathname.startsWith('/suites') ? styles.active : ''}`}
+                    className={`${styles.navLink} ${isActiveLink(link) ? styles.active : ''}`}
+                    onClick={(event) => handleNavClick(event, link)}
                   >
                     {link.label}
                     <HiChevronDown size={16} className={`${styles.chevron} ${suitesOpen ? styles.chevronOpen : ''}`} />
@@ -78,7 +93,8 @@ export default function Navbar() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`${styles.navLink} ${location.pathname === link.to ? styles.active : ''}`}
+                  className={`${styles.navLink} ${isActiveLink(link) ? styles.active : ''}`}
+                  onClick={(event) => handleNavClick(event, link)}
                 >
                   {link.label}
                 </Link>
@@ -113,7 +129,8 @@ export default function Navbar() {
             <div key={link.to}>
               <Link
                 to={link.to}
-                className={styles.drawerLink}
+                className={`${styles.drawerLink} ${isActiveLink(link) ? styles.drawerLinkActive : ''}`}
+                onClick={(event) => handleNavClick(event, link)}
               >
                 {link.label}
               </Link>
