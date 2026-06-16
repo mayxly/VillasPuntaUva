@@ -84,7 +84,7 @@ export default function SuitesGallery() {
                   image={suite.image}
                   bedrooms={suite.bedrooms}
                   bathrooms={suite.bathrooms}
-                  description={suite.description}
+                  description={suite.shortDescription}
                 />
               </div>
             ))}

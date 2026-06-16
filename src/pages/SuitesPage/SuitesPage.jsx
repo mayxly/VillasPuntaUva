@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { IoBedOutline, IoPeopleOutline } from 'react-icons/io5'
 import { LuBath } from 'react-icons/lu'
 import BookingWidget from '../../sections/BookingWidget/BookingWidget'
-import { suites } from '../../data/suites'
+import { getLowestNightlyRate, suites } from '../../data/suites'
 import styles from './SuitesPage.module.css'
 
 const initialBookingValue = {
@@ -37,7 +37,7 @@ function SuiteListingCard({ suite }) {
             <p className={styles.cardLocation}>{suite.location}, Costa Rica</p>
           </div>
           <p className={styles.price}>
-            <span className={styles.priceMeta}>from</span> {priceFormatter.format(suite.pricePerNight)}
+            <span className={styles.priceMeta}>from</span> {priceFormatter.format(getLowestNightlyRate(suite))}
             <span className={styles.priceNight}>/night</span>
           </p>
         </div>
