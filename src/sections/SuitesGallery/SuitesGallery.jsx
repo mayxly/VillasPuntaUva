@@ -5,9 +5,11 @@ import SuiteCard from '../../components/SuiteCard/SuiteCard'
 import styles from './SuitesGallery.module.css'
 
 export default function SuitesGallery() {
+  const sectionRef = useRef(null)
   const trackRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [visibleCount, setVisibleCount] = useState(4)
+  const [isInView, setIsInView] = useState(false)
 
   const maxIndex = Math.max(0, suites.length - visibleCount)
 
@@ -29,6 +31,34 @@ export default function SuitesGallery() {
     if (activeIndex > maxIndex) setActiveIndex(maxIndex)
   }, [maxIndex, activeIndex])
 
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return undefined
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.35 },
+    )
+
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!isInView || maxIndex === 0) return undefined
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mediaQuery.matches) return undefined
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current >= maxIndex ? 0 : current + 1))
+    }, 3600)
+
+    return () => window.clearInterval(interval)
+  }, [isInView, maxIndex])
+
   const scrollTo = (index) => {
     const clamped = Math.max(0, Math.min(index, maxIndex))
     setActiveIndex(clamped)
@@ -37,7 +67,7 @@ export default function SuitesGallery() {
   const cardWidthPercent = 100 / visibleCount
 
   return (
-    <section className={styles.section}>
+    <section ref={sectionRef} className={styles.section}>
       <div className={styles.header}>
         <img
           src="/images/logos/logo-blue.png"

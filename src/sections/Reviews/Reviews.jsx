@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { FaStar } from 'react-icons/fa'
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 import { GoVerified } from 'react-icons/go'
@@ -67,8 +67,10 @@ function ReviewCard({ review }) {
 }
 
 export default function Reviews() {
+  const sectionRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [visibleCount, setVisibleCount] = useState(3)
+  const [isInView, setIsInView] = useState(false)
 
   const maxIndex = Math.max(0, reviews.length - visibleCount)
 
@@ -89,6 +91,34 @@ export default function Reviews() {
     if (activeIndex > maxIndex) setActiveIndex(maxIndex)
   }, [maxIndex, activeIndex])
 
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return undefined
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.35 },
+    )
+
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!isInView || maxIndex === 0) return undefined
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mediaQuery.matches) return undefined
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current >= maxIndex ? 0 : current + 1))
+    }, 4200)
+
+    return () => window.clearInterval(interval)
+  }, [isInView, maxIndex])
+
   const scrollTo = (index) => {
     setActiveIndex(Math.max(0, Math.min(index, maxIndex)))
   }
@@ -96,7 +126,7 @@ export default function Reviews() {
   const cardWidthPercent = 100 / visibleCount
 
   return (
-    <section className={styles.section}>
+    <section ref={sectionRef} className={styles.section}>
       <div className={styles.container}>
         <p className={styles.intro}>
           At Villas Punta Uva in Punta Uva, Costa Rica, we offer a warm, authentic experience that
