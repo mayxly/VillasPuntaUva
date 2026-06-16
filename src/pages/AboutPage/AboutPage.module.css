@@ -1,20 +1,249 @@
 .page {
-  min-height: 60vh;
+  background: var(--color-bg-light);
+  color: var(--color-text);
+}
+
+.hero {
+  position: relative;
+  min-height: 560px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--section-padding);
-  padding-top: calc(var(--nav-height) + 80px);
+  overflow: hidden;
+  background: url('/images/hero/us.jpg') center 35% / cover no-repeat;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.28),
+    rgba(15, 23, 42, 0.62)
+  );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  padding: calc(var(--nav-height) + 96px) 24px 96px;
   text-align: center;
-  gap: 12px;
 }
 
-.page h1 {
+.heroIcon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 18px;
+}
+
+.hero h1 {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: clamp(2.75rem, 6vw, 4.75rem);
+  font-weight: 400;
+  color: var(--color-white);
+  line-height: 1;
 }
 
-.page p {
-  color: var(--color-text-light);
+.hero p {
+  max-width: 620px;
+  margin: 20px auto 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+  gap: 48px;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 96px 24px 56px;
+  align-items: center;
+}
+
+.storyText,
+.familyInner,
+.experienceHeader {
+  max-width: 760px;
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+  color: var(--color-primary-dark);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.story h2,
+.family h2,
+.experience h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  color: var(--color-dark);
+  line-height: 1.05;
+}
+
+.story p:not(.eyebrow),
+.family p:not(.eyebrow) {
+  margin-top: 20px;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+.storyImage {
+  min-height: 520px;
+  border-radius: var(--border-radius);
+  background: url('/images/hero/us.jpg') center center / cover no-repeat;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
+}
+
+.family {
+  background: var(--color-white);
+  margin-top: 40px;
+}
+
+.familyInner {
+  margin: 0 auto;
+  padding: 88px 24px;
+  text-align: center;
+}
+
+.experience {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 88px 24px 104px;
+}
+
+.experienceHeader {
+  margin: 0 auto 36px;
+  text-align: center;
+}
+
+.valueGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.valueCard,
+.photoPlaceholder {
+  border-radius: var(--border-radius);
+  background: var(--color-white);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+.valueCard {
+  padding: 28px;
+}
+
+.valueCard h3,
+.photoPlaceholder h3 {
+  font-family: var(--font-heading);
+  font-size: 1.55rem;
+  font-weight: 400;
+  color: var(--color-dark);
+}
+
+.valueCard p,
+.photoPlaceholder p {
+  margin-top: 12px;
+  color: var(--color-text);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.photoPlaceholders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.photoPlaceholder {
+  display: flex;
+  min-height: 280px;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+  border: 1px dashed rgba(61, 122, 135, 0.42);
+  background:
+    linear-gradient(135deg, rgba(91, 185, 217, 0.1), rgba(173, 224, 237, 0.26)),
+    var(--color-white);
+}
+
+.photoPlaceholder span {
+  color: var(--color-primary-dark);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.photoPlaceholder p {
+  margin-top: 8px;
+  color: var(--color-text);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+  .story {
+    grid-template-columns: 1fr;
+    padding-top: 72px;
+  }
+
+  .storyImage {
+    min-height: 420px;
+  }
+
+  .valueGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .photoPlaceholders {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: 500px;
+  }
+
+  .heroContent {
+    padding-bottom: 72px;
+  }
+
+  .story,
+  .familyInner,
+  .experience {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .story {
+    padding-bottom: 40px;
+  }
+
+  .familyInner,
+  .experience {
+    padding-top: 64px;
+    padding-bottom: 72px;
+  }
+
+  .storyImage {
+    min-height: 340px;
+  }
+
+  .valueCard,
+  .photoPlaceholder {
+    padding: 24px;
+  }
 }

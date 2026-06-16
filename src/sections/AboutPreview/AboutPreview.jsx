@@ -11,12 +11,11 @@ export default function AboutPreview() {
           className={styles.icon}
         />
         <h2 className={styles.heading}>
-          Villas Punta Uva<br />Punta Uva, Costa Rica
+          Punta Uva, Costa Rica
         </h2>
         <p className={styles.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vestibulum facilisis lectus, et mollis neque.
-          In a ultrices quam, eget commodo ligula. Vestibulum turpis lacus, accumsan a facilisis non, vestibulum maximus
-          mauris.
+          Stay in private vacation villas surrounded by jungle, wildlife, and the Caribbean coast.
+          Each home is designed for comfort, privacy, and easy days near Punta Uva Beach.
         </p>
         <Link to="/suites" className={styles.btn}>View Our Suites</Link>
       </div>
