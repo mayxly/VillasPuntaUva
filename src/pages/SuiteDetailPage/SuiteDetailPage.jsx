@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -25,6 +25,7 @@ import {
   getLowestNightlyRate,
   suites,
 } from '../../data/suites'
+import BookingModal from '../../components/BookingModal/BookingModal'
 import styles from './SuiteDetailPage.module.css'
 
 const priceFormatter = new Intl.NumberFormat('en-US', {
@@ -46,6 +47,12 @@ const initialBookingValue = {
 
 function formatPrice(value) {
   return priceFormatter.format(value)
+}
+
+function addDays(date, days) {
+  const nextDate = new Date(date)
+  nextDate.setDate(nextDate.getDate() + days)
+  return nextDate
 }
 
 function Gallery({ suite }) {
@@ -176,14 +183,16 @@ function AmenityIcon({ label }) {
   if (normalizedLabel.includes('beach')) return <LuTreePalm size={18} />
   if (normalizedLabel.includes('pool')) return <LuWaves size={18} />
   if (normalizedLabel.includes('gym')) return <LuDumbbell size={18} />
-  if (normalizedLabel.includes('wifi')) return <LuWifi size={18} />
+  if (normalizedLabel.includes('wifi') || normalizedLabel.includes('wi-fi')) return <LuWifi size={18} />
   if (normalizedLabel.includes('air conditioning')) return <LuWind size={18} />
   if (normalizedLabel.includes('parking')) return <LuCircleParking size={18} />
   if (normalizedLabel.includes('tv') || normalizedLabel.includes('netflix')) return <LuMonitor size={18} />
   if (normalizedLabel.includes('patio') || normalizedLabel.includes('rancho') || normalizedLabel.includes('hammock')) {
     return <LuTreePalm size={18} />
   }
-  if (normalizedLabel.includes('bbq') || normalizedLabel.includes('kitchen')) return <LuUtensils size={18} />
+  if (normalizedLabel.includes('bbq') || normalizedLabel.includes('barbecue') || normalizedLabel.includes('kitchen')) {
+    return <LuUtensils size={18} />
+  }
 
   return <LuSparkles size={18} />
 }
@@ -231,8 +240,15 @@ function NotesSection({ suite }) {
 
 function BookingPanel({ suite }) {
   const [bookingValue, setBookingValue] = useState(initialBookingValue)
+  const [arrivalOpen, setArrivalOpen] = useState(false)
+  const [checkoutOpen, setCheckoutOpen] = useState(false)
+  const [checkoutOpenDate, setCheckoutOpenDate] = useState(null)
+  const [bookingOpen, setBookingOpen] = useState(false)
+  const arrivalPickerRef = useRef(null)
+  const checkoutPickerRef = useRef(null)
   const { arrival, departure, guests } = bookingValue
   const guestCount = Number(guests)
+  const minCheckoutDate = arrival ? addDays(arrival, 1) : new Date()
 
   const estimate = useMemo(() => {
     if (!arrival || !departure || departure <= arrival) return null
@@ -261,110 +277,154 @@ function BookingPanel({ suite }) {
     }))
   }
 
+  const closeArrivalCalendar = () => {
+    setArrivalOpen(false)
+    arrivalPickerRef.current?.setOpen(false)
+  }
+
+  const closeCheckoutCalendar = () => {
+    setCheckoutOpen(false)
+    checkoutPickerRef.current?.setOpen(false)
+  }
+
   const handleArrivalChange = (date) => {
     setBookingValue((current) => ({
       ...current,
       arrival: date,
-      departure: current.departure && date && current.departure <= date ? null : current.departure,
+      departure: null,
     }))
+    closeArrivalCalendar()
+    setCheckoutOpenDate(date)
+
+    if (date) {
+      window.setTimeout(() => setCheckoutOpen(true), 0)
+    }
   }
 
   return (
-    <aside className={styles.bookingPanel} aria-label="Estimate your stay">
-      <div className={styles.bookingHeader}>
-        <p>
-          <span>from</span>
-          {formatPrice(getLowestNightlyRate(suite))}
-        </p>
-        <span>/night</span>
-      </div>
-
-      <div className={styles.bookingFields}>
-        <label className={styles.field}>
-          <span>Check-in</span>
-          <DatePicker
-            selected={arrival}
-            onChange={handleArrivalChange}
-            placeholderText="Select date"
-            className={styles.input}
-            minDate={new Date()}
-            dateFormat="MMM d, yyyy"
-          />
-        </label>
-
-        <label className={styles.field}>
-          <span>Checkout</span>
-          <DatePicker
-            selected={departure}
-            onChange={(date) => updateValue({ departure: date })}
-            placeholderText="Select date"
-            className={styles.input}
-            minDate={arrival || new Date()}
-            dateFormat="MMM d, yyyy"
-          />
-        </label>
-
-        <label className={`${styles.field} ${styles.fullField}`}>
-          <span>Guests</span>
-          <select
-            value={guests}
-            onChange={(event) => updateValue({ guests: event.target.value })}
-            className={styles.input}
-          >
-            {Array.from({ length: 10 }, (_, index) => index + 1).map((count) => (
-              <option key={count} value={count}>
-                {count} {count === 1 ? 'Guest' : 'Guests'}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-
-      {error && (
-        <p className={styles.error} role="alert">
-          {error}
-        </p>
-      )}
-
-      {visibleEstimate ? (
-        <div className={styles.estimate}>
-          <div className={styles.lineItem}>
-            <span>
-              Nightly subtotal for {visibleEstimate.nights.length}{' '}
-              {visibleEstimate.nights.length === 1 ? 'night' : 'nights'}
-            </span>
-            <strong>{formatPrice(visibleEstimate.nightlySubtotal)}</strong>
-          </div>
-          {visibleEstimate.discount > 0 && (
-            <div className={styles.lineItem}>
-              <span>Weekly discount</span>
-              <strong>-{formatPrice(visibleEstimate.discount)}</strong>
-            </div>
-          )}
-          <div className={styles.lineItem}>
-            <span>Cleaning fee</span>
-            <strong>{formatPrice(visibleEstimate.cleaningFee)}</strong>
-          </div>
-          <div className={styles.totalLine}>
-            <span>Estimated total</span>
-            <strong>{formatPrice(visibleEstimate.total)}</strong>
-          </div>
-
-          <div className={styles.nightlyList}>
-            {visibleEstimate.nightlyRates.map((night) => (
-              <div key={night.date.toISOString()}>
-                <span>{dateFormatter.format(night.date)}</span>
-                <span>{formatPrice(night.rate)}</span>
-              </div>
-            ))}
-          </div>
+    <>
+      <aside className={styles.bookingPanel} aria-label="Estimate your stay">
+        <div className={styles.bookingHeader}>
+          <p>
+            <span>from</span>
+            {formatPrice(getLowestNightlyRate(suite))}
+          </p>
+          <span>/night</span>
         </div>
-      ) : (
-        <p className={styles.prompt}>Select your dates to see an estimated stay total.</p>
-      )}
 
-      <p className={styles.rateFinePrint}>{suite.rateNote}</p>
-    </aside>
+        <div className={styles.bookingFields}>
+          <label className={styles.field}>
+            <span>Check-in</span>
+            <DatePicker
+              ref={arrivalPickerRef}
+              selected={arrival}
+              onChange={handleArrivalChange}
+              placeholderText="Select date"
+              className={styles.input}
+              minDate={new Date()}
+              dateFormat="MMM d, yyyy"
+              shouldCloseOnSelect
+              open={arrivalOpen}
+              onInputClick={() => setArrivalOpen(true)}
+              onClickOutside={closeArrivalCalendar}
+              onSelect={closeArrivalCalendar}
+            />
+          </label>
+
+          <label className={styles.field}>
+            <span>Checkout</span>
+            <DatePicker
+              ref={checkoutPickerRef}
+              selected={departure}
+              onChange={(date) => {
+                updateValue({ departure: date })
+                closeCheckoutCalendar()
+              }}
+              placeholderText="Select date"
+              className={styles.input}
+              minDate={minCheckoutDate}
+              dateFormat="MMM d, yyyy"
+              shouldCloseOnSelect
+              openToDate={checkoutOpenDate || arrival || undefined}
+              open={checkoutOpen}
+              onInputClick={() => setCheckoutOpen(true)}
+              onClickOutside={closeCheckoutCalendar}
+              onSelect={closeCheckoutCalendar}
+            />
+          </label>
+
+          <label className={`${styles.field} ${styles.fullField}`}>
+            <span>Guests</span>
+            <select
+              value={guests}
+              onChange={(event) => updateValue({ guests: event.target.value })}
+              className={styles.input}
+            >
+              {Array.from({ length: 10 }, (_, index) => index + 1).map((count) => (
+                <option key={count} value={count}>
+                  {count} {count === 1 ? 'Guest' : 'Guests'}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        {error && (
+          <p className={styles.error} role="alert">
+            {error}
+          </p>
+        )}
+
+        {visibleEstimate ? (
+          <div className={styles.estimate}>
+            <div className={styles.lineItem}>
+              <span>
+                Nightly subtotal for {visibleEstimate.nights.length}{' '}
+                {visibleEstimate.nights.length === 1 ? 'night' : 'nights'}
+              </span>
+              <strong>{formatPrice(visibleEstimate.nightlySubtotal)}</strong>
+            </div>
+            {visibleEstimate.discount > 0 && (
+              <div className={styles.lineItem}>
+                <span>Weekly discount</span>
+                <strong>-{formatPrice(visibleEstimate.discount)}</strong>
+              </div>
+            )}
+            <div className={styles.lineItem}>
+              <span>Cleaning fee</span>
+              <strong>{formatPrice(visibleEstimate.cleaningFee)}</strong>
+            </div>
+            <div className={styles.totalLine}>
+              <span>Estimated total</span>
+              <strong>{formatPrice(visibleEstimate.total)}</strong>
+            </div>
+
+            <button
+              type="button"
+              className={styles.reserveButton}
+              onClick={() => setBookingOpen(true)}
+            >
+              Reserve
+            </button>
+
+            <div className={styles.nightlyList}>
+              {visibleEstimate.nightlyRates.map((night) => (
+                <div key={night.date.toISOString()}>
+                  <span>{dateFormatter.format(night.date)}</span>
+                  <span>{formatPrice(night.rate)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p className={styles.prompt}>Select your dates to see an estimated stay total.</p>
+        )}
+
+        <p className={styles.rateFinePrint}>{suite.rateNote}</p>
+      </aside>
+
+      {bookingOpen && <BookingModal onClose={() => setBookingOpen(false)} />}
+    </>
   )
 }
 

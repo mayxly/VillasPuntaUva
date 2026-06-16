@@ -16,6 +16,8 @@ export default function BookingWidget({
   buttonLabel = 'View Suites',
 }) {
   const [localValue, setLocalValue] = useState(defaultValue)
+  const [arrivalOpen, setArrivalOpen] = useState(false)
+  const [departureOpen, setDepartureOpen] = useState(false)
 
   const bookingValue = value ?? localValue
   const { arrival, departure, guests } = bookingValue
@@ -38,6 +40,12 @@ export default function BookingWidget({
       arrival: date,
       departure: departure && date && departure <= date ? null : departure,
     })
+    setArrivalOpen(false)
+  }
+
+  const handleDepartureChange = (date) => {
+    updateValue({ departure: date })
+    setDepartureOpen(false)
   }
 
   const handleSearch = () => {
@@ -58,6 +66,10 @@ export default function BookingWidget({
             className={styles.input}
             minDate={new Date()}
             dateFormat="MMM d, yyyy"
+            open={arrivalOpen}
+            onInputClick={() => setArrivalOpen(true)}
+            onClickOutside={() => setArrivalOpen(false)}
+            onSelect={() => setArrivalOpen(false)}
           />
         </div>
 
@@ -65,11 +77,15 @@ export default function BookingWidget({
           <label className={styles.label}>Departure Date</label>
           <DatePicker
             selected={departure}
-            onChange={(date) => updateValue({ departure: date })}
+            onChange={handleDepartureChange}
             placeholderText="Select date"
             className={styles.input}
             minDate={arrival || new Date()}
             dateFormat="MMM d, yyyy"
+            open={departureOpen}
+            onInputClick={() => setDepartureOpen(true)}
+            onClickOutside={() => setDepartureOpen(false)}
+            onSelect={() => setDepartureOpen(false)}
           />
         </div>
 

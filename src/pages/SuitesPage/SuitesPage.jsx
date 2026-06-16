@@ -135,7 +135,7 @@ export default function SuitesPage() {
         {guestFilter && !error && (
           <div className={styles.filterBar}>
             <p>
-              Showing villas for {guestFilter} {guestFilter === 1 ? 'guest' : 'guests'}
+              Showing available villas for {guestFilter} {guestFilter === 1 ? 'guest' : 'guests'}
             </p>
             <button type="button" className={styles.clearButton} onClick={clearSearch}>
               Clear search
