@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: url('/images/hero/us.jpg') center center / cover no-repeat;
+  background: url('/images/about/laptop.webp') center center / cover no-repeat;
 }
 
 .hero::before {
@@ -97,7 +97,7 @@
 .storyImage {
   min-height: 520px;
   border-radius: var(--border-radius);
-  background: url('/images/hero/us.jpg') center center / cover no-repeat;
+  background: url('/images/about/angel.webp') center center / cover no-repeat;
   box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
 }
 
@@ -125,7 +125,7 @@
 .experienceImage {
   height: 100%;
   min-height: 640px;
-  background: url('/images/hero/us.jpg') center center / cover no-repeat;
+  background: url('/images/about/walk.webp') center center / cover no-repeat;
 }
 
 .experienceContent {
