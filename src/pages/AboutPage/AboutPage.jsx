@@ -69,29 +69,23 @@ export default function AboutPage() {
       </section>
 
       <section className={styles.experience}>
-        <div className={styles.experienceHeader}>
-          <p className={styles.eyebrow}>Life on the Caribbean Coast</p>
-          <h2>What guests feel here</h2>
-        </div>
+        <div className={styles.experienceImage} aria-label="Villas Punta Uva hosts" role="img" />
 
-        <div className={styles.valueGrid}>
-          {values.map((value) => (
-            <article key={value.title} className={styles.valueCard}>
-              <h3>{value.title}</h3>
-              <p>{value.text}</p>
-            </article>
-          ))}
-        </div>
+        <div className={styles.experienceContent}>
+          <div className={styles.experienceHeader}>
+            <p className={styles.eyebrow}>Life on the Caribbean Coast</p>
+            <h2>What guests feel here</h2>
+          </div>
 
-        <div className={styles.photoPlaceholders}>
-          <div className={styles.photoPlaceholder}>
-            <span>Photo placeholder</span>
-            <p>Add a family or host photo here.</p>
-          </div>
-          <div className={styles.photoPlaceholder}>
-            <span>Photo placeholder</span>
-            <p>Add a villa, beach, or jungle lifestyle photo here.</p>
-          </div>
+          <ol className={styles.valueGrid}>
+            {values.map((value, index) => (
+              <li key={value.title} className={styles.valueCard}>
+                <span className={styles.valueNumber}>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{value.title}</h3>
+                <p>{value.text}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
     </div>

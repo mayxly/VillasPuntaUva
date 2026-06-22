@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -10,6 +10,7 @@ import {
   LuChevronUp,
   LuDumbbell,
   LuImage,
+  LuImages,
   LuInfo,
   LuMonitor,
   LuCircleParking,
@@ -19,6 +20,7 @@ import {
   LuWind,
   LuSparkles,
   LuUtensils,
+  LuX,
 } from 'react-icons/lu'
 import {
   calculateSuiteStay,
@@ -55,8 +57,45 @@ function addDays(date, days) {
   return nextDate
 }
 
+function uniqueImages(images) {
+  return images.filter((image, index) => images.indexOf(image) === index)
+}
+
+function getSuitePhotoSections(suite) {
+  return (suite.photoSections ?? [])
+    .map((section) => ({
+      ...section,
+      images: uniqueImages((section.images ?? []).filter(Boolean)),
+    }))
+    .filter((section) => section.title && section.images.length > 0)
+}
+
 function Gallery({ suite }) {
-  const featuredImages = [suite.image, ...suite.gallery].slice(0, 5)
+  const [galleryOpen, setGalleryOpen] = useState(false)
+  const featuredImages = uniqueImages(
+    (suite.featuredGallery?.length ? suite.featuredGallery : [suite.image, ...(suite.gallery ?? [])]).filter(Boolean)
+  ).slice(0, 5)
+  const photoSections = useMemo(() => getSuitePhotoSections(suite), [suite])
+
+  useEffect(() => {
+    if (!galleryOpen) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setGalleryOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [galleryOpen])
 
   return (
     <section className={styles.gallery} aria-label={`${suite.name} photos`}>
@@ -71,20 +110,68 @@ function Gallery({ suite }) {
             decoding="async"
           />
         ))}
+
+        <button
+          type="button"
+          className={styles.showPhotosButton}
+          onClick={() => setGalleryOpen(true)}
+          aria-haspopup="dialog"
+        >
+          <LuImages size={18} />
+          Show more
+        </button>
       </div>
 
-      <div className={styles.photoStrip} aria-label="All suite photos">
-        {suite.gallery.map((image, index) => (
-          <img
-            key={image}
-            src={image}
-            alt={`${suite.name} gallery photo ${index + 1}`}
-            className={styles.stripImage}
-            loading="lazy"
-            decoding="async"
-          />
-        ))}
-      </div>
+      {galleryOpen && (
+        <div
+          className={styles.galleryModal}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${suite.name} photo gallery`}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setGalleryOpen(false)
+            }
+          }}
+        >
+          <div className={styles.galleryDialog}>
+            <div className={styles.galleryDialogHeader}>
+              <div>
+                <p>Photo gallery</p>
+                <h2>{suite.name}</h2>
+              </div>
+              <button
+                type="button"
+                className={styles.galleryCloseButton}
+                onClick={() => setGalleryOpen(false)}
+                aria-label="Close photo gallery"
+              >
+                <LuX size={18} />
+                Close
+              </button>
+            </div>
+
+            <div className={styles.galleryDialogBody}>
+              {photoSections.map((section) => (
+                <section key={section.title} className={styles.photoSection}>
+                  <h3>{section.title}</h3>
+                  <div className={styles.photoSectionGrid}>
+                    {section.images.map((image, index) => (
+                      <img
+                        key={image}
+                        src={image}
+                        alt={`${suite.name} ${section.title} photo ${index + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

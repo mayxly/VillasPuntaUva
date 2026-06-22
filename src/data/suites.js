@@ -3,6 +3,102 @@ const makeGallery = (folder, count, skipped = []) =>
     .filter((number) => !skipped.includes(number))
     .map((number) => `/images/suites/${folder}/${folder}-${number}.webp`)
 
+const makeSuiteImage = (folder, number) => `/images/suites/${folder}/${folder}-${number}.webp`
+
+const makeSuiteImages = (folder, numbers) =>
+  numbers.map((number) => makeSuiteImage(folder, number))
+
+const uniqueImages = (images) =>
+  images.filter((image, index) => images.indexOf(image) === index)
+
+const makePhotoSections = (folder, sections) =>
+  sections.map((section) => ({
+    title: section.title,
+    images: makeSuiteImages(folder, section.numbers),
+  }))
+
+const makeGalleryFromPhotoSections = (featuredGallery, photoSections) =>
+  uniqueImages([
+    ...featuredGallery,
+    ...photoSections.flatMap((section) => section.images),
+  ])
+
+const mariposaFeaturedGallery = makeSuiteImages('mariposa', [1, 8, 30, 37, 15])
+const mariposaPhotoSections = makePhotoSections('mariposa', [
+  { title: 'Kitchen', numbers: [1, 2, 4] },
+  { title: 'Dining Room', numbers: [ 8, 9] },
+  { title: 'Living Room', numbers: [10, 12, 13] },
+  { title: 'Patio', numbers: [15, 16,18, 20, 21] },
+  { title: 'Bedroom 1', numbers: [22, 23,26, 27] },
+  { title: 'Bedroom 2', numbers: [ 30, 31, 33, 29] },
+  { title: 'Bedroom 3', numbers: [ 37, 38, 39,] },
+  { title: 'Bedroom 4', numbers: [ 43,46, 47, 48, 53, 55] },
+  { title: 'Bedroom 5', numbers: [ 58, 59, 60, 61] },
+])
+
+const tucanFeaturedGallery = makeSuiteImages('tucan', [1, 2, 17, 19, 12])
+const tucanPhotoSections = makePhotoSections('tucan', [
+  { title: 'Kitchen', numbers: [1, 3, 5, 6, 7] },
+  { title: 'Living Room', numbers: [2, 8, 9, 10] },
+  { title: 'Dining Room', numbers: [12, 27] },
+  { title: 'Bedroom 1', numbers: [17, 18] },
+  { title: 'Bedroom 2', numbers: [19, 22, 25, 26] },
+])
+
+const presidenteFeaturedGallery = makeSuiteImages('presidente', [20, 7, 13, 22, 1])
+const presidentePhotoSections = makePhotoSections('presidente', [
+  { title: 'Kitchen', numbers: [1, 3, 4, 5, 9, 10, 12] },
+  { title: 'Dining Room', numbers: [6, 7, 8] },
+  { title: 'Living Room', numbers: [16, 19, 20, 21] },
+  { title: 'Bedroom 1', numbers: [13, 14, 15] },
+  { title: 'Bedroom 2', numbers: [36] },
+  { title: 'Bedroom 3', numbers: [ 22, 23, 28] },
+  { title: 'Bedroom 4', numbers: [37] },
+  { title: 'Bedroom 5', numbers: [32, 34] },
+])
+
+const angelFeaturedGallery = makeSuiteImages('angel', [24, 5, 12, 27, 35])
+const angelPhotoSections = makePhotoSections('angel', [
+  { title: 'Living Room', numbers: [1, 2, 3] },
+  { title: 'Dining Room', numbers: [5, 6, 10] },
+  { title: 'Bedroom 1', numbers: [13, 14, 15, 17, 18] },
+  { title: 'Kitchen', numbers: [22, 23, 24] },
+  { title: 'Bedroom 2', numbers: [27, 28, 29] },
+  { title: 'Balcony', numbers: [31, 32, 33] },
+  { title: 'Exterior', numbers: [34, 35, 36] },
+])
+
+const cachaFeaturedGallery = makeSuiteImages('cacha', [16, 20, 23, 14, 35])
+const cachaPhotoSections = makePhotoSections('cacha', [
+  { title: 'Living Room', numbers: [16] },
+  { title: 'Dining Room', numbers: [20, 21] },
+  { title: 'Bedroom 1', numbers: [23, 24, 25, 26, 27] },
+  { title: 'Kitchen', numbers: [14, 17, 18, 19] },
+  { title: 'Bedroom 2', numbers: [37] },
+  { title: 'Bedroom 3', numbers: [29, 30, 32] },
+  { title: 'Patio', numbers: [10, 11, 12, 13, 22] },
+  { title: 'Exterior', numbers: [2, 3] },
+])
+
+const careyFeaturedGallery = makeSuiteImages('carey', [10, 2, 5, 7, 11])
+const careyPhotoSections = makePhotoSections('carey', [
+  { title: 'Bathroom', numbers: [4] },
+  { title: 'Bedroom 1', numbers: [9, 10, 11] },
+  { title: 'Kitchen', numbers: [2, 3] },
+  { title: 'Bedroom 2', numbers: [12] },
+  { title: 'Balcony', numbers: [6, 7, 8] },
+  { title: 'Exterior', numbers: [1, 5] },
+])
+
+const colibriFeaturedGallery = makeSuiteImages('colibri', [2, 8, 6, 12, 21])
+const colibriPhotoSections = makePhotoSections('colibri', [
+  { title: 'Bedroom 1', numbers: [ 4, 8, 10] },
+  { title: 'Dining Room', numbers: [6, 7] },
+  { title: 'Kitchen', numbers: [1, 3, 5] },
+  { title: 'Bathroom', numbers: [11] },
+  { title: 'Patio', numbers: [12, 13, 14, 20, 21] },
+])
+
 const sharedAmenities = [
   'Infinity pool',
   'Gym',
@@ -20,7 +116,9 @@ export const suites = [
     location: 'Punta Uva',
     slug: 'villa-mariposa',
     image: '/images/suites/mariposa.webp',
-    gallery: makeGallery('mariposa', 65),
+    gallery: makeGalleryFromPhotoSections(mariposaFeaturedGallery, mariposaPhotoSections),
+    featuredGallery: mariposaFeaturedGallery,
+    photoSections: mariposaPhotoSections,  
     bedrooms: 5,
     bathrooms: 5,
     sleeps: 10,
@@ -97,7 +195,9 @@ export const suites = [
     location: 'Punta Uva',
     slug: 'villa-tucan',
     image: '/images/suites/tucan.webp',
-    gallery: makeGallery('tucan', 27),
+    gallery: makeGalleryFromPhotoSections(tucanFeaturedGallery, tucanPhotoSections),
+    featuredGallery: tucanFeaturedGallery,
+    photoSections: tucanPhotoSections,
     bedrooms: 2,
     bathrooms: 2,
     sleeps: 4,
@@ -171,7 +271,9 @@ export const suites = [
     location: 'Punta Uva',
     slug: 'villa-presidente',
     image: '/images/suites/presidente.webp',
-    gallery: makeGallery('presidente', 35),
+    gallery: makeGalleryFromPhotoSections(presidenteFeaturedGallery, presidentePhotoSections),
+    featuredGallery: presidenteFeaturedGallery,
+    photoSections: presidentePhotoSections,
     bedrooms: 5,
     bathrooms: 5,
     sleeps: 10,
@@ -184,11 +286,11 @@ export const suites = [
     description:
       'Villa Presidente is the most elegant large-group residence at Villas Punta Uva, with five bedrooms, private bathrooms, balconies, and full air conditioning. Four king beds and one queen bed give families and groups generous comfort, while the chef-ready kitchen, quartz dining table, and spacious living room are designed for gathering. A gated setting, shared infinity pool, yoga platform, workout area, and five-minute walk to Arrecife/Punta Uva Beach make this a refined Caribbean base.',
     sleepingArrangements: [
-      { label: 'Bedroom 1', bed: '1 King Bed' },
-      { label: 'Bedroom 2', bed: '1 Queen Bed', image: '/images/suites/presidente/presidente-22.webp' },
-      { label: 'Bedroom 3', bed: '1 King Bed', image: '/images/suites/presidente/presidente-32.webp' },
-      { label: 'Bedroom 4', bed: '1 King Bed' },
-      { label: 'Bedroom 5', bed: '1 King Bed' },
+      { label: 'Bedroom 1', bed: '1 King Bed', image: '/images/suites/presidente/presidente-13.webp' },
+      { label: 'Bedroom 2', bed: '1 Queen Bed', image: '/images/suites/presidente/presidente-36.webp' },
+      { label: 'Bedroom 3', bed: '1 King Bed', image: '/images/suites/presidente/presidente-22.webp' },
+      { label: 'Bedroom 4', bed: '1 King Bed', image: '/images/suites/presidente/presidente-37.webp' },
+      { label: 'Bedroom 5', bed: '1 King Bed', image: '/images/suites/presidente/presidente-32.webp' },
     ],
     features: [
       'Each bedroom has its own private bathroom',
@@ -249,7 +351,9 @@ export const suites = [
     location: 'Punta Uva',
     slug: 'villa-colibri',
     image: '/images/suites/colibri.webp',
-    gallery: makeGallery('colibri', 21),
+    gallery: makeGalleryFromPhotoSections(colibriFeaturedGallery, colibriPhotoSections),
+    featuredGallery: colibriFeaturedGallery,
+    photoSections: colibriPhotoSections,
     bedrooms: 1,
     bathrooms: 1,
     sleeps: 2,
@@ -322,7 +426,9 @@ export const suites = [
     location: 'Punta Uva',
     slug: 'villa-angel',
     image: '/images/suites/angel.webp',
-    gallery: makeGallery('angel', 37),
+    gallery: makeGalleryFromPhotoSections(angelFeaturedGallery, angelPhotoSections),
+    featuredGallery: angelFeaturedGallery,
+    photoSections: angelPhotoSections,
     bedrooms: 2,
     bathrooms: 2,
     sleeps: 4,
@@ -396,7 +502,9 @@ export const suites = [
     location: 'Arrecife',
     slug: 'villa-cacha',
     image: '/images/suites/cacha.webp',
-    gallery: makeGallery('cacha', 37, [34]),
+    gallery: makeGalleryFromPhotoSections(cachaFeaturedGallery, cachaPhotoSections),
+    featuredGallery: cachaFeaturedGallery,
+    photoSections: cachaPhotoSections,
     bedrooms: 3,
     bathrooms: 2,
     sleeps: 6,
@@ -471,7 +579,9 @@ export const suites = [
     location: 'Arrecife',
     slug: 'carey-house',
     image: '/images/suites/carey.webp',
-    gallery: makeGallery('carey', 12),
+    gallery: makeGalleryFromPhotoSections(careyFeaturedGallery, careyPhotoSections),
+    featuredGallery: careyFeaturedGallery,
+    photoSections: careyPhotoSections,
     bedrooms: 2,
     bathrooms: 1,
     sleeps: 4,
