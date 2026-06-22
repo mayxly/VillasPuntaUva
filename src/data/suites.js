@@ -30,6 +30,16 @@ const sharedPoolImages = [
   '/images/infinity pool/drone-19.webp',
 ]
 
+const sharedBeachImages = [
+  '/images/beach/beach-1.webp',
+  '/images/beach/beach-2.webp',
+  '/images/beach/beach-3.webp',
+  '/images/beach/beach-4.webp',
+  '/images/beach/beach-5.webp',
+  '/images/beach/beach-6.webp',
+  '/images/beach/beach-7.webp',
+]
+
 const mariposaFeaturedGallery = makeSuiteImages('mariposa', [1, 8, 30, 37, 66])
 const mariposaPhotoSections = makePhotoSections('mariposa', [
   { title: 'Kitchen', numbers: [1, 2, 4] },
@@ -42,6 +52,7 @@ const mariposaPhotoSections = makePhotoSections('mariposa', [
   { title: 'Bedroom 4', numbers: [ 43,46, 47, 48, 53, 55] },
   { title: 'Bedroom 5', numbers: [ 58, 59, 60, 61] },
   { title: 'Pool', images: sharedPoolImages },
+  { title: 'Beach', images: sharedBeachImages },
 ])
 
 const tucanFeaturedGallery = makeSuiteImages('tucan', [1, 2, 17, 12, 28])
@@ -52,6 +63,7 @@ const tucanPhotoSections = makePhotoSections('tucan', [
   { title: 'Bedroom 1', numbers: [17, 18] },
   { title: 'Bedroom 2', numbers: [19, 22, 25, 26] },
   { title: 'Pool', images: sharedPoolImages },
+  { title: 'Beach', images: sharedBeachImages },
 ])
 
 const presidenteFeaturedGallery = makeSuiteImages('presidente', [20, 7, 13, 1, 38])
@@ -65,9 +77,10 @@ const presidentePhotoSections = makePhotoSections('presidente', [
   { title: 'Bedroom 4', numbers: [37] },
   { title: 'Bedroom 5', numbers: [32, 34] },
   { title: 'Pool', images: sharedPoolImages },
+  { title: 'Beach', images: sharedBeachImages },
 ])
 
-const angelFeaturedGallery = makeSuiteImages('angel', [24, 5, 12, 27, 35])
+const angelFeaturedGallery = makeSuiteImages('angel', [24, 5, 12, 27, 38])
 const angelPhotoSections = makePhotoSections('angel', [
   { title: 'Living Room', numbers: [1, 2, 3] },
   { title: 'Dining Room', numbers: [5, 6, 10] },
@@ -76,9 +89,11 @@ const angelPhotoSections = makePhotoSections('angel', [
   { title: 'Bedroom 2', numbers: [27, 28, 29] },
   { title: 'Balcony', numbers: [31, 32, 33] },
   { title: 'Exterior', numbers: [34, 35, 36] },
+  { title: 'Pool', images: sharedPoolImages },
+  { title: 'Beach', images: sharedBeachImages },
 ])
 
-const cachaFeaturedGallery = makeSuiteImages('cacha', [16, 20, 23, 14, 35])
+const cachaFeaturedGallery = makeSuiteImages('cacha', [16, 20, 23, 39, 35])
 const cachaPhotoSections = makePhotoSections('cacha', [
   { title: 'Living Room', numbers: [16] },
   { title: 'Dining Room', numbers: [20, 21] },
@@ -87,17 +102,21 @@ const cachaPhotoSections = makePhotoSections('cacha', [
   { title: 'Bedroom 2', numbers: [37] },
   { title: 'Bedroom 3', numbers: [29, 30, 32] },
   { title: 'Patio', numbers: [10, 11, 12, 13, 22] },
+  { title: 'Pool', numbers: [40,41] },
   { title: 'Exterior', numbers: [2, 3] },
+  { title: 'Beach', images: sharedBeachImages },
 ])
 
-const careyFeaturedGallery = makeSuiteImages('carey', [10, 2, 5, 7, 11])
+const careyFeaturedGallery = makeSuiteImages('carey', [12, 2, 5, 7, 13])
 const careyPhotoSections = makePhotoSections('carey', [
-  { title: 'Bathroom', numbers: [4] },
   { title: 'Bedroom 1', numbers: [9, 10, 11] },
   { title: 'Kitchen', numbers: [2, 3] },
   { title: 'Bedroom 2', numbers: [12] },
+  { title: 'Bathroom', numbers: [4] },
   { title: 'Balcony', numbers: [6, 7, 8] },
   { title: 'Exterior', numbers: [1, 5] },
+  { title: 'Pool', images: sharedPoolImages },
+  { title: 'Beach', images: sharedBeachImages },
 ])
 
 const colibriFeaturedGallery = makeSuiteImages('colibri', [2, 8, 6, 12, 22])
@@ -108,6 +127,7 @@ const colibriPhotoSections = makePhotoSections('colibri', [
   { title: 'Bathroom', numbers: [11] },
   { title: 'Patio', numbers: [12, 13, 14, 20, 21] },
   { title: 'Pool', images: sharedPoolImages },
+  { title: 'Beach', images: sharedBeachImages },
 ])
 
 const sharedAmenities = [
