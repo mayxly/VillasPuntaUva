@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { IoBedOutline, IoPeopleOutline } from 'react-icons/io5'
 import { LuBath } from 'react-icons/lu'
 import BookingWidget from '../../sections/BookingWidget/BookingWidget'
@@ -17,6 +17,44 @@ const priceFormatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
   maximumFractionDigits: 0,
 })
+
+function parseDateParam(value) {
+  if (!value) return null
+
+  const [year, month, day] = value.split('-').map(Number)
+
+  if (!year || !month || !day) return null
+
+  const date = new Date(year, month - 1, day)
+
+  if (
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ) {
+    return null
+  }
+
+  return date
+}
+
+function formatDateParam(date) {
+  if (!date) return ''
+
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+
+  return `${year}-${month}-${day}`
+}
+
+function getBookingValueFromParams(searchParams) {
+  return {
+    arrival: parseDateParam(searchParams.get('arrival')),
+    departure: parseDateParam(searchParams.get('departure')),
+    guests: searchParams.get('guests') || initialBookingValue.guests,
+  }
+}
 
 function SuiteListingCard({ suite }) {
   return (
@@ -61,8 +99,12 @@ function SuiteListingCard({ suite }) {
 }
 
 export default function SuitesPage() {
-  const [bookingValue, setBookingValue] = useState(initialBookingValue)
-  const [guestFilter, setGuestFilter] = useState(null)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [bookingValue, setBookingValue] = useState(() => getBookingValueFromParams(searchParams))
+  const [guestFilter, setGuestFilter] = useState(() => {
+    const guestCount = Number(searchParams.get('guests'))
+    return Number.isFinite(guestCount) && guestCount >= 1 ? guestCount : null
+  })
   const [error, setError] = useState('')
 
   const filteredSuites = useMemo(() => {
@@ -94,12 +136,18 @@ export default function SuitesPage() {
     }
 
     setGuestFilter(guestCount)
+    setSearchParams({
+      arrival: formatDateParam(arrival),
+      departure: formatDateParam(departure),
+      guests,
+    })
     setError('')
   }
 
   const clearSearch = () => {
     setBookingValue(initialBookingValue)
     setGuestFilter(null)
+    setSearchParams({})
     setError('')
   }
 
