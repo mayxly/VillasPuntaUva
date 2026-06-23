@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FaInstagram, FaFacebookF, FaTripadvisor } from 'react-icons/fa'
+import { FaInstagram, FaTiktok } from 'react-icons/fa'
 import { suites } from '../../data/suites'
 import styles from './Footer.module.css'
 
@@ -62,9 +62,22 @@ export default function Footer() {
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>Follow Us</h4>
             <div className={styles.socials}>
-              <a href="#" aria-label="Instagram"><FaInstagram size={22} /></a>
-              <a href="#" aria-label="Facebook"><FaFacebookF size={20} /></a>
-              <a href="#" aria-label="TripAdvisor"><FaTripadvisor size={22} /></a>
+              <a
+                href="https://www.instagram.com/villaspuntauva/"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaInstagram size={22} />
+              </a>
+              <a
+                href="https://www.tiktok.com/@villaspuntauva"
+                aria-label="TikTok"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaTiktok size={20} />
+              </a>
             </div>
           </div>
         </div>
