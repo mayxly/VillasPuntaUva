@@ -29,7 +29,7 @@ export default function HomePage() {
     if (departureParam) params.set('departure', departureParam)
     if (guests) params.set('guests', guests)
 
-    navigate(`/suites${params.toString() ? `?${params.toString()}` : ''}`)
+    navigate(`/suites${params.toString() ? `?${params.toString()}` : ''}#available-suites`)
   }
 
   return (

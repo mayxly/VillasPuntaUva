@@ -17,7 +17,7 @@ export default function AboutPreview() {
           Stay in private vacation villas surrounded by jungle, wildlife, and the Caribbean coast.
           Each home is designed for comfort, privacy, and easy days near Punta Uva Beach.
         </p>
-        <Link to="/suites" className={styles.btn}>View Our Suites</Link>
+        <Link to="/suites#available-suites" className={styles.btn}>View Our Suites</Link>
       </div>
     </section>
   )

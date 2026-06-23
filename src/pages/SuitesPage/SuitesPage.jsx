@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { IoBedOutline, IoPeopleOutline } from 'react-icons/io5'
 import { LuBath } from 'react-icons/lu'
 import BookingWidget from '../../sections/BookingWidget/BookingWidget'
@@ -99,6 +99,7 @@ function SuiteListingCard({ suite }) {
 }
 
 export default function SuitesPage() {
+  const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const [bookingValue, setBookingValue] = useState(() => getBookingValueFromParams(searchParams))
   const [guestFilter, setGuestFilter] = useState(() => {
@@ -135,12 +136,14 @@ export default function SuitesPage() {
       return
     }
 
-    setGuestFilter(guestCount)
-    setSearchParams({
+    const params = new URLSearchParams({
       arrival: formatDateParam(arrival),
       departure: formatDateParam(departure),
       guests,
     })
+
+    setGuestFilter(guestCount)
+    navigate(`/suites?${params.toString()}#available-suites`, { replace: true })
     setError('')
   }
 
@@ -180,14 +183,18 @@ export default function SuitesPage() {
           </p>
         )}
 
-        {guestFilter && !error && (
-          <div className={styles.filterBar}>
+        {!error && (
+          <div id="available-suites" className={styles.filterBar}>
             <p>
-              Showing available villas for {guestFilter} {guestFilter === 1 ? 'guest' : 'guests'}
+              {guestFilter
+                ? `Showing available suites for ${guestFilter} ${guestFilter === 1 ? 'guest' : 'guests'}`
+                : 'Showing all available suites'}
             </p>
-            <button type="button" className={styles.clearButton} onClick={clearSearch}>
-              Clear search
-            </button>
+            {guestFilter && (
+              <button type="button" className={styles.clearButton} onClick={clearSearch}>
+                Clear search
+              </button>
+            )}
           </div>
         )}
 
