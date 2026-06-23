@@ -49,6 +49,16 @@ export default function Navbar() {
     setSuitesOpen(false)
   }
 
+  const handleLogoClick = (event) => {
+    setMobileOpen(false)
+    setSuitesOpen(false)
+
+    if (isHome) {
+      event.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   const openBookingModal = () => {
     setMobileOpen(false)
     setSuitesOpen(false)
@@ -59,7 +69,7 @@ export default function Navbar() {
     <>
       <header className={`${styles.navbar} ${solid ? styles.solid : ''}`}>
         <div className={styles.container}>
-          <Link to="/" className={styles.logoLink}>
+          <Link to="/" className={styles.logoLink} onClick={handleLogoClick}>
             <img
               src={solid ? '/images/logos/logo-black-text.png' : '/images/logos/logo-white-text.png'}
               alt="Villas Punta Uva"
