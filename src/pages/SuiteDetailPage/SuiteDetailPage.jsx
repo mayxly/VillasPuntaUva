@@ -325,6 +325,29 @@ function NotesSection({ suite }) {
   )
 }
 
+function AirbnbSection({ suite }) {
+  if (!suite.airbnbUrl) return null
+
+  return (
+    <div className={`${styles.sectionBlock} ${styles.airbnbBlock}`}>
+      <p className={styles.airbnbEyebrow}>Also seen on</p>
+      <a
+        href={suite.airbnbUrl}
+        className={styles.airbnbButton}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`View ${suite.name} on Airbnb`}
+      >
+        <img src="/images/logos/airbnb-logo.png" alt="" />
+        <span>Airbnb</span>
+      </a>
+      <p className={styles.airbnbNote}>
+        Book directly with us to avoid third-party platform fees and get the best direct booking experience!
+      </p>
+    </div>
+  )
+}
+
 function BookingPanel({ suite }) {
   const [bookingValue, setBookingValue] = useState(initialBookingValue)
   const [arrivalOpen, setArrivalOpen] = useState(false)
@@ -599,6 +622,8 @@ export default function SuiteDetailPage() {
             </div>
             <p className={styles.rateNote}>{suite.rateNote}</p>
           </div>
+
+          <AirbnbSection suite={suite} />
         </div>
 
         <BookingPanel suite={suite} />
