@@ -451,7 +451,7 @@ export const suites = [
     ],
     rateNote: standardRateNote,
     rates: {
-      high: { weekday: 80, weekend: 90 },
+      high: { weekday: 90, weekend: 100 },
       low: { weekday: 80, weekend: 90 },
     },
   },
