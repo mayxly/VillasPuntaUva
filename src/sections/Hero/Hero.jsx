@@ -14,7 +14,7 @@ export default function Hero() {
         />
         <h1 className={styles.title}>Villas Punta Uva</h1>
         <p className={styles.subtitle}>
-          {t('footer.tagline')}
+          {t('home.tagline')}
         </p>
       </div>
     </section>
