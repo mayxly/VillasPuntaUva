@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import styles from './AboutUs.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function AboutUs() {
+  const { t } = useLanguage()
   return (
     <section className={styles.section}>
       <div className={styles.brandSide}>
@@ -14,10 +16,9 @@ export default function AboutUs() {
       <div className={styles.photoSide}>
         <div className={styles.photoContent}>
           <p className={styles.text}>
-            Whether you're seeking a romantic getaway, a family adventure, or a peaceful retreat,
-            our team is dedicated to making your stay exceptional from start to finish.
+            {t('home.aboutText')}
           </p>
-          <Link to="/about" className={styles.btn}>About Us</Link>
+          <Link to="/about" className={styles.btn}>{t('nav.about')}</Link>
         </div>
       </div>
     </section>

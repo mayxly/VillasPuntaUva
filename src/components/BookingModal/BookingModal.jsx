@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { HiX } from 'react-icons/hi'
 import styles from './BookingModal.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function BookingModal({ onClose }) {
+  const { t } = useLanguage()
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
@@ -33,7 +35,7 @@ export default function BookingModal({ onClose }) {
           type="button"
           className={styles.close}
           onClick={onClose}
-          aria-label="Close booking information"
+          aria-label={t('common.close')}
         >
           <HiX size={24} />
         </button>
@@ -42,13 +44,12 @@ export default function BookingModal({ onClose }) {
           alt=""
           className={styles.icon}
         />
-        <h2 id="booking-modal-title">Ready to book?</h2>
+        <h2 id="booking-modal-title">{t('booking.modalTitle')}</h2>
         <p>
-          Text or WhatsApp us at <strong>+506 6145 9916</strong> to book your stay,
-          ask a question, or inquire about availability.
+          {t('booking.modalText', { phone: '+506 6145 9916' })}
         </p>
         <a href="https://wa.me/50661459916" className={styles.action}>
-          Message +506 6145 9916
+          {t('booking.message', { phone: '+506 6145 9916' })}
         </a>
       </div>
     </div>

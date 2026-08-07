@@ -5,6 +5,7 @@ import { LuBath } from 'react-icons/lu'
 import BookingWidget from '../../sections/BookingWidget/BookingWidget'
 import { getLowestNightlyRate, suites } from '../../data/suites'
 import styles from './SuitesPage.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 const initialBookingValue = {
   arrival: null,
@@ -57,6 +58,8 @@ function getBookingValueFromParams(searchParams) {
 }
 
 function SuiteListingCard({ suite }) {
+  const { language, locale, t } = useLanguage()
+  const formatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
   return (
     <Link to={`/suites/${suite.slug}`} className={styles.suiteCard}>
       <div className={styles.cardImageWrap}>
@@ -75,22 +78,22 @@ function SuiteListingCard({ suite }) {
             <p className={styles.cardLocation}>{suite.location}, Costa Rica</p>
           </div>
           <p className={styles.price}>
-            <span className={styles.priceMeta}>from</span> {priceFormatter.format(getLowestNightlyRate(suite))}
-            <span className={styles.priceNight}>/night</span>
+            <span className={styles.priceMeta}>{t('common.from')}</span> {formatter.format(getLowestNightlyRate(suite))}
+            <span className={styles.priceNight}>/{t('common.night')}</span>
           </p>
         </div>
         <div className={styles.specs} aria-label={`${suite.name} details`}>
           <span className={styles.spec}>
             <IoBedOutline size={18} />
-            {suite.bedrooms} {suite.bedrooms === 1 ? 'bed' : 'beds'}
+            {suite.bedrooms} {language === 'es' ? (suite.bedrooms === 1 ? 'cama' : 'camas') : (suite.bedrooms === 1 ? 'bed' : 'beds')}
           </span>
           <span className={styles.spec}>
             <LuBath size={18} />
-            {suite.bathrooms} {suite.bathrooms === 1 ? 'bath' : 'baths'}
+            {suite.bathrooms} {language === 'es' ? (suite.bathrooms === 1 ? 'baño' : 'baños') : (suite.bathrooms === 1 ? 'bath' : 'baths')}
           </span>
           <span className={styles.spec}>
             <IoPeopleOutline size={18} />
-            Sleeps {suite.sleeps}
+            {t('suites.sleeps', { count: suite.sleeps })}
           </span>
         </div>
       </div>
@@ -99,6 +102,7 @@ function SuiteListingCard({ suite }) {
 }
 
 export default function SuitesPage() {
+  const { language, t } = useLanguage()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const [bookingValue, setBookingValue] = useState(() => getBookingValueFromParams(searchParams))
@@ -117,22 +121,22 @@ export default function SuitesPage() {
     const guestCount = Number(guests)
 
     if (!arrival) {
-      setError('Please select an arrival date.')
+      setError(t('booking.selectArrival'))
       return
     }
 
     if (!departure) {
-      setError('Please select a departure date.')
+      setError(t('booking.selectDeparture'))
       return
     }
 
     if (departure <= arrival) {
-      setError('Please choose a departure date after your arrival date.')
+      setError(t('booking.checkoutAfterArrival'))
       return
     }
 
     if (!Number.isFinite(guestCount) || guestCount < 1) {
-      setError('Please select at least one guest.')
+      setError(t('booking.selectGuest'))
       return
     }
 
@@ -163,9 +167,9 @@ export default function SuitesPage() {
             alt=""
             className={styles.heroIcon}
           />
-          <h1 className={styles.heroTitle}>Suites</h1>
+          <h1 className={styles.heroTitle}>{t('suites.title')}</h1>
           <p className={styles.heroText}>
-            Browse private villas shaped for quiet mornings, salt-air afternoons, and effortless Caribbean stays.
+            {t('suites.hero')}
           </p>
         </div>
       </section>
@@ -176,7 +180,7 @@ export default function SuitesPage() {
         onSearch={handleSearch}
       />
 
-      <section className={styles.listings} aria-label="Suite listings">
+      <section className={styles.listings} aria-label={t('suites.listings')}>
         {error && (
           <p className={styles.message} role="alert">
             {error}
@@ -187,12 +191,12 @@ export default function SuitesPage() {
           <div id="available-suites" className={styles.filterBar}>
             <p>
               {guestFilter
-                ? `Showing available suites for ${guestFilter} ${guestFilter === 1 ? 'guest' : 'guests'}`
-                : 'Showing all available suites'}
+                ? t('suites.showingFor', { count: guestFilter, unit: guestFilter === 1 ? t('common.guest').toLowerCase() : t('common.guests').toLowerCase() })
+                : t('suites.showingAll')}
             </p>
             {guestFilter && (
               <button type="button" className={styles.clearButton} onClick={clearSearch}>
-                Clear search
+                {t('suites.clear')}
               </button>
             )}
           </div>
@@ -206,10 +210,10 @@ export default function SuitesPage() {
           </div>
         ) : (
           <div className={styles.emptyState}>
-            <h2>No suites match your search</h2>
-            <p>Try a smaller group size to see more villas.</p>
+            <h2>{t('suites.noMatch')}</h2>
+            <p>{t('suites.smallerGroup')}</p>
             <button type="button" className={styles.emptyButton} onClick={clearSearch}>
-              Show all suites
+              {t('suites.allSuites')}
             </button>
           </div>
         )}

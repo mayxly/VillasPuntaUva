@@ -3,8 +3,10 @@ import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 import { suites } from '../../data/suites'
 import SuiteCard from '../../components/SuiteCard/SuiteCard'
 import styles from './SuitesGallery.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function SuitesGallery() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const trackRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
@@ -75,11 +77,10 @@ export default function SuitesGallery() {
           className={styles.icon}
         />
         <h2 className={styles.heading}>
-          Discover our suites
+          {t('home.discover')}
         </h2>
         <p className={styles.subheading}>
-          We're more than a place to stay. Villas Punta Uva is an invitation to pause, breathe, and
-          reconnect. Explore our handcrafted villas designed for calm, where every element tells a story.
+          {t('home.discoverText')}
         </p>
       </div>
 
@@ -88,7 +89,7 @@ export default function SuitesGallery() {
           className={`${styles.arrow} ${styles.arrowLeft}`}
           onClick={() => scrollTo(activeIndex - 1)}
           disabled={activeIndex === 0}
-          aria-label="Previous"
+          aria-label={t('common.previous')}
         >
           <HiChevronLeft size={28} />
         </button>
@@ -125,7 +126,7 @@ export default function SuitesGallery() {
           className={`${styles.arrow} ${styles.arrowRight}`}
           onClick={() => scrollTo(activeIndex + 1)}
           disabled={activeIndex >= maxIndex}
-          aria-label="Next"
+          aria-label={t('common.next')}
         >
           <HiChevronRight size={28} />
         </button>
@@ -137,7 +138,7 @@ export default function SuitesGallery() {
             key={i}
             className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ''}`}
             onClick={() => scrollTo(i)}
-            aria-label={`Go to slide ${i + 1}`}
+            aria-label={`${t('common.next')} ${i + 1}`}
           />
         ))}
       </div>

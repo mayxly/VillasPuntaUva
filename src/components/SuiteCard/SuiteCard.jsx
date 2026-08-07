@@ -4,8 +4,10 @@ import { LuBath } from 'react-icons/lu'
 import { HiArrowRight } from 'react-icons/hi'
 import PlaceholderImage from '../PlaceholderImage/PlaceholderImage'
 import styles from './SuiteCard.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function SuiteCard({ name, location, slug, image, bedrooms, bathrooms, description }) {
+  const { t } = useLanguage()
   return (
     <div className={styles.card}>
       {/* Front face — image + name overlay */}
@@ -45,16 +47,16 @@ export default function SuiteCard({ name, location, slug, image, bedrooms, bathr
         <div className={styles.specs}>
           <span className={styles.spec}>
             <IoBedOutline size={18} />
-            {bedrooms} {bedrooms === 1 ? 'Bed' : 'Beds'}
+            {bedrooms} {bedrooms === 1 ? t('common.guest').replace('Guest', 'Bed').replace('Huésped', 'Cama') : (t('common.guest').replace('Guest', 'Beds').replace('Huésped', 'Camas'))}
           </span>
           <span className={styles.spec}>
             <LuBath size={18} />
-            {bathrooms} {bathrooms === 1 ? 'Bath' : 'Baths'}
+            {bathrooms} {bathrooms === 1 ? (t('common.guest').startsWith('H') ? 'Baño' : 'Bath') : (t('common.guest').startsWith('H') ? 'Baños' : 'Baths')}
           </span>
         </div>
         <p className={styles.backDesc}>{description}</p>
         <Link to={`/suites/${slug}`} className={styles.viewLink}>
-          View details <HiArrowRight size={18} />
+          {t('suites.viewDetails')} <HiArrowRight size={18} />
         </Link>
       </div>
     </div>

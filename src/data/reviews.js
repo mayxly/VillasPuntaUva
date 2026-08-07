@@ -8,6 +8,7 @@ export const reviews = [
     rating: 5,
     platform: 'airbnb',
     text: "Angel's place was beautiful! I immediately fell in love when I seen the villa. The location was walkable from Punta Uva beach and multiple food locations. Angel was helpful in providing recommendations and ensuring we had everything we needed for our stay.",
+    textEs: '¡El lugar de Angel era hermoso! Me enamoré inmediatamente al ver la villa. La ubicación permite caminar a la playa de Punta Uva y a varios lugares para comer. Angel fue muy servicial con recomendaciones y se aseguró de que tuviéramos todo lo necesario para nuestra estadía.',
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const reviews = [
     rating: 5,
     platform: 'airbnb',
     text: "Incredible property with stunning natural surroundings. The private pool was a highlight and the kids loved spotting wildlife from the deck. The villa was spacious, clean, and had everything we needed. Highly recommend for families looking for a peaceful getaway.",
+    textEs: 'Propiedad increíble con un entorno natural impresionante. La piscina privada fue un punto destacado y a los niños les encantó observar la vida silvestre desde la terraza. La villa era espaciosa, limpia y tenía todo lo que necesitábamos. Muy recomendable para familias que buscan una escapada tranquila.',
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ export const reviews = [
     rating: 5,
     platform: 'airbnb',
     text: "A true hidden gem on the Caribbean coast. The villa is beautifully designed with natural wood and surrounded by lush tropical gardens. We could hear howler monkeys in the morning and the beach is just a short walk. The hosts were responsive and welcoming.",
+    textEs: 'Una verdadera joya escondida en la costa caribeña. La villa está bellamente diseñada con madera natural y rodeada de exuberantes jardines tropicales. Podíamos escuchar monos aulladores por la mañana y la playa está a pocos pasos. Los anfitriones fueron atentos y acogedores.',
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ export const reviews = [
     rating: 5,
     platform: 'airbnb',
     text: "Perfect escape from the city. The villa is tucked away in nature but still close to restaurants and the beach. Loved the open-air design and the sounds of the jungle at night. The air conditioning was a nice touch for the warmer afternoons.",
+    textEs: 'La escapada perfecta de la ciudad. La villa está rodeada de naturaleza, pero cerca de restaurantes y de la playa. Nos encantó el diseño al aire libre y los sonidos de la selva por la noche. El aire acondicionado fue un gran detalle para las tardes cálidas.',
   },
   {
     id: 5,
@@ -48,5 +52,6 @@ export const reviews = [
     rating: 5,
     platform: 'airbnb',
     text: "We had the most wonderful week here. The property is even better than the photos. Punta Uva beach is absolutely gorgeous and barely crowded. Our host went above and beyond to make sure everything was perfect. Already planning our return trip!",
+    textEs: 'Pasamos una semana maravillosa aquí. La propiedad es aún mejor que en las fotos. La playa de Punta Uva es absolutamente hermosa y casi no está concurrida. Nuestro anfitrión hizo más de lo esperado para asegurarse de que todo fuera perfecto. ¡Ya estamos planeando volver!',
   },
 ]

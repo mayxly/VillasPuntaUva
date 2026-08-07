@@ -1,6 +1,8 @@
 import styles from './Hero.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function Hero() {
+  const { t } = useLanguage()
   return (
     <section className={styles.hero}>
       <div className={styles.overlay} />
@@ -12,7 +14,7 @@ export default function Hero() {
         />
         <h1 className={styles.title}>Villas Punta Uva</h1>
         <p className={styles.subtitle}>
-          Private Beach Villas in Punta Uva & Arrecife, Costa Rica
+          {t('footer.tagline')}
         </p>
       </div>
     </section>

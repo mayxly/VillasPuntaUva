@@ -4,6 +4,7 @@ import { HiMenu, HiX, HiChevronDown } from 'react-icons/hi'
 import { useScrollPosition } from '../../hooks/useScrollPosition'
 import { suites } from '../../data/suites'
 import BookingModal from '../BookingModal/BookingModal'
+import { useLanguage } from '../../i18n/LanguageContext'
 import styles from './Navbar.module.css'
 
 export default function Navbar() {
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [bookingOpen, setBookingOpen] = useState(false)
   const scrollY = useScrollPosition()
   const location = useLocation()
+  const { language, setLanguage, t } = useLanguage()
 
   const isHome = location.pathname === '/'
   const isScrolled = scrollY > 80
@@ -28,11 +30,11 @@ export default function Navbar() {
   }, [location])
 
   const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/suites', label: 'Suites', hasDropdown: true },
-    { to: '/attractions', label: 'Attractions' },
-    { to: '/about', label: 'About Us' },
-    { to: '/contact', label: 'Contact Us' },
+    { to: '/', label: t('nav.home') },
+    { to: '/suites', label: t('nav.suites'), hasDropdown: true },
+    { to: '/attractions', label: t('nav.attractions') },
+    { to: '/about', label: t('nav.about') },
+    { to: '/contact', label: t('nav.contact') },
   ]
 
   const isActiveLink = (link) => {
@@ -118,15 +120,19 @@ export default function Navbar() {
                 </Link>
               )
             )}
+            <LanguageSwitch language={language} setLanguage={setLanguage} t={t} />
             <button type="button" className={styles.bookBtn} onClick={openBookingModal}>
-              Book Now
+              {t('nav.book')}
             </button>
           </nav>
+          <div className={styles.mobileActions}>
+            <LanguageSwitch language={language} setLanguage={setLanguage} t={t} />
+          </div>
 
           <button
             className={styles.hamburger}
             onClick={() => setMobileOpen(true)}
-            aria-label="Open menu"
+            aria-label={t('nav.open')}
           >
             <HiMenu size={28} />
           </button>
@@ -140,7 +146,7 @@ export default function Navbar() {
         <button
           className={styles.closeBtn}
           onClick={() => setMobileOpen(false)}
-          aria-label="Close menu"
+          aria-label={t('nav.close')}
         >
           <HiX size={28} />
         </button>
@@ -169,13 +175,33 @@ export default function Navbar() {
               )}
             </div>
           ))}
+          <LanguageSwitch language={language} setLanguage={setLanguage} t={t} className={styles.drawerLanguage} />
           <button type="button" className={styles.bookBtn} onClick={openBookingModal}>
-            Book Now
+            {t('nav.book')}
           </button>
         </nav>
       </div>
 
       {bookingOpen && <BookingModal onClose={() => setBookingOpen(false)} />}
     </>
+  )
+}
+
+function LanguageSwitch({ language, setLanguage, t, className = '' }) {
+  return (
+    <div className={`${styles.languageSwitch} ${className}`} aria-label={t('nav.language')}>
+      {['en', 'es'].map((option) => (
+        <button
+          key={option}
+          type="button"
+          className={language === option ? styles.languageActive : ''}
+          onClick={() => setLanguage(option)}
+          aria-pressed={language === option}
+          aria-label={`${t('nav.language')}: ${option === 'en' ? 'English' : 'Español'}`}
+        >
+          {option.toUpperCase()}
+        </button>
+      ))}
+    </div>
   )
 }

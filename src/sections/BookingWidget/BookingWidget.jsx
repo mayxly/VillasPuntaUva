@@ -2,6 +2,11 @@ import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import styles from './BookingWidget.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
+import { es } from 'date-fns/locale'
+import { registerLocale } from 'react-datepicker'
+
+registerLocale('es', es)
 
 const defaultValue = {
   arrival: null,
@@ -15,6 +20,7 @@ export default function BookingWidget({
   onSearch,
   buttonLabel = 'View Suites',
 }) {
+  const { language, t } = useLanguage()
   const [localValue, setLocalValue] = useState(defaultValue)
   const [arrivalOpen, setArrivalOpen] = useState(false)
   const [departureOpen, setDepartureOpen] = useState(false)
@@ -58,14 +64,15 @@ export default function BookingWidget({
     <section className={styles.section} id="book">
       <div className={styles.card}>
         <div className={styles.field}>
-          <label className={styles.label}>Arrival Date</label>
+          <label className={styles.label}>{t('common.arrival')}</label>
           <DatePicker
             selected={arrival}
             onChange={handleArrivalChange}
-            placeholderText="Select date"
+            placeholderText={t('common.selectDate')}
             className={styles.input}
             minDate={new Date()}
             dateFormat="MMM d, yyyy"
+            locale={language === 'es' ? 'es' : undefined}
             open={arrivalOpen}
             onInputClick={() => setArrivalOpen(true)}
             onClickOutside={() => setArrivalOpen(false)}
@@ -74,14 +81,15 @@ export default function BookingWidget({
         </div>
 
         <div className={styles.field}>
-          <label className={styles.label}>Departure Date</label>
+          <label className={styles.label}>{t('common.departure')}</label>
           <DatePicker
             selected={departure}
             onChange={handleDepartureChange}
-            placeholderText="Select date"
+            placeholderText={t('common.selectDate')}
             className={styles.input}
             minDate={arrival || new Date()}
             dateFormat="MMM d, yyyy"
+            locale={language === 'es' ? 'es' : undefined}
             open={departureOpen}
             onInputClick={() => setDepartureOpen(true)}
             onClickOutside={() => setDepartureOpen(false)}
@@ -90,7 +98,7 @@ export default function BookingWidget({
         </div>
 
         <div className={styles.field}>
-          <label className={styles.label}>Number of Guests</label>
+          <label className={styles.label}>{t('common.guests')}</label>
           <select
             value={guests}
             onChange={(e) => updateValue({ guests: e.target.value })}
@@ -98,14 +106,14 @@ export default function BookingWidget({
           >
             {Array.from({ length: 10 }, (_, i) => (
               <option key={i + 1} value={i + 1}>
-                {i + 1} {i === 0 ? 'Guest' : 'Guests'}
+                {i + 1} {i === 0 ? t('common.guest') : t('common.guests')}
               </option>
             ))}
           </select>
         </div>
 
         <button className={styles.btn} onClick={handleSearch}>
-          {buttonLabel}
+          {buttonLabel === 'View Suites' ? t('common.viewSuites') : buttonLabel}
         </button>
       </div>
     </section>

@@ -1,4 +1,86 @@
 import styles from './AttractionsPage.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
+
+const spanishLabels = {
+  'Outdoor Adventures': 'Aventuras al aire libre',
+  'Water Activities': 'Actividades acuáticas',
+  Diving: 'Buceo',
+  'In the Caribbean': 'En el Caribe',
+  'Canopy Tour': 'Tour de canopy',
+  'Surf Lessons': 'Clases de surf',
+  'Chocolate Tours': 'Tours de chocolate',
+  'Horseback Riding': 'Cabalgatas',
+  Nature: 'Naturaleza',
+  Activities: 'Actividades',
+  'Explore the Caribbean': 'Explore el Caribe',
+  'Night Life': 'Vida nocturna',
+  'Rafting Rio Pacuare': 'Rafting en el Río Pacuare',
+  'Punta Uva Kayaking': 'Kayak en Punta Uva',
+  'Cahuita Snorkeling': 'Snorkel en Cahuita',
+  'Discover Dive': 'Buceo de descubrimiento',
+  'Boat dives': 'Buceos desde barco',
+  'Shore dives': 'Buceos desde la orilla',
+  'Zipline-Canopy Tour': 'Tour de tirolesa y canopy',
+  'Superman Experience': 'Experiencia Superman',
+  'Jungle Adventure': 'Aventura en la selva',
+  Packages: 'Paquetes',
+  Includes: 'Incluye',
+  'Regular Tours (open to public)': 'Tours regulares (abiertos al público)',
+  'Private Tours (advanced notice)': 'Tours privados (con reserva previa)',
+  'Short Tour': 'Tour corto',
+  'Beach Jungle Tour': 'Tour de playa y selva',
+  'El hippo camp tour': 'Tour de campamento Hippo',
+  'Bri Bri Waterfalls': 'Cataratas de Bri Bri',
+  'Macaw Sanctuary': 'Santuario de guacamayas',
+  'Jaguar Sanctuary': 'Santuario de jaguares',
+  'Yoga at Svastha': 'Yoga en Svastha',
+  'Farmers markets': 'Mercados agrícolas',
+  'Volleyball in Cocles': 'Voleibol en Cocles',
+  'Hot Rocks Local Bar and Restaurant': 'Bar y restaurante local Hot Rocks',
+  Adults: 'Adultos',
+  'Tuktuk Numbers': 'Números de tuk-tuk',
+  'Taxi Numbers': 'Números de taxi',
+}
+
+const spanishDescriptions = {
+  'outdoor-adventures:Rafting Rio Pacuare': 'Un emocionante día de río entre cañones de selva y cataratas, en uno de los ríos de aguas blancas más famosos de Costa Rica. Ideal para quienes buscan paisajes, adrenalina y una inmersión total en la jungla. 4 horas.',
+  'outdoor-adventures:Punta Uva Kayaking': 'Reme por tranquilas vías navegables del Caribe y observe la vida silvestre en las exuberantes orillas de Punta Uva. Es una aventura lenta y escénica, con buenas posibilidades de ver monos, perezosos, iguanas y aves tropicales. 5 horas.',
+  'outdoor-adventures:Cahuita Snorkeling': 'Explore el arrecife protegido de Cahuita, una de las experiencias marinas emblemáticas de la costa caribeña. Espere aguas claras, colorida vida de arrecife, navegación, equipo y una caminata guiada. 5 horas.',
+  'diving:Discover Dive': 'Perfecto para quienes bucean por primera vez y desean una introducción guiada al mundo submarino caribeño. Comience desde la orilla con instrucción técnica, apoyo de un divemaster y equipo incluido.',
+  'diving:Boat dives': 'Navegue mar adentro con apoyo local para visitar sitios caribeños más profundos y disfrutar una experiencia de mar abierto. Ideal para buzos certificados; incluye acceso en bote, instrucción, divemaster y equipo.',
+  'diving:Shore dives': 'Disfrute un buceo sencillo desde la orilla, cerca de la costa, ideal para buzos certificados que prefieren empezar desde tierra. Incluye instrucción, divemaster y equipo.',
+  'canopy-tour:Zipline-Canopy Tour': 'Vuele por la selva y lleve su adrenalina al máximo con el tour de canopy. Recorrerá 18 plataformas y 2.400 metros de diversión y aventura.',
+  'canopy-tour:Superman Experience': 'Añada un giro a la adrenalina y pruebe el cable Superman. Se deslizará 450 metros a una altura máxima de 90 metros, en la posición de vuelo del famoso superhéroe.',
+  'canopy-tour:Jungle Adventure': 'Canopy, caminata, rápel, puentes colgantes, escalada de árboles, columpio de Tarzán y cable Superman. ¡Este tour lo tiene todo!',
+  'surf-lessons:Surf Lessons': 'Aprenda a leer las olas con instrucción local paciente en la costa caribeña. Las clases se adaptan desde principiantes hasta surfistas en progreso, con opciones privadas y grupales.',
+  'surf-lessons:Packages': 'Los paquetes de varias clases le dan más tiempo en el agua y un mejor ritmo para mejorar su postura, tiempo y confianza. Elija un paquete para recibir entrenamiento constante en varias sesiones de playa.',
+  'surf-lessons:Includes': 'Tabla de surf, leash, camisetas de lycra, transporte para tres personas o menos, instructores bilingües y certificados por la ISA.',
+  'chocolate-tours:Chocolate Tours': 'Recorra una finca de cacao activa y siga el chocolate desde la fruta del bosque hasta la degustación final. Un tour relajado, delicioso y memorable que combina cultura, naturaleza y vistas al mar.',
+  'chocolate-tours:Regular Tours (open to public)': 'Únase a un tour público programado para conocer la finca de cacao y el taller en un ambiente fácil y social.',
+  'chocolate-tours:Private Tours (advanced notice)': 'Reserve con anticipación una experiencia privada de chocolate con mayor flexibilidad para su grupo. Es ideal para familias, retiros y grupos grandes.',
+  'horseback-riding:Short Tour': 'Una experiencia corta e intensa para principiantes y niños. Recorra Punta Cocles y Playa Chiquita, o relájese al final del día viendo el atardecer. Duración: 1,5 horas.',
+  'horseback-riding:Beach Jungle Tour': 'Cabalgue por playas de arena blanca y después adéntrese en la selva tropical. Su guía le ayudará a observar monos aulladores, perezosos, tucanes, loros y más. Duración: 2,5 horas.',
+  'horseback-riding:El hippo camp tour': 'Una mezcla de aventura y relajación para una experiencia inolvidable. Después del tour, usted y su pareja disfrutarán de un masaje en pareja con dos terapeutas licenciados. 2,5 horas más 1 hora de masaje.',
+  'nature:Bri Bri Waterfalls': 'Caminata de 5 minutos por la exuberante selva tropical para llegar a las famosas cataratas de Bri Bri. Perfecto para un baño refrescante o una pequeña aventura.',
+  'nature:Macaw Sanctuary': 'Observe estas extraordinarias aves en su hábitat natural. Una experiencia única e inspiradora de observación de aves y una excelente oportunidad fotográfica. Visitas con reserva todos los días a las 3 p. m.',
+  'nature:Jaguar Sanctuary': 'Un centro de rescate animal en Cocles dedicado a la rehabilitación de monos, perezosos, serpientes, tortugas, jaguares y más.',
+  'activities:Yoga at Svastha': 'Practique en plataformas de yoga al aire libre con vista al océano y la selva, rodeado de aves exóticas y algún perezoso, mono, agutí o mapache. Svastha es ideal para una clase tranquila o un retiro de bienestar.',
+  'activities:Farmers markets': 'Recorra productos locales, artículos hechos a mano y puestos comunitarios alrededor de Puerto Viejo. Una excelente manera de abastecer la villa y conocer a quienes producen los alimentos y artesanías de la región.',
+  'activities:Volleyball in Cocles': 'Participe en clases de voleibol de distintos niveles para hombres, mujeres, niñas, niños y familias. ¡Conozca nuevos amigos y la comunidad!',
+  'night-life:Arrecife Restaurante': 'Cada domingo disfrute clases de baile, pista abierta y ritmos latinos como salsa, cumbia y bachata. ¡Perfecto para bailar toda la noche!',
+  'night-life:Salsa Brava': 'Martes, jueves, viernes y sábado: noches de reggae y fiestas frente a la playa en Salsa Brava. Buen ambiente, música, baile e inolvidables noches caribeñas junto al mar.',
+  'night-life:Clan Vibes Club': 'Miércoles a domingo: música afrobeats y reggaetón, ambiente juvenil, DJ en vivo, bar y seguridad; el lugar perfecto para disfrutar la vida nocturna de Puerto Viejo.',
+  'night-life:Hot Rocks Local Bar and Restaurant': 'Un bar y restaurante local relajado con buena música, bebidas y ambiente caribeño, perfecto para comenzar o terminar su noche en Puerto Viejo.',
+}
+
+function localizeActivityText(value, language) {
+  if (language !== 'es' || !value) return value
+  if (value === 'MESSAGE 6145 9916 TO BOOK') return 'ENVÍE UN MENSAJE AL 6145 9916 PARA RESERVAR'
+  if (value === 'Tours offered every Monday through Saturday at 10 am and 2pm. No tours on Sunday') return 'Tours de lunes a sábado a las 10 a. m. y 2 p. m. No hay tours los domingos.'
+  if (value === 'Monday to Friday from 9am - 5:30pm. Saturday from 9am - 12pm. Sunday closed') return 'De lunes a viernes de 9 a. m. a 5:30 p. m. Sábado de 9 a. m. a 12 p. m. Cerrado los domingos.'
+  if (spanishLabels[value]) return spanishLabels[value]
+  return value
+}
 
 const activitySections = [
   {
@@ -309,15 +391,15 @@ function AttractionImage({ label, src }) {
   )
 }
 
-function ActivityItem({ item }) {
+function ActivityItem({ item, language, sectionId }) {
   return (
     <article className={styles.item}>
       <div className={styles.itemHeader}>
-        <h3>{item.title}</h3>
+        <h3>{localizeActivityText(item.title, language)}</h3>
         {item.price && <span className={styles.price}>{item.price}</span>}
       </div>
 
-      {item.description && <p>{item.description}</p>}
+      {item.description && <p>{language === 'es' ? (spanishDescriptions[`${sectionId}:${item.title}`] ?? item.description) : item.description}</p>}
 
       {item.lines?.map((line) => (
         <p key={line} className={styles.line}>
@@ -355,17 +437,17 @@ function ActivityItem({ item }) {
   )
 }
 
-function ActivitySection({ section, index }) {
+function ActivitySection({ section, index, language }) {
   return (
     <section id={section.id} className={`${styles.section} ${index % 2 ? styles.alt : ''}`}>
       <div className={styles.sectionInner}>
         <div className={styles.sectionIntro}>
           {section.eyebrow && <p className={styles.eyebrow}>{section.eyebrow}</p>}
-          <h2>{section.title}</h2>
-          {section.subtitle && <p className={styles.subtitle}>{section.subtitle}</p>}
-          {section.provider && <p className={styles.provider}>{section.provider}</p>}
-          {section.schedule && <p className={styles.schedule}>{section.schedule}</p>}
-          {section.contact && <p className={styles.contact}>{section.contact}</p>}
+          <h2>{localizeActivityText(section.title, language)}</h2>
+          {section.subtitle && <p className={styles.subtitle}>{localizeActivityText(section.subtitle, language)}</p>}
+          {section.provider && <p className={styles.provider}>{localizeActivityText(section.provider, language)}</p>}
+          {section.schedule && <p className={styles.schedule}>{localizeActivityText(section.schedule, language)}</p>}
+          {section.contact && <p className={styles.contact}>{localizeActivityText(section.contact, language)}</p>}
 
           {section.contacts?.length > 0 && (
             <div className={styles.contactGrid}>
@@ -385,14 +467,14 @@ function ActivitySection({ section, index }) {
               <AttractionImage
                 key={imageIndex}
                 src={image}
-                label={`${section.title} image ${imageIndex + 1}`}
+                label={`${localizeActivityText(section.title, language)} ${language === 'es' ? 'imagen' : 'image'} ${imageIndex + 1}`}
               />
             ))}
           </div>
 
           <div className={styles.items}>
             {section.items.map((item) => (
-              <ActivityItem key={item.title} item={item} />
+              <ActivityItem key={item.title} item={item} language={language} sectionId={section.id} />
             ))}
           </div>
         </div>
@@ -402,6 +484,7 @@ function ActivitySection({ section, index }) {
 }
 
 export default function AttractionsPage() {
+  const { language, t } = useLanguage()
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
@@ -411,15 +494,15 @@ export default function AttractionsPage() {
             alt=""
             className={styles.heroIcon}
           />
-          <h1 className={styles.heroTitle}>Attractions</h1>
+          <h1 className={styles.heroTitle}>{t('pages.attractions')}</h1>
           <p className={styles.heroText}>
-            Explore tours, ocean adventures, jungle experiences, wellness, and nightlife around Punta Uva.
+            {t('pages.attractionsHero')}
           </p>
         </div>
       </section>
 
       {activitySections.map((section, index) => (
-        <ActivitySection key={section.title} section={section} index={index} />
+        <ActivitySection key={section.title} section={section} index={index} language={language} />
       ))}
     </div>
   )

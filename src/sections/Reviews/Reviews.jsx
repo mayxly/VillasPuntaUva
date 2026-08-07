@@ -4,6 +4,7 @@ import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 import { GoVerified } from 'react-icons/go'
 import { reviews } from '../../data/reviews'
 import styles from './Reviews.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 function AirbnbLogo() {
   return (
@@ -16,10 +17,12 @@ function AirbnbLogo() {
 }
 
 function ReviewCard({ review }) {
+  const { language, t } = useLanguage()
+  const reviewText = language === 'es' ? review.textEs : review.text
   const [expanded, setExpanded] = useState(false)
   const maxLength = 150
-  const isLong = review.text.length > maxLength
-  const displayText = expanded ? review.text : review.text.slice(0, maxLength)
+  const isLong = reviewText.length > maxLength
+  const displayText = expanded ? reviewText : reviewText.slice(0, maxLength)
 
   return (
     <div className={styles.card}>
@@ -32,7 +35,7 @@ function ReviewCard({ review }) {
           <span className={styles.location}>{review.location}</span>
         </div>
         <div className={styles.postedOn}>
-          <span className={styles.postedLabel}>Posted on</span>
+          <span className={styles.postedLabel}>{t('home.posted')}</span>
           <AirbnbLogo />
         </div>
 
@@ -59,7 +62,7 @@ function ReviewCard({ review }) {
           className={styles.showMore}
           onClick={() => setExpanded(!expanded)}
         >
-          {expanded ? 'Show less' : 'Show more'}
+          {expanded ? t('common.showLess') : t('common.showMore')}
         </button>
       )}
     </div>
@@ -67,6 +70,7 @@ function ReviewCard({ review }) {
 }
 
 export default function Reviews() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [visibleCount, setVisibleCount] = useState(3)
@@ -129,8 +133,7 @@ export default function Reviews() {
     <section ref={sectionRef} className={styles.section}>
       <div className={styles.container}>
         <p className={styles.intro}>
-          At Villas Punta Uva in Punta Uva, Costa Rica, we offer a warm, authentic experience that
-          connects you with the nature and culture of Costa Rica's Southern Caribbean.
+          {t('home.reviewsText')}
         </p>
 
         <div className={styles.carouselWrap}>
@@ -138,7 +141,7 @@ export default function Reviews() {
             className={`${styles.arrow} ${styles.arrowLeft}`}
             onClick={() => scrollTo(activeIndex - 1)}
             disabled={activeIndex === 0}
-            aria-label="Previous review"
+          aria-label={t('common.previous')}
           >
             <HiChevronLeft size={28} />
           </button>
@@ -166,7 +169,7 @@ export default function Reviews() {
             className={`${styles.arrow} ${styles.arrowRight}`}
             onClick={() => scrollTo(activeIndex + 1)}
             disabled={activeIndex >= maxIndex}
-            aria-label="Next review"
+          aria-label={t('common.next')}
           >
             <HiChevronRight size={28} />
           </button>
