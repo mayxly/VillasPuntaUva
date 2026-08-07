@@ -231,7 +231,7 @@ const activitySections = [
     ],
     items: [
       {
-        title: 'Yoga at Amaser',
+        title: 'Yoga at Svastha',
         description:
           'Practice on open-air yoga platforms overlooking both the ocean and the jungle, surrounded by exotic birds and the occasional sloth, monkey, agouti, or mapache. Amaser is ideal for a peaceful class or a deeper retreat-style reset.',
         bullets: ['8am and 9:30am EVERYDAY', '5pm'],
