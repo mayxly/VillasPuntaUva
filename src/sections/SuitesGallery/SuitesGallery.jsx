@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
-import { suites } from '../../data/suites'
+import { getLocalizedSuites } from '../../data/suites'
 import SuiteCard from '../../components/SuiteCard/SuiteCard'
 import styles from './SuitesGallery.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function SuitesGallery() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
+  const suites = getLocalizedSuites(language)
   const sectionRef = useRef(null)
   const trackRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)

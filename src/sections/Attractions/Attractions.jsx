@@ -4,7 +4,13 @@ import styles from './Attractions.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function Attractions() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
+  const attractionNames = {
+    'Ocean Adventures': 'Aventuras en el océano',
+    'Jungle & Wildlife': 'Selva y vida silvestre',
+    'Culture & Wellness': 'Cultura y bienestar',
+    'Tours & Nightlife': 'Tours y vida nocturna',
+  }
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -21,13 +27,13 @@ export default function Attractions() {
             >
               <img
                 src={item.image}
-                alt={item.name}
+                alt={language === 'es' ? attractionNames[item.name] : item.name}
                 className={styles.image}
                 loading="lazy"
                 decoding="async"
               />
               <div className={styles.overlay} />
-              <h3 className={styles.title}>{item.name}</h3>
+              <h3 className={styles.title}>{language === 'es' ? attractionNames[item.name] : item.name}</h3>
             </Link>
           ))}
         </div>

@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { IoBedOutline, IoPeopleOutline } from 'react-icons/io5'
 import { LuBath } from 'react-icons/lu'
 import BookingWidget from '../../sections/BookingWidget/BookingWidget'
-import { getLowestNightlyRate, suites } from '../../data/suites'
+import { getLocalizedSuites, getLowestNightlyRate } from '../../data/suites'
 import styles from './SuitesPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
@@ -103,6 +103,7 @@ function SuiteListingCard({ suite }) {
 
 export default function SuitesPage() {
   const { language, t } = useLanguage()
+  const localizedSuites = getLocalizedSuites(language)
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const [bookingValue, setBookingValue] = useState(() => getBookingValueFromParams(searchParams))
@@ -113,9 +114,9 @@ export default function SuitesPage() {
   const [error, setError] = useState('')
 
   const filteredSuites = useMemo(() => {
-    if (!guestFilter) return suites
-    return suites.filter((suite) => suite.sleeps >= guestFilter)
-  }, [guestFilter])
+    if (!guestFilter) return localizedSuites
+    return localizedSuites.filter((suite) => suite.sleeps >= guestFilter)
+  }, [guestFilter, localizedSuites])
 
   const handleSearch = ({ arrival, departure, guests }) => {
     const guestCount = Number(guests)

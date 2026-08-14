@@ -747,3 +747,71 @@ export const calculateSuiteStay = (suite, arrival, departure) => {
     total,
   }
 }
+
+const spanishSuiteText = {
+  'Kitchen': 'Cocina', 'Dining Room': 'Comedor', 'Living Room': 'Sala', 'Patio': 'Patio', 'Pool': 'Piscina', 'Beach': 'Playa', 'Balcony': 'Balcón', 'Exterior': 'Exterior', 'Bathroom': 'Baño', 'Studio': 'Estudio',
+  'Bedroom 1': 'Habitación 1', 'Bedroom 2': 'Habitación 2', 'Bedroom 3': 'Habitación 3', 'Bedroom 4': 'Habitación 4', 'Bedroom 5': 'Habitación 5', '1 King Bed': '1 cama king', '1 Queen Bed': '1 cama queen',
+  'Infinity pool': 'Piscina infinita', 'Gym': 'Gimnasio', 'Yoga platform': 'Plataforma de yoga', 'Parking': 'Estacionamiento', 'Beach access': 'Acceso a la playa', 'Shared beach access': 'Acceso compartido a la playa', 'Shared infinity pool': 'Piscina infinita compartida', 'Shared pool': 'Piscina compartida', 'Pool': 'Piscina', 'Shared outdoor pool': 'Piscina exterior compartida', 'Private natural pool': 'Piscina natural privada', 'Shared gym': 'Gimnasio compartido', 'Kitchen': 'Cocina', 'Chef-ready kitchen': 'Cocina lista para chef', 'Wi-Fi': 'Wi‑Fi', 'Air conditioning': 'Aire acondicionado', 'Private patio or balcony': 'Patio o balcón privado', 'Patio or balcony': 'Patio o balcón', 'Private rancho': 'Rancho privado', 'Hammock': 'Hamaca', 'Dedicated workspace': 'Espacio de trabajo dedicado',
+  'Bathroom': 'Baño', 'Bedroom and laundry': 'Habitación y lavandería', 'Kitchen and dining': 'Cocina y comedor', 'Outdoor and location': 'Exteriores y ubicación', 'Location and outdoor': 'Ubicación y exteriores', 'Outdoor and facilities': 'Exteriores e instalaciones', 'Parking and services': 'Estacionamiento y servicios', 'Services': 'Servicios', 'Views and bathroom': 'Vistas y baño', 'Guest access': 'Acceso de huéspedes', 'Other things to note': 'Otros aspectos a tener en cuenta', 'Not included': 'No incluido',
+  'Bathtub': 'Bañera', 'Hair dryer': 'Secadora de cabello', 'Body soap': 'Jabón corporal', 'Outdoor shower': 'Ducha exterior', 'Hot water': 'Agua caliente', 'Shower gel': 'Gel de ducha', 'Essentials': 'Artículos esenciales', 'Hangers': 'Ganchos', 'Bed linens': 'Ropa de cama', 'Cotton linens': 'Sábanas de algodón', 'Extra pillows and blankets': 'Almohadas y mantas adicionales', 'Room-darkening shades': 'Cortinas opacas', 'Iron': 'Plancha', 'Safe': 'Caja fuerte', 'Wardrobe storage': 'Armario', 'Clothing storage': 'Espacio para ropa', 'Dresser storage': 'Cómoda', 'Refrigerator': 'Refrigerador', 'Double refrigerator': 'Refrigerador doble', 'Microwave': 'Microondas', 'Dishwasher': 'Lavavajillas', 'Freezer': 'Congelador', 'Gas stove': 'Cocina de gas', 'Electric stove': 'Cocina eléctrica', 'Stove': 'Cocina', 'Oven': 'Horno', 'Coffee maker': 'Cafetera', 'Dining table': 'Mesa de comedor', 'Beach essentials': 'Artículos de playa', 'Sun loungers': 'Tumbonas', 'Pets allowed': 'Se permiten mascotas', 'Long-term stays allowed': 'Se permiten estadías largas', 'Self check-in with keypad': 'Entrada autónoma con teclado', 'Housekeeping is available at an extra cost': 'Servicio de limpieza disponible con costo adicional', 'Free parking on premises': 'Estacionamiento gratuito en el lugar', 'Luggage drop-off allowed': 'Se permite dejar equipaje', 'Private entrance': 'Entrada privada', 'Backyard': 'Patio trasero', 'Outdoor furniture': 'Muebles de exterior', 'Barbecue grill': 'Parrilla', 'Private barbecue grill': 'Parrilla privada', 'Private gas barbecue grill': 'Parrilla de gas privada', 'Shared gas barbecue grill': 'Parrilla de gas compartida', 'Shared barbecue grill': 'Parrilla compartida',
+  'Holiday pricing may vary, and stays of 7 nights or more receive a 10% discount.': 'Las tarifas de temporada pueden variar y las estadías de 7 noches o más reciben un 10% de descuento.',
+  'Each bedroom has its own private bathroom and patio': 'Cada habitación tiene su propio baño y patio privado', 'Spacious common areas for large groups': 'Amplias áreas comunes para grupos grandes', 'Large kitchen, living room, and dining area': 'Cocina grande, sala y comedor', 'Air conditioning throughout': 'Aire acondicionado en toda la villa', 'Outdoor barbecue area': 'Área de parrilla al aire libre', 'Access to shared infinity pool, gym, yoga platform, and parking': 'Acceso a piscina infinita compartida, gimnasio, plataforma de yoga y estacionamiento',
+  'Caribbean-inspired design': 'Diseño inspirado en el Caribe', 'Fully equipped kitchen': 'Cocina totalmente equipada', 'Comfortable living room with a TV': 'Sala cómoda con televisión', 'Access to shared infinity pool, gym, and yoga platform': 'Acceso a piscina infinita compartida, gimnasio y plataforma de yoga', 'Surrounded by lush tropical nature': 'Rodeada de exuberante naturaleza tropical',
+  'Each bedroom has its own private bathroom': 'Cada habitación tiene su propio baño privado', 'Spacious social areas for large groups': 'Amplias áreas sociales para grupos grandes', 'Beautiful wraparound veranda': 'Hermosa terraza envolvente',
+  'Cozy studio layout': 'Distribución acogedora tipo estudio', 'Small kitchen': 'Cocina pequeña', 'Private rancho with a barbecue area': 'Rancho privado con área de parrilla', 'Outdoor lounge area': 'Área de descanso exterior',
+  'Wood-style home': 'Casa de estilo madera', 'Spacious wraparound veranda': 'Amplia terraza envolvente', 'Hammocks for relaxing': 'Hamacas para relajarse', 'Private path to the shared infinity pool': 'Sendero privado hacia la piscina infinita compartida', 'Outdoor space for barbecuing': 'Espacio exterior para asar',
+  'Spacious wraparound terrace': 'Amplia terraza envolvente', 'Abundant wildlife and exotic fruit trees': 'Abundante vida silvestre y árboles frutales exóticos', 'Private tropical living with modern comforts': 'Vida tropical privada con comodidades modernas', 'Cozy wood-style home': 'Acogedora casa de estilo madera', 'Relaxing porch': 'Porche para relajarse', 'Abundant wildlife': 'Abundante vida silvestre', 'Exotic fruit trees': 'Árboles frutales exóticos', 'Peaceful Caribbean setting': 'Entorno caribeño tranquilo',
+}
+
+const spanishSuiteNarratives = {
+  1: {
+    shortDescription: 'Una espaciosa villa caribeña de cinco habitaciones con suites king, cocina lista para chef, porches con vista a la selva y acceso a piscina infinita compartida.',
+    description: 'Villa Mariposa es una residencia de lujo caribeña espaciosa, diseñada para familias y grupos que desean reunirse sin perder privacidad. Sus cinco habitaciones king, cinco baños, aire acondicionado y cocina lista para chef facilitan instalarse después de días en la playa Arrecife/Punta Uva. Los porches con vista a la selva, la piscina infinita compartida y el internet de fibra crean una experiencia tropical refinada.',
+  },
+  2: {
+    shortDescription: 'Un refugio de selva de dos habitaciones con comodidades modernas, piscina compartida y fácil acceso a la playa.',
+    description: 'Casa Tucan es un refugio de selva en un nivel superior con dos habitaciones, dos baños y aire acondicionado completo. La cocina luminosa, la cómoda sala y los grandes ventanales crean una base acogedora cerca de la playa Arrecife/Punta Uva. La piscina, el gimnasio y la plataforma de yoga compartidos ofrecen comodidad de resort, mientras los árboles cercanos traen perezosos, monos y aves a la experiencia.',
+  },
+  3: {
+    shortDescription: 'Una amplia residencia caribeña de cinco habitaciones con piscina infinita compartida y vistas a la selva.',
+    description: 'Villa Presidente ofrece espacio, privacidad y comodidad caribeña para familias y grupos. Disfrute habitaciones amplias, cocina bien equipada, aire acondicionado y acceso a las áreas compartidas de piscina, gimnasio y yoga, todo cerca de Punta Uva.',
+  },
+  4: {
+    shortDescription: 'Un estudio tropical privado y acogedor con piscina, gimnasio y plataforma de yoga compartidos.',
+    description: 'Villa Colibri es un estudio cómodo y tranquilo, pensado para una estadía relajada cerca de la playa. Cuenta con cocina, aire acondicionado, un rancho privado y acceso a la piscina infinita, gimnasio y plataforma de yoga compartidos.',
+  },
+  5: {
+    shortDescription: 'Una villa de dos habitaciones rodeada de naturaleza, con piscina infinita compartida y comodidades modernas.',
+    description: 'Villa Angel combina comodidad moderna con la tranquilidad de la costa caribeña. Sus dos habitaciones, cocina equipada, aire acondicionado y hamaca crean un lugar ideal para descansar, con acceso a la piscina infinita compartida y a los jardines.',
+  },
+  6: {
+    shortDescription: 'Una casa de tres habitaciones en la selva con piscina natural privada y a pocos minutos de la playa.',
+    description: 'Villa Cacha ofrece una experiencia privada de selva con tres habitaciones, aire acondicionado y una piscina natural filtrada por plantas y roca volcánica. La casa de madera está rodeada de árboles frutales y vida silvestre, a pocos minutos a pie de la playa Arrecife/Punta Uva.',
+  },
+  7: {
+    shortDescription: 'Una villa cómoda de dos habitaciones, cerca de la playa y con acceso a piscina infinita compartida.',
+    description: 'Villa Carey es una base cómoda para explorar Punta Uva y Puerto Viejo. Disfrute dos habitaciones, cocina, aire acondicionado, patio o balcón y acceso a la piscina infinita compartida.',
+  },
+}
+
+function translateSuiteString(value) {
+  if (spanishSuiteText[value]) return spanishSuiteText[value]
+  return value
+}
+
+function translateSuiteValue(value) {
+  if (typeof value === 'string') return translateSuiteString(value)
+  if (Array.isArray(value)) return value.map(translateSuiteValue)
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, translateSuiteValue(item)]))
+  return value
+}
+
+export function getLocalizedSuite(suite, language) {
+  if (language !== 'es' || !suite) return suite
+  const localizedSuite = translateSuiteValue(suite)
+  return { ...localizedSuite, ...spanishSuiteNarratives[suite.id] }
+}
+
+export function getLocalizedSuites(language) {
+  return suites.map((suite) => getLocalizedSuite(suite, language))
+}

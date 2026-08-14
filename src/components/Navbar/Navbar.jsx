@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { HiMenu, HiX, HiChevronDown } from 'react-icons/hi'
 import { useScrollPosition } from '../../hooks/useScrollPosition'
-import { suites } from '../../data/suites'
+import { getLocalizedSuites } from '../../data/suites'
 import BookingModal from '../BookingModal/BookingModal'
 import { useLanguage } from '../../i18n/LanguageContext'
 import styles from './Navbar.module.css'
@@ -14,6 +14,7 @@ export default function Navbar() {
   const scrollY = useScrollPosition()
   const location = useLocation()
   const { language, setLanguage, t } = useLanguage()
+  const localizedSuites = getLocalizedSuites(language)
 
   const isHome = location.pathname === '/'
   const isScrolled = scrollY > 80
@@ -97,7 +98,7 @@ export default function Navbar() {
                     <HiChevronDown size={16} className={`${styles.chevron} ${suitesOpen ? styles.chevronOpen : ''}`} />
                   </Link>
                   <div className={`${styles.dropdown} ${suitesOpen ? styles.dropdownVisible : ''}`}>
-                    {suites.map((suite) => (
+                    {localizedSuites.map((suite) => (
                       <Link
                         key={suite.id}
                         to={`/suites/${suite.slug}`}
@@ -162,7 +163,7 @@ export default function Navbar() {
               </Link>
               {link.hasDropdown && (
                 <div className={styles.drawerSub}>
-                  {suites.map((suite) => (
+                  {localizedSuites.map((suite) => (
                     <Link
                       key={suite.id}
                       to={`/suites/${suite.slug}`}

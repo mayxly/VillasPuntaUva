@@ -25,10 +25,16 @@ import {
 import {
   calculateSuiteStay,
   getLowestNightlyRate,
+  getLocalizedSuite,
   suites,
 } from '../../data/suites'
 import BookingModal from '../../components/BookingModal/BookingModal'
 import styles from './SuiteDetailPage.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
+import { es } from 'date-fns/locale'
+import { registerLocale } from 'react-datepicker'
+
+registerLocale('es', es)
 
 const priceFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -71,6 +77,7 @@ function getSuitePhotoSections(suite) {
 }
 
 function Gallery({ suite }) {
+  const { t } = useLanguage()
   const [galleryOpen, setGalleryOpen] = useState(false)
   const featuredImages = uniqueImages(
     (suite.featuredGallery?.length ? suite.featuredGallery : [suite.image, ...(suite.gallery ?? [])]).filter(Boolean)
@@ -98,13 +105,13 @@ function Gallery({ suite }) {
   }, [galleryOpen])
 
   return (
-    <section className={styles.gallery} aria-label={`${suite.name} photos`}>
+    <section className={styles.gallery} aria-label={`${suite.name} ${t('suites.photos')}`}>
       <div className={styles.galleryGrid}>
         {featuredImages.map((image, index) => (
           <img
             key={image}
             src={image}
-            alt={`${suite.name} photo ${index + 1}`}
+            alt={`${suite.name} ${t('suites.photos')} ${index + 1}`}
             className={index === 0 ? styles.galleryHero : styles.galleryImage}
             loading={index === 0 ? 'eager' : 'lazy'}
             decoding="async"
@@ -118,7 +125,7 @@ function Gallery({ suite }) {
           aria-haspopup="dialog"
         >
           <LuImages size={18} />
-          Show more
+          {t('suites.morePhotos')}
         </button>
       </div>
 
@@ -127,7 +134,7 @@ function Gallery({ suite }) {
           className={styles.galleryModal}
           role="dialog"
           aria-modal="true"
-          aria-label={`${suite.name} photo gallery`}
+          aria-label={`${suite.name} ${t('suites.photoGallery').toLowerCase()}`}
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) {
               setGalleryOpen(false)
@@ -137,17 +144,17 @@ function Gallery({ suite }) {
           <div className={styles.galleryDialog}>
             <div className={styles.galleryDialogHeader}>
               <div>
-                <p>Photo gallery</p>
+                <p>{t('suites.photoGallery')}</p>
                 <h2>{suite.name}</h2>
               </div>
               <button
                 type="button"
                 className={styles.galleryCloseButton}
                 onClick={() => setGalleryOpen(false)}
-                aria-label="Close photo gallery"
+                aria-label={t('suites.closeGallery')}
               >
                 <LuX size={18} />
-                Close
+                {t('common.close')}
               </button>
             </div>
 
@@ -160,7 +167,7 @@ function Gallery({ suite }) {
                       <img
                         key={image}
                         src={image}
-                        alt={`${suite.name} ${section.title} photo ${index + 1}`}
+                        alt={`${suite.name} ${section.title} ${t('suites.photos')} ${index + 1}`}
                         loading="lazy"
                         decoding="async"
                       />
@@ -186,11 +193,12 @@ function Fact({ icon, label }) {
 }
 
 function SleepingSection({ suite }) {
+  const { t } = useLanguage()
   if (!suite.sleepingArrangements?.length) return null
 
   return (
     <div className={styles.sectionBlock}>
-      <h2>Where you&apos;ll sleep</h2>
+      <h2>{t('suites.sleep')}</h2>
       <div className={styles.sleepGrid}>
         {suite.sleepingArrangements.map((room) => (
           <article key={`${room.label}-${room.bed}`} className={styles.sleepCard}>
@@ -219,13 +227,14 @@ function SleepingSection({ suite }) {
 }
 
 function AmenitiesSection({ suite }) {
+  const { t } = useLanguage()
   const [expanded, setExpanded] = useState(false)
   const preview = suite.amenitiesPreview ?? suite.sharedAmenities ?? []
   const amenityGroups = suite.amenities ?? []
 
   return (
     <div className={styles.sectionBlock}>
-      <h2>What this place offers</h2>
+      <h2>{t('suites.offers')}</h2>
       <div className={styles.amenityGrid}>
         {preview.map((amenity) => (
           <div key={amenity} className={styles.amenity}>
@@ -256,7 +265,7 @@ function AmenitiesSection({ suite }) {
           className={styles.showMoreButton}
           onClick={() => setExpanded((current) => !current)}
         >
-          {expanded ? 'Show less amenities' : 'Show more amenities'}
+          {expanded ? t('suites.lessAmenities') : t('suites.moreAmenities')}
           {expanded ? <LuChevronUp size={18} /> : <LuChevronDown size={18} />}
         </button>
       )}
@@ -285,6 +294,7 @@ function AmenityIcon({ label }) {
 }
 
 function NotesSection({ suite }) {
+  const { t } = useLanguage()
   if (!suite.notes?.length) return null
 
   const guestAccessItems = suite.notes
@@ -305,7 +315,7 @@ function NotesSection({ suite }) {
 
   return (
     <div className={styles.sectionBlock}>
-      <h2>Good to know</h2>
+      <h2>{t('suites.goodToKnow')}</h2>
       <div className={styles.notesGrid}>
         {displayNotes.map((group) => (
           <article key={group.title} className={styles.noteCard}>
@@ -326,11 +336,12 @@ function NotesSection({ suite }) {
 }
 
 function AirbnbSection({ suite }) {
+  const { t } = useLanguage()
   if (!suite.airbnbUrl) return null
 
   return (
     <div className={`${styles.sectionBlock} ${styles.airbnbBlock}`}>
-      <p className={styles.airbnbEyebrow}>Also seen on</p>
+      <p className={styles.airbnbEyebrow}>{t('suites.alsoSeen')}</p>
       <a
         href={suite.airbnbUrl}
         className={styles.airbnbButton}
@@ -342,13 +353,16 @@ function AirbnbSection({ suite }) {
         <span>Airbnb</span>
       </a>
       <p className={styles.airbnbNote}>
-        Book directly with us to avoid third-party platform fees and get the best direct booking experience!
+        {t('suites.directBook')}
       </p>
     </div>
   )
 }
 
 function BookingPanel({ suite }) {
+  const { language, locale, t } = useLanguage()
+  const priceFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const dateFormatter = new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric' })
   const [bookingValue, setBookingValue] = useState(initialBookingValue)
   const [arrivalOpen, setArrivalOpen] = useState(false)
   const [checkoutOpen, setCheckoutOpen] = useState(false)
@@ -368,13 +382,13 @@ function BookingPanel({ suite }) {
   const error = useMemo(() => {
     if (!arrival && !departure) return ''
     if (arrival && departure && departure <= arrival) {
-      return 'Please choose a checkout date after your arrival date.'
+      return t('booking.checkoutAfterArrival')
     }
     if (!Number.isFinite(guestCount) || guestCount < 1) {
-      return 'Please select at least one guest.'
+      return t('booking.selectGuest')
     }
     if (guestCount > suite.sleeps) {
-      return `${suite.name} sleeps up to ${suite.sleeps} guests.`
+      return `${suite.name}: ${t('suites.sleeps', { count: suite.sleeps })}.`
     }
     return ''
   }, [arrival, departure, guestCount, suite])
@@ -413,26 +427,27 @@ function BookingPanel({ suite }) {
 
   return (
     <>
-      <aside className={styles.bookingPanel} aria-label="Estimate your stay">
+      <aside className={styles.bookingPanel} aria-label={t('booking.estimate')}>
         <div className={styles.bookingHeader}>
           <p>
-            <span>from</span>
-            {formatPrice(getLowestNightlyRate(suite))}
+            <span>{t('common.from')}</span>
+            {priceFormatter.format(getLowestNightlyRate(suite))}
           </p>
-          <span>/night</span>
+          <span>/{t('common.night')}</span>
         </div>
 
         <div className={styles.bookingFields}>
           <label className={styles.field}>
-            <span>Check-in</span>
+            <span>{t('common.checkIn')}</span>
             <DatePicker
               ref={arrivalPickerRef}
               selected={arrival}
               onChange={handleArrivalChange}
-              placeholderText="Select date"
+              placeholderText={t('common.selectDate')}
               className={styles.input}
               minDate={new Date()}
               dateFormat="MMM d, yyyy"
+              locale={language === 'es' ? 'es' : undefined}
               shouldCloseOnSelect
               open={arrivalOpen}
               onInputClick={() => setArrivalOpen(true)}
@@ -442,7 +457,7 @@ function BookingPanel({ suite }) {
           </label>
 
           <label className={styles.field}>
-            <span>Checkout</span>
+            <span>{t('common.checkout')}</span>
             <DatePicker
               ref={checkoutPickerRef}
               selected={departure}
@@ -450,10 +465,11 @@ function BookingPanel({ suite }) {
                 updateValue({ departure: date })
                 closeCheckoutCalendar()
               }}
-              placeholderText="Select date"
+              placeholderText={t('common.selectDate')}
               className={styles.input}
               minDate={minCheckoutDate}
               dateFormat="MMM d, yyyy"
+              locale={language === 'es' ? 'es' : undefined}
               shouldCloseOnSelect
               openToDate={checkoutOpenDate || arrival || undefined}
               open={checkoutOpen}
@@ -464,7 +480,7 @@ function BookingPanel({ suite }) {
           </label>
 
           <label className={`${styles.field} ${styles.fullField}`}>
-            <span>Guests</span>
+            <span>{t('common.guests')}</span>
             <select
               value={guests}
               onChange={(event) => updateValue({ guests: event.target.value })}
@@ -472,7 +488,7 @@ function BookingPanel({ suite }) {
             >
               {Array.from({ length: 10 }, (_, index) => index + 1).map((count) => (
                 <option key={count} value={count}>
-                  {count} {count === 1 ? 'Guest' : 'Guests'}
+                  {count} {count === 1 ? t('common.guest') : t('common.guests')}
                 </option>
               ))}
             </select>
@@ -489,23 +505,22 @@ function BookingPanel({ suite }) {
           <div className={styles.estimate}>
             <div className={styles.lineItem}>
               <span>
-                Nightly subtotal for {visibleEstimate.nights.length}{' '}
-                {visibleEstimate.nights.length === 1 ? 'night' : 'nights'}
+                {t('booking.nightlySubtotal', { count: visibleEstimate.nights.length, unit: visibleEstimate.nights.length === 1 ? t('common.night') : t('common.nights') })}
               </span>
               <strong>{formatPrice(visibleEstimate.nightlySubtotal)}</strong>
             </div>
             {visibleEstimate.discount > 0 && (
               <div className={styles.lineItem}>
-                <span>Weekly discount</span>
+                <span>{t('booking.weeklyDiscount')}</span>
                 <strong>-{formatPrice(visibleEstimate.discount)}</strong>
               </div>
             )}
             <div className={styles.lineItem}>
-              <span>Cleaning fee</span>
+                <span>{t('booking.cleaningFee')}</span>
               <strong>{formatPrice(visibleEstimate.cleaningFee)}</strong>
             </div>
             <div className={styles.totalLine}>
-              <span>Estimated total</span>
+              <span>{t('booking.estimatedTotal')}</span>
               <strong>{formatPrice(visibleEstimate.total)}</strong>
             </div>
 
@@ -514,7 +529,7 @@ function BookingPanel({ suite }) {
               className={styles.reserveButton}
               onClick={() => setBookingOpen(true)}
             >
-              Reserve
+              {t('common.reserve')}
             </button>
 
             <div className={styles.nightlyList}>
@@ -527,7 +542,7 @@ function BookingPanel({ suite }) {
             </div>
           </div>
         ) : (
-          <p className={styles.prompt}>Select your dates to see an estimated stay total.</p>
+          <p className={styles.prompt}>{t('booking.selectDates')}</p>
         )}
 
         <p className={styles.rateFinePrint}>{suite.rateNote}</p>
@@ -540,14 +555,15 @@ function BookingPanel({ suite }) {
 
 export default function SuiteDetailPage() {
   const { slug } = useParams()
-  const suite = suites.find((item) => item.slug === slug)
+  const { language, locale, t } = useLanguage()
+  const suite = getLocalizedSuite(suites.find((item) => item.slug === slug), language)
 
   if (!suite) {
     return (
       <div className={styles.notFound}>
-        <h1>Suite Not Found</h1>
-        <p>The suite you're looking for doesn't exist.</p>
-        <Link to="/suites" className={styles.backLink}>Back to Suites</Link>
+        <h1>{t('suites.notFound')}</h1>
+        <p>{t('suites.missing')}</p>
+        <Link to="/suites" className={styles.backLink}>{t('suites.back')}</Link>
       </div>
     )
   }
@@ -556,14 +572,14 @@ export default function SuiteDetailPage() {
     <div className={styles.page}>
       <section className={styles.hero}>
         <div>
-          <Link to="/suites" className={styles.backText}>All suites</Link>
+          <Link to="/suites" className={styles.backText}>{t('suites.all')}</Link>
           <h1>{suite.name}</h1>
           <p className={styles.location}>{suite.location}, Limon, Costa Rica</p>
         </div>
         <p className={styles.heroPrice}>
-          <span>from</span>
-          {formatPrice(getLowestNightlyRate(suite))}
-          <span>/night</span>
+          <span>{t('common.from')}</span>
+          {new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(getLowestNightlyRate(suite))}
+          <span>/{t('common.night')}</span>
         </p>
       </section>
 
@@ -573,7 +589,7 @@ export default function SuiteDetailPage() {
         <div className={styles.mainContent}>
           <div className={styles.summary}>
             <div className={styles.facts}>
-              <Fact icon={<IoPeopleOutline size={20} />} label={`${suite.sleeps} guests`} />
+              <Fact icon={<IoPeopleOutline size={20} />} label={`${suite.sleeps} ${t('suites.guests')}`} />
               <Fact icon={<IoBedOutline size={20} />} label={suite.bedsLabel} />
               <Fact icon={<LuBath size={20} />} label={suite.bathsLabel} />
             </div>
@@ -583,7 +599,7 @@ export default function SuiteDetailPage() {
           <SleepingSection suite={suite} />
 
           <div className={styles.sectionBlock}>
-            <h2>What makes it special</h2>
+            <h2>{t('suites.special')}</h2>
             <div className={styles.featureGrid}>
               {suite.features.map((feature) => (
                 <div key={feature} className={styles.feature}>
@@ -599,25 +615,25 @@ export default function SuiteDetailPage() {
           <NotesSection suite={suite} />
 
           <div className={styles.sectionBlock}>
-            <h2>2026 rates</h2>
+            <h2>{t('suites.rates')}</h2>
             <div className={styles.rateCards}>
               <div className={styles.rateCard}>
                 <LuCalendarDays size={20} />
-                <h3>July to March</h3>
-                <p>{formatPrice(suite.rates.high.weekday)} Sunday to Thursday</p>
-                <p>{formatPrice(suite.rates.high.weekend)} Friday and Saturday</p>
+                <h3>{t('suites.rateHigh')}</h3>
+                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rates.high.weekday)} {t('suites.weekdays')}</p>
+                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rates.high.weekend)} {t('suites.weekends')}</p>
               </div>
               <div className={styles.rateCard}>
                 <LuCalendarDays size={20} />
-                <h3>April to June</h3>
-                <p>{formatPrice(suite.rates.low.weekday)} Sunday to Thursday</p>
-                <p>{formatPrice(suite.rates.low.weekend)} Friday and Saturday</p>
+                <h3>{t('suites.rateLow')}</h3>
+                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rates.low.weekday)} {t('suites.weekdays')}</p>
+                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rates.low.weekend)} {t('suites.weekends')}</p>
               </div>
               <div className={styles.rateCard}>
                 <LuCalendarDays size={20} />
-                <h3>Fees and discounts</h3>
-                <p>{formatPrice(suite.cleaningFee)} cleaning fee</p>
-                <p>10% off stays of 7 nights or more</p>
+                <h3>{t('suites.fees')}</h3>
+                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.cleaningFee)} {t('booking.cleaningFee').toLowerCase()}</p>
+                <p>{t('suites.discount')}</p>
               </div>
             </div>
             <p className={styles.rateNote}>{suite.rateNote}</p>

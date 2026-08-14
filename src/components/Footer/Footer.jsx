@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import { FaInstagram, FaTiktok } from 'react-icons/fa'
-import { suites } from '../../data/suites'
+import { getLocalizedSuites } from '../../data/suites'
 import styles from './Footer.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function Footer() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
+  const suites = getLocalizedSuites(language)
   return (
     <footer className={styles.footer}>
       <div className={styles.topBanner}>
