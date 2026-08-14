@@ -224,22 +224,11 @@ const activitySections = [
         title: 'Regular Tours (open to public)',
         description:
           'Join a scheduled public chocolate tour for an easy, social way to experience the cacao farm and workshop.',
-        prices: [
-          ['Adults', '20,000'],
-          ['Kids ages 6 - 12 years', '10,000'],
-          ['Kids ages 0 - 5 years', 'Free'],
-        ],
       },
       {
         title: 'Private Tours (advanced notice)',
         description:
           'Book ahead for a private chocolate experience with more flexibility for your group. This is the best fit for families, retreats, and larger groups who want the tour arranged around them.',
-        prices: [
-          ['Adults (min 4)', '25,000'],
-          ['Groups of 10-19', '22,500'],
-          ['Groups of 20+', '18,750'],
-          ['Kids ages 6 a 12 years', '12,500'],
-        ],
       },
     ],
   },
@@ -257,19 +246,16 @@ const activitySections = [
     items: [
       {
         title: 'Short Tour',
-        price: '$70',
         description:
           'A short but intense experience for beginners and kids. Start your day with an hour long ride along the beautiful Punta Cocles and Playa Chiquita, or unwind at the end of the day while watching the sunset. 1.5 hours duration',
       },
       {
         title: 'Beach Jungle Tour',
-        price: '$100',
         description:
           'Ride along the beach, where you will get to see breathtaking scenery of white sand beaches. Then, head into the jungle, where you explore the rich wildlife of the tropical rainforest. Your guide will help you spot animals, it is possible to see howler monkeys, sloths, toucans, parrots and more on this amazing tour. 2.5 hours duration',
       },
       {
         title: 'El hippo camp tour',
-        price: '$150',
         description:
           'A mix of adventure and relax for an unforgettable experience. After the tour, you and your partner will be pampered with a couples massage by two licensed massage therapists. 2.5 hours + 1 hour massage',
       },
