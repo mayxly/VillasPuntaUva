@@ -75,7 +75,7 @@ const spanishDescriptions = {
 
 function localizeActivityText(value, language) {
   if (language !== 'es' || !value) return value
-  if (value === 'MESSAGE 6145 9916 TO BOOK') return 'ENVÍE UN MENSAJE AL 6145 9916 PARA RESERVAR'
+  if (value === 'Message +506 6145 9916 on Whatsapp to book') return 'Envíe un mensaje al +506 6145 9916 por Whatsapp para reservar'
   if (value === 'Tours offered every Monday through Saturday at 10 am and 2pm. No tours on Sunday') return 'Tours de lunes a sábado a las 10 a. m. y 2 p. m. No hay tours los domingos.'
   if (value === 'Monday to Friday from 9am - 5:30pm. Saturday from 9am - 12pm. Sunday closed') return 'De lunes a viernes de 9 a. m. a 5:30 p. m. Sábado de 9 a. m. a 12 p. m. Cerrado los domingos.'
   if (spanishLabels[value]) return spanishLabels[value]
@@ -87,7 +87,7 @@ const activitySections = [
     id: 'outdoor-adventures',
     title: 'Outdoor Adventures',
     subtitle: 'Water Activities',
-    contact: 'MESSAGE 6145 9916 TO BOOK',
+    contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
       '/images/attractions/outdoor-1.webp',
       '/images/attractions/outdoor-2.webp',
@@ -116,7 +116,7 @@ const activitySections = [
     title: 'Diving',
     subtitle: 'In the Caribbean',
     provider: 'Punta Uva, Dive Center',
-    contact: 'MESSAGE 6145 9916 TO BOOK',
+    contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
       '/images/attractions/dive-1.webp',
       '/images/attractions/dive-2.webp',
@@ -144,7 +144,7 @@ const activitySections = [
     id: 'canopy-tour',
     title: 'Canopy Tour',
     subtitle: 'Nativo Adventures',
-    contact: 'MESSAGE 6145 9916 TO BOOK',
+    contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
       '/images/attractions/tour-1.webp',
       '/images/attractions/tour-2.webp',
@@ -171,7 +171,7 @@ const activitySections = [
   {
     id: 'surf-lessons',
     title: 'Surf Lessons',
-    contact: 'MESSAGE 6145 9916 TO BOOK',
+    contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
       '/images/attractions/surf-1.webp',
       '/images/attractions/surf-2.webp',
@@ -202,7 +202,7 @@ const activitySections = [
     id: 'chocolate-tours',
     title: 'Chocolate Tours',
     schedule: 'Tours offered every Monday through Saturday at 10 am and 2pm. No tours on Sunday',
-    contact: 'MESSAGE 6145 9916 TO BOOK',
+    contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
       '/images/attractions/chocolate-1.webp',
       '/images/attractions/chocolate-2.webp',
@@ -237,7 +237,7 @@ const activitySections = [
     title: 'Horseback Riding',
     subtitle: 'Caribe Horse Riding Club',
     schedule: 'Monday to Friday from 9am - 5:30pm. Saturday from 9am - 12pm. Sunday closed',
-    contact: 'MESSAGE 6145 9916 TO BOOK',
+    contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
       '/images/attractions/horse-1.webp',
       '/images/attractions/horse-2.webp',
@@ -329,8 +329,8 @@ const activitySections = [
       '/images/attractions/night-3.webp',
     ],
     contacts: [
-      ['Tuktuk Numbers', '506 8783 4249'],
-      ['Taxi Numbers', '506-8513-8333'],
+      ['Tuktuk Numbers', '+506 8783 4249'],
+      ['Taxi Numbers', '+506 8513 8333'],
     ],
     items: [
       {
