@@ -138,7 +138,7 @@ const sharedAmenities = [
 ]
 
 const standardRateNote =
-  'Holiday pricing may vary, and stays of 7 nights or more receive a 10% discount.'
+  'Holiday pricing may vary, and stays of 7 nights or more receive a 10% discount. Kids 5 and under stay free and do not count as a guest.'
 
 export const suites = [
   {
@@ -186,7 +186,7 @@ export const suites = [
       },
       {
         title: 'Bedroom and laundry',
-        items: ['Paid washer and dryer in unit', 'Essentials', 'Bed linens', 'Cotton linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Safe', 'Wardrobe storage'],
+        items: ['Washer and dryer in unit', 'Free laundry for stays of 5 nights or more', '$10/night laundry fee for the whole reservation on stays under 5 nights', 'Essentials', 'Bed linens', 'Cotton linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Safe', 'Wardrobe storage'],
       },
       {
         title: 'Kitchen and dining',
@@ -198,7 +198,7 @@ export const suites = [
       },
       {
         title: 'Parking and services',
-        items: ['Free driveway parking for 4 cars', 'Shared outdoor infinity pool', 'Shared gym nearby', 'Pets allowed', 'Luggage drop-off allowed', 'Long-term stays allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
+        items: ['Free driveway parking for 4 cars', 'Shared outdoor infinity pool', 'Shared gym nearby', 'Pets allowed for a fee', 'Luggage drop-off allowed', 'Long-term stays allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
       },
     ],
     notes: [
@@ -275,7 +275,7 @@ export const suites = [
       },
       {
         title: 'Parking and services',
-        items: ['Free parking on premises', 'Pool', 'Shared gym', 'Pets allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
+        items: ['Free parking on premises', 'Pool', 'Shared gym', 'Pets allowed for a fee', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
       },
     ],
     notes: [
@@ -344,7 +344,7 @@ export const suites = [
       },
       {
         title: 'Bedroom and laundry',
-        items: ['Paid washer and dryer in unit', 'Essentials', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Clothing storage'],
+        items: ['Washer and dryer in unit', 'Free laundry for stays of 5 nights or more', '$10/night laundry fee for the whole reservation on stays under 5 nights', 'Essentials', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Clothing storage'],
       },
       {
         title: 'Kitchen and dining',
@@ -356,7 +356,7 @@ export const suites = [
       },
       {
         title: 'Parking and services',
-        items: ['Free parking on premises', 'Shared pool', 'Gym', 'Pets allowed', 'Luggage drop-off allowed', 'Long-term stays allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
+        items: ['Free parking on premises', 'Shared pool', 'Gym', 'Pets allowed for a fee', 'Luggage drop-off allowed', 'Long-term stays allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
       },
     ],
     notes: [
@@ -420,7 +420,7 @@ export const suites = [
       },
       {
         title: 'Bedroom and laundry',
-        items: ['Paid dryer', 'Essentials', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Dresser storage'],
+        items: ['Essentials', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Dresser storage'],
       },
       {
         title: 'Kitchen and dining',
@@ -432,7 +432,7 @@ export const suites = [
       },
       {
         title: 'Services',
-        items: ['Pets allowed', 'Luggage drop-off allowed', 'Long-term stays allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
+        items: ['Pets allowed for a fee', 'Luggage drop-off allowed', 'Long-term stays allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
       },
     ],
     notes: [
@@ -497,7 +497,7 @@ export const suites = [
       },
       {
         title: 'Bedroom and laundry',
-        items: ['Paid washer and dryer in unit', 'Essentials', 'Hangers', 'Bed linens', 'Cotton linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Safe', 'Clothing storage'],
+        items: ['Washer and dryer in unit', 'Free laundry for stays of 5 nights or more', '$10/night laundry fee for the whole reservation on stays under 5 nights', 'Essentials', 'Hangers', 'Bed linens', 'Cotton linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Safe', 'Clothing storage'],
       },
       {
         title: 'Kitchen and dining',
@@ -509,7 +509,7 @@ export const suites = [
       },
       {
         title: 'Parking and services',
-        items: ['Free parking on premises', 'Shared saltwater infinity pool', 'Gym', 'Single-level home', 'Pets allowed', 'Long-term stays allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
+        items: ['Free parking on premises', 'Shared saltwater infinity pool', 'Gym', 'Single-level home', 'Pets allowed for a fee', 'Long-term stays allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
       },
     ],
     notes: [
@@ -587,7 +587,7 @@ export const suites = [
       },
       {
         title: 'Parking and services',
-        items: ['Free parking on premises', 'Private outdoor natural pool', 'Pets allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
+        items: ['Free parking on premises', 'Private outdoor natural pool', 'Pets allowed for a fee', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
       },
     ],
     notes: [
@@ -652,7 +652,7 @@ export const suites = [
       },
       {
         title: 'Bedroom and laundry',
-        items: ['Paid washer and dryer in unit', 'Bed linens', 'Cotton linens', 'Dresser storage'],
+        items: ['Washer and dryer in unit', 'Free laundry for stays of 5 nights or more', '$10/night laundry fee for the whole reservation on stays under 5 nights', 'Bed linens', 'Cotton linens', 'Dresser storage'],
       },
       {
         title: 'Kitchen and dining',
@@ -664,7 +664,7 @@ export const suites = [
       },
       {
         title: 'Parking and services',
-        items: ['Free parking on premises', 'Shared outdoor infinity pool', 'Pets allowed', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
+        items: ['Free parking on premises', 'Shared outdoor infinity pool', 'Pets allowed for a fee', 'Self check-in with keypad', 'Housekeeping is available at an extra cost'],
       },
     ],
     notes: [
@@ -674,7 +674,7 @@ export const suites = [
       },
       {
         title: 'Other things to note',
-        items: ['A new home may be constructed nearby in the future, about 75 yards away.', 'Construction is currently paused due to permits, and guests will be updated if it resumes.', 'There will be no construction noise between December 14 and January 3, 2026.', 'Pricing reflects this temporary nearby work.'],
+        items: ['Construction on the property is currently paused; guests will be notified if it resumes.'],
       },
       {
         title: 'Not included',
@@ -754,9 +754,9 @@ const spanishSuiteText = {
   'Infinity pool': 'Piscina infinita', 'Gym': 'Gimnasio', 'Yoga platform': 'Plataforma de yoga', 'Parking': 'Estacionamiento', 'Public beach access 5 minute walk': 'Acceso a la playa pública a 5 minutos caminando', 'Public beach access 7 minute walk': 'Acceso a la playa pública a 7 minutos caminando', 'Shared infinity pool': 'Piscina infinita compartida', 'Shared pool': 'Piscina compartida', 'Pool': 'Piscina', 'Shared outdoor pool': 'Piscina exterior compartida', 'Private natural pool': 'Piscina natural privada', 'Shared gym': 'Gimnasio compartido', 'Kitchen': 'Cocina', 'Chef-ready kitchen': 'Cocina lista para chef', 'Wi-Fi': 'Wi‑Fi', 'Air conditioning': 'Aire acondicionado', 'Private patio or balcony': 'Patio o balcón privado', 'Patio or balcony': 'Patio o balcón', 'Private rancho': 'Rancho privado', 'Hammock': 'Hamaca', 'Dedicated workspace': 'Espacio de trabajo dedicado',
   '5 beds': '5 camas', '3 beds': '3 camas', '2 beds': '2 camas', '1 bedroom studio': 'Estudio de 1 habitación', '5 baths': '5 baños', '2 baths': '2 baños', '1 bath': '1 baño',
   'Bathroom': 'Baño', 'Bedroom and laundry': 'Habitación y lavandería', 'Kitchen and dining': 'Cocina y comedor', 'Outdoor and location': 'Exteriores y ubicación', 'Location and outdoor': 'Ubicación y exteriores', 'Outdoor and facilities': 'Exteriores e instalaciones', 'Parking and services': 'Estacionamiento y servicios', 'Services': 'Servicios', 'Views and bathroom': 'Vistas y baño', 'Guest access': 'Acceso de huéspedes', 'Other things to note': 'Otros aspectos a tener en cuenta', 'Not included': 'No incluido',
-  'Bathtub': 'Bañera', 'Hair dryer': 'Secadora de cabello', 'Body soap': 'Jabón corporal', 'Outdoor shower': 'Ducha exterior', 'Hot water': 'Agua caliente', 'Shower gel': 'Gel de ducha', 'Essentials': 'Artículos esenciales', 'Hangers': 'Ganchos', 'Bed linens': 'Ropa de cama', 'Cotton linens': 'Sábanas de algodón', 'Extra pillows and blankets': 'Almohadas y mantas adicionales', 'Room-darkening shades': 'Cortinas opacas', 'Iron': 'Plancha', 'Safe': 'Caja fuerte', 'Wardrobe storage': 'Armario', 'Clothing storage': 'Espacio para ropa', 'Dresser storage': 'Cómoda', 'Refrigerator': 'Refrigerador', 'Double refrigerator': 'Refrigerador doble', 'Microwave': 'Microondas', 'Dishwasher': 'Lavavajillas', 'Freezer': 'Congelador', 'Gas stove': 'Cocina de gas', 'Electric stove': 'Cocina eléctrica', 'Stove': 'Cocina', 'Oven': 'Horno', 'Coffee maker': 'Cafetera', 'Dining table': 'Mesa de comedor', 'Beach essentials': 'Artículos de playa', 'Sun loungers': 'Tumbonas', 'Pets allowed': 'Se permiten mascotas', 'Long-term stays allowed': 'Se permiten estadías largas', 'Self check-in with keypad': 'Entrada autónoma con teclado', 'Housekeeping is available at an extra cost': 'Servicio de limpieza disponible con costo adicional', 'Free parking on premises': 'Estacionamiento gratuito en el lugar', 'Luggage drop-off allowed': 'Se permite dejar equipaje', 'Private entrance': 'Entrada privada', 'Backyard': 'Patio trasero', 'Outdoor furniture': 'Muebles de exterior', 'Barbecue grill': 'Parrilla', 'Private barbecue grill': 'Parrilla privada', 'Private gas barbecue grill': 'Parrilla de gas privada', 'Shared gas barbecue grill': 'Parrilla de gas compartida', 'Shared barbecue grill': 'Parrilla compartida',
-  'Paid washer and dryer in unit': 'Lavadora y secadora de pago en la unidad', 'Free washer and dryer in unit': 'Lavadora y secadora gratuitas en la unidad', 'Paid dryer': 'Secadora de pago', 'Cooking basics': 'Utensilios básicos para cocinar', 'Dishes and silverware': 'Vajilla y cubiertos', 'Mini fridge': 'Mini refrigerador', 'Hot water kettle': 'Hervidor de agua', 'Drip coffee maker': 'Cafetera de goteo', 'Rice cooker': 'Olla arrocera', 'Wine glasses': 'Copas de vino', 'Toaster': 'Tostadora', 'Baking sheet': 'Bandeja para hornear', 'Blender': 'Licuadora', 'Coffee': 'Café', 'Barbecue utensils': 'Utensilios para parrilla', 'Private backyard': 'Patio trasero privado', 'Outdoor dining area': 'Área de comedor exterior', 'Shared outdoor infinity pool': 'Piscina infinita exterior compartida', 'Shared saltwater infinity pool': 'Piscina infinita compartida de agua salada', 'Private outdoor natural pool': 'Piscina natural exterior privada', 'Shared gym nearby': 'Gimnasio compartido cercano', 'Shared gym in building': 'Gimnasio compartido en el edificio', 'Laundromat nearby': 'Lavandería cercana', '50-inch HDTV with Netflix': 'TV HD de 50 pulgadas con Netflix', 'Garden view': 'Vista al jardín', 'Pool view': 'Vista a la piscina', 'Single-level home': 'Casa de una sola planta',
-  'Holiday pricing may vary, and stays of 7 nights or more receive a 10% discount.': 'Las tarifas de temporada pueden variar y las estadías de 7 noches o más reciben un 10% de descuento.',
+  'Bathtub': 'Bañera', 'Hair dryer': 'Secadora de cabello', 'Body soap': 'Jabón corporal', 'Outdoor shower': 'Ducha exterior', 'Hot water': 'Agua caliente', 'Shower gel': 'Gel de ducha', 'Essentials': 'Artículos esenciales', 'Hangers': 'Ganchos', 'Bed linens': 'Ropa de cama', 'Cotton linens': 'Sábanas de algodón', 'Extra pillows and blankets': 'Almohadas y mantas adicionales', 'Room-darkening shades': 'Cortinas opacas', 'Iron': 'Plancha', 'Safe': 'Caja fuerte', 'Wardrobe storage': 'Armario', 'Clothing storage': 'Espacio para ropa', 'Dresser storage': 'Cómoda', 'Refrigerator': 'Refrigerador', 'Double refrigerator': 'Refrigerador doble', 'Microwave': 'Microondas', 'Dishwasher': 'Lavavajillas', 'Freezer': 'Congelador', 'Gas stove': 'Cocina de gas', 'Electric stove': 'Cocina eléctrica', 'Stove': 'Cocina', 'Oven': 'Horno', 'Coffee maker': 'Cafetera', 'Dining table': 'Mesa de comedor', 'Beach essentials': 'Artículos de playa', 'Sun loungers': 'Tumbonas', 'Pets allowed for a fee': 'Se permiten mascotas con costo adicional', 'Long-term stays allowed': 'Se permiten estadías largas', 'Self check-in with keypad': 'Entrada autónoma con teclado', 'Housekeeping is available at an extra cost': 'Servicio de limpieza disponible con costo adicional', 'Free parking on premises': 'Estacionamiento gratuito en el lugar', 'Luggage drop-off allowed': 'Se permite dejar equipaje', 'Private entrance': 'Entrada privada', 'Backyard': 'Patio trasero', 'Outdoor furniture': 'Muebles de exterior', 'Barbecue grill': 'Parrilla', 'Private barbecue grill': 'Parrilla privada', 'Private gas barbecue grill': 'Parrilla de gas privada', 'Shared gas barbecue grill': 'Parrilla de gas compartida', 'Shared barbecue grill': 'Parrilla compartida',
+  'Paid washer and dryer in unit': 'Lavadora y secadora de pago en la unidad', 'Free washer and dryer in unit': 'Lavadora y secadora gratuitas en la unidad', 'Washer and dryer in unit': 'Lavadora y secadora en la unidad', 'Free laundry for stays of 5 nights or more': 'Lavandería gratuita para estadías de 5 noches o más', '$10/night laundry fee for the whole reservation on stays under 5 nights': 'Cargo de lavandería de $10/noche para toda la reserva en estadías de menos de 5 noches', 'Paid dryer': 'Secadora de pago', 'Cooking basics': 'Utensilios básicos para cocinar', 'Dishes and silverware': 'Vajilla y cubiertos', 'Mini fridge': 'Mini refrigerador', 'Hot water kettle': 'Hervidor de agua', 'Drip coffee maker': 'Cafetera de goteo', 'Rice cooker': 'Olla arrocera', 'Wine glasses': 'Copas de vino', 'Toaster': 'Tostadora', 'Baking sheet': 'Bandeja para hornear', 'Blender': 'Licuadora', 'Coffee': 'Café', 'Barbecue utensils': 'Utensilios para parrilla', 'Private backyard': 'Patio trasero privado', 'Outdoor dining area': 'Área de comedor exterior', 'Shared outdoor infinity pool': 'Piscina infinita exterior compartida', 'Shared saltwater infinity pool': 'Piscina infinita compartida de agua salada', 'Private outdoor natural pool': 'Piscina natural exterior privada', 'Shared gym nearby': 'Gimnasio compartido cercano', 'Shared gym in building': 'Gimnasio compartido en el edificio', 'Laundromat nearby': 'Lavandería cercana', '50-inch HDTV with Netflix': 'TV HD de 50 pulgadas con Netflix', 'Garden view': 'Vista al jardín', 'Pool view': 'Vista a la piscina', 'Single-level home': 'Casa de una sola planta',
+  'Holiday pricing may vary, and stays of 7 nights or more receive a 10% discount. Kids 5 and under stay free and do not count as a guest.': 'Las tarifas de temporada pueden variar y las estadías de 7 noches o más reciben un 10% de descuento. Los niños de 5 años o menos se hospedan gratis y no cuentan como huésped.',
   'Each bedroom has its own private bathroom and patio': 'Cada habitación tiene su propio baño y patio privado', 'Spacious common areas for large groups': 'Amplias áreas comunes para grupos grandes', 'Large kitchen, living room, and dining area': 'Cocina grande, sala y comedor', 'Air conditioning throughout': 'Aire acondicionado en toda la villa', 'Outdoor barbecue area': 'Área de parrilla al aire libre', 'Access to shared infinity pool, gym, yoga platform, and parking': 'Acceso a piscina infinita compartida, gimnasio, plataforma de yoga y estacionamiento',
   'Caribbean-inspired design': 'Diseño inspirado en el Caribe', 'Fully equipped kitchen': 'Cocina totalmente equipada', 'Comfortable living room with a TV': 'Sala cómoda con televisión', 'Access to shared infinity pool, gym, and yoga platform': 'Acceso a piscina infinita compartida, gimnasio y plataforma de yoga', 'Surrounded by lush tropical nature': 'Rodeada de exuberante naturaleza tropical',
   'Each bedroom has its own private bathroom': 'Cada habitación tiene su propio baño privado', 'Spacious social areas for large groups': 'Amplias áreas sociales para grupos grandes', 'Beautiful wraparound veranda': 'Hermosa terraza envolvente',
