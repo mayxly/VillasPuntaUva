@@ -5,6 +5,7 @@ import styles from './BookingWidget.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { es } from 'date-fns/locale'
 import { registerLocale } from 'react-datepicker'
+import GuestPicker from '../../components/GuestPicker/GuestPicker'
 
 registerLocale('es', es)
 
@@ -12,6 +13,8 @@ const defaultValue = {
   arrival: null,
   departure: null,
   guests: '2',
+  kidsUnder5: 0,
+  pets: 0,
 }
 
 export default function BookingWidget({
@@ -26,7 +29,7 @@ export default function BookingWidget({
   const [departureOpen, setDepartureOpen] = useState(false)
 
   const bookingValue = value ?? localValue
-  const { arrival, departure, guests } = bookingValue
+  const { arrival, departure } = bookingValue
 
   const updateValue = (updates) => {
     const nextValue = {
@@ -99,17 +102,7 @@ export default function BookingWidget({
 
         <div className={styles.field}>
           <label className={styles.label}>{t('common.guests')}</label>
-          <select
-            value={guests}
-            onChange={(e) => updateValue({ guests: e.target.value })}
-            className={styles.input}
-          >
-            {Array.from({ length: 10 }, (_, i) => (
-              <option key={i + 1} value={i + 1}>
-                {i + 1} {i === 0 ? t('common.guest') : t('common.guests')}
-              </option>
-            ))}
-          </select>
+          <GuestPicker value={bookingValue} onChange={updateValue} maxGuests={12} />
         </div>
 
         <button className={styles.btn} onClick={handleSearch}>

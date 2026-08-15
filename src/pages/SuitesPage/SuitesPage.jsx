@@ -11,6 +11,8 @@ const initialBookingValue = {
   arrival: null,
   departure: null,
   guests: '2',
+  kidsUnder5: 0,
+  pets: 0,
 }
 
 const priceFormatter = new Intl.NumberFormat('en-US', {
@@ -54,14 +56,22 @@ function getBookingValueFromParams(searchParams) {
     arrival: parseDateParam(searchParams.get('arrival')),
     departure: parseDateParam(searchParams.get('departure')),
     guests: searchParams.get('guests') || initialBookingValue.guests,
+    kidsUnder5: Number(searchParams.get('kidsUnder5')) || 0,
+    pets: Number(searchParams.get('pets')) || 0,
   }
 }
 
-function SuiteListingCard({ suite }) {
+const NO_MINIMUM_SLUGS = ['carey-house', 'villa-colibri']
+
+function getMaxGuests(suite) {
+  return suite.maxGuests ?? suite.sleeps
+}
+
+function SuiteListingCard({ suite, dimmed }) {
   const { language, locale, t } = useLanguage()
   const formatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
   return (
-    <Link to={`/suites/${suite.slug}`} className={styles.suiteCard}>
+    <Link to={`/suites/${suite.slug}`} className={`${styles.suiteCard} ${dimmed ? styles.suiteCardDimmed : ''}`}>
       <div className={styles.cardImageWrap}>
         <img
           src={suite.image}
@@ -111,14 +121,28 @@ export default function SuitesPage() {
     const guestCount = Number(searchParams.get('guests'))
     return Number.isFinite(guestCount) && guestCount >= 1 ? guestCount : null
   })
+  const [appliedStay, setAppliedStay] = useState(() => {
+    const arrival = parseDateParam(searchParams.get('arrival'))
+    const departure = parseDateParam(searchParams.get('departure'))
+    return arrival && departure ? { arrival, departure } : null
+  })
   const [error, setError] = useState('')
 
   const filteredSuites = useMemo(() => {
     if (!guestFilter) return localizedSuites
-    return localizedSuites.filter((suite) => suite.sleeps >= guestFilter)
+    return localizedSuites
+      .filter((suite) => getMaxGuests(suite) >= guestFilter)
+      .slice()
+      .sort((a, b) => a.sleeps - b.sleeps || getLowestNightlyRate(a) - getLowestNightlyRate(b))
   }, [guestFilter, localizedSuites])
 
-  const handleSearch = ({ arrival, departure, guests }) => {
+  const oneNightStay = useMemo(() => {
+    if (!appliedStay) return false
+    const nights = Math.round((appliedStay.departure - appliedStay.arrival) / (1000 * 60 * 60 * 24))
+    return nights === 1
+  }, [appliedStay])
+
+  const handleSearch = ({ arrival, departure, guests, kidsUnder5, pets }) => {
     const guestCount = Number(guests)
 
     if (!arrival) {
@@ -145,9 +169,12 @@ export default function SuitesPage() {
       arrival: formatDateParam(arrival),
       departure: formatDateParam(departure),
       guests,
+      kidsUnder5: String(kidsUnder5 || 0),
+      pets: String(pets || 0),
     })
 
     setGuestFilter(guestCount)
+    setAppliedStay({ arrival, departure })
     navigate(`/suites?${params.toString()}#available-suites`, { replace: true })
     setError('')
   }
@@ -155,6 +182,7 @@ export default function SuitesPage() {
   const clearSearch = () => {
     setBookingValue(initialBookingValue)
     setGuestFilter(null)
+    setAppliedStay(null)
     setSearchParams({})
     setError('')
   }
@@ -203,10 +231,21 @@ export default function SuitesPage() {
           </div>
         )}
 
+        {!error && oneNightStay && (
+          <div className={styles.message}>
+            <p>{t('suites.twoNightMinimum')}</p>
+            <p className={styles.messageSubtext}>{t('suites.twoNightMinimumException')}</p>
+          </div>
+        )}
+
         {filteredSuites.length > 0 ? (
           <div className={styles.grid}>
             {filteredSuites.map((suite) => (
-              <SuiteListingCard key={suite.id} suite={suite} />
+              <SuiteListingCard
+                key={suite.id}
+                suite={suite}
+                dimmed={oneNightStay && !NO_MINIMUM_SLUGS.includes(suite.slug)}
+              />
             ))}
           </div>
         ) : (

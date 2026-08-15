@@ -20,7 +20,7 @@ function formatDateParam(date) {
 export default function HomePage() {
   const navigate = useNavigate()
 
-  const handleSuiteSearch = ({ arrival, departure, guests }) => {
+  const handleSuiteSearch = ({ arrival, departure, guests, kidsUnder5, pets }) => {
     const params = new URLSearchParams()
     const arrivalParam = formatDateParam(arrival)
     const departureParam = formatDateParam(departure)
@@ -28,6 +28,8 @@ export default function HomePage() {
     if (arrivalParam) params.set('arrival', arrivalParam)
     if (departureParam) params.set('departure', departureParam)
     if (guests) params.set('guests', guests)
+    if (kidsUnder5) params.set('kidsUnder5', kidsUnder5)
+    if (pets) params.set('pets', pets)
 
     navigate(`/suites${params.toString() ? `?${params.toString()}` : ''}#available-suites`)
   }

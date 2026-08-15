@@ -1,0 +1,139 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.trigger {
+  width: 100%;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid #dce5e8;
+  border-radius: var(--border-radius);
+  background: var(--color-white);
+  color: var(--color-dark);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  text-align: left;
+  outline: none;
+  transition: border-color var(--transition-speed) ease;
+}
+
+.trigger:focus,
+.trigger:hover {
+  border-color: var(--color-primary);
+}
+
+.trigger svg {
+  flex-shrink: 0;
+  color: var(--color-text-light);
+  transition: transform var(--transition-speed) ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 300px;
+  max-width: 90vw;
+  padding: 16px;
+  border-radius: var(--border-radius);
+  background: var(--color-white);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eef2f4;
+}
+
+.row:last-of-type {
+  border-bottom: none;
+}
+
+.rowText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rowLabel {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.rowDescription {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.counterBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #cbd5e1;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-dark);
+  transition: border-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.counterBtn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.counterBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.counterValue {
+  min-width: 18px;
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.doneBtn {
+  margin-top: 8px;
+  align-self: flex-end;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.doneBtn:hover {
+  background-color: var(--color-primary-dark);
+}

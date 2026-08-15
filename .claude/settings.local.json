@@ -12,7 +12,10 @@
       "Bash(cp assets/logo-white.png public/images/logos/)",
       "Bash(cp \"assets/logo-white-text.PNG\" public/images/logos/logo-white-text.png)",
       "Bash(npx vite:*)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(npx vite *)",
+      "Bash(npx --yes playwright --version)",
+      "Bash(node -e ' *)"
     ]
   }
 }

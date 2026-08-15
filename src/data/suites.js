@@ -154,6 +154,7 @@ export const suites = [
     bedrooms: 5,
     bathrooms: 5,
     sleeps: 10,
+    maxGuests: 12,
     bedsLabel: '5 beds',
     bathsLabel: '5 baths',
     cleaningFee: 150,
@@ -234,6 +235,7 @@ export const suites = [
     bedrooms: 2,
     bathrooms: 2,
     sleeps: 4,
+    maxGuests: 6,
     bedsLabel: '2 beds',
     bathsLabel: '2 baths',
     cleaningFee: 60,
@@ -311,6 +313,7 @@ export const suites = [
     bedrooms: 5,
     bathrooms: 5,
     sleeps: 10,
+    maxGuests: 12,
     bedsLabel: '5 beds',
     bathsLabel: '5 baths',
     cleaningFee: 150,
@@ -392,6 +395,7 @@ export const suites = [
     bedrooms: 1,
     bathrooms: 1,
     sleeps: 2,
+    maxGuests: 3,
     bedsLabel: '1 bedroom studio',
     bathsLabel: '1 bath',
     cleaningFee: 30,
@@ -468,6 +472,7 @@ export const suites = [
     bedrooms: 2,
     bathrooms: 2,
     sleeps: 4,
+    maxGuests: 6,
     bedsLabel: '2 beds',
     bathsLabel: '2 baths',
     cleaningFee: 100,
@@ -545,6 +550,7 @@ export const suites = [
     bedrooms: 3,
     bathrooms: 2,
     sleeps: 6,
+    maxGuests: 8,
     bedsLabel: '3 beds',
     bathsLabel: '2 baths',
     cleaningFee: 125,
@@ -623,6 +629,7 @@ export const suites = [
     bedrooms: 2,
     bathrooms: 1,
     sleeps: 4,
+    maxGuests: 6,
     bedsLabel: '2 beds',
     bathsLabel: '1 bath',
     cleaningFee: 50,
@@ -728,21 +735,44 @@ export const getStayNights = (arrival, departure) => {
   return nights
 }
 
-export const calculateSuiteStay = (suite, arrival, departure) => {
+export const getDaysUntilArrival = (arrival) => {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const arrivalDate = new Date(arrival.getFullYear(), arrival.getMonth(), arrival.getDate())
+  return Math.round((arrivalDate - today) / (1000 * 60 * 60 * 24))
+}
+
+export const EXTRA_GUEST_NIGHTLY_FEE = 15
+export const PET_NIGHTLY_FEE = 10
+
+export const calculateSuiteStay = (suite, arrival, departure, guests, pets = 0) => {
   const nights = getStayNights(arrival, departure)
   const nightlyRates = nights.map((date) => ({
     date,
     rate: getNightlyRate(suite, date),
   }))
   const nightlySubtotal = nightlyRates.reduce((total, night) => total + night.rate, 0)
-  const discount = nights.length >= 7 ? Math.round(nightlySubtotal * 0.1) : 0
-  const total = nightlySubtotal - discount + suite.cleaningFee
+  const weeklyDiscount = nights.length >= 7 ? Math.round(nightlySubtotal * 0.1) : 0
+  const daysUntilArrival = getDaysUntilArrival(arrival)
+  const lastMinuteDiscount = daysUntilArrival >= 0 && daysUntilArrival <= 7 ? Math.round(nightlySubtotal * 0.1) : 0
+  const discount = weeklyDiscount + lastMinuteDiscount
+  const extraGuests = Math.max(0, (guests ?? suite.sleeps) - suite.sleeps)
+  const extraGuestFee = extraGuests * nights.length * EXTRA_GUEST_NIGHTLY_FEE
+  const petCount = Math.max(0, Number(pets) || 0)
+  const petFee = petCount * nights.length * PET_NIGHTLY_FEE
+  const total = nightlySubtotal - discount + suite.cleaningFee + extraGuestFee + petFee
 
   return {
     nights,
     nightlyRates,
     nightlySubtotal,
+    weeklyDiscount,
+    lastMinuteDiscount,
     discount,
+    extraGuests,
+    petCount,
+    petFee,
+    extraGuestFee,
     cleaningFee: suite.cleaningFee,
     total,
   }

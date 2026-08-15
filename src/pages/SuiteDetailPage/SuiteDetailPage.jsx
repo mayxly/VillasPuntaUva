@@ -27,8 +27,10 @@ import {
   getLowestNightlyRate,
   getLocalizedSuite,
   suites,
+  EXTRA_GUEST_NIGHTLY_FEE,
 } from '../../data/suites'
 import BookingModal from '../../components/BookingModal/BookingModal'
+import GuestPicker from '../../components/GuestPicker/GuestPicker'
 import styles from './SuiteDetailPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { es } from 'date-fns/locale'
@@ -51,6 +53,8 @@ const initialBookingValue = {
   arrival: null,
   departure: null,
   guests: '2',
+  kidsUnder5: 0,
+  pets: 0,
 }
 
 function formatPrice(value) {
@@ -370,14 +374,15 @@ function BookingPanel({ suite }) {
   const [bookingOpen, setBookingOpen] = useState(false)
   const arrivalPickerRef = useRef(null)
   const checkoutPickerRef = useRef(null)
-  const { arrival, departure, guests } = bookingValue
+  const { arrival, departure, guests, pets } = bookingValue
   const guestCount = Number(guests)
+  const petCount = Number(pets) || 0
   const minCheckoutDate = arrival ? addDays(arrival, 1) : new Date()
 
   const estimate = useMemo(() => {
     if (!arrival || !departure || departure <= arrival) return null
-    return calculateSuiteStay(suite, arrival, departure)
-  }, [arrival, departure, suite])
+    return calculateSuiteStay(suite, arrival, departure, guestCount, petCount)
+  }, [arrival, departure, suite, guestCount, petCount])
 
   const error = useMemo(() => {
     if (!arrival && !departure) return ''
@@ -387,8 +392,8 @@ function BookingPanel({ suite }) {
     if (!Number.isFinite(guestCount) || guestCount < 1) {
       return t('booking.selectGuest')
     }
-    if (guestCount > suite.sleeps) {
-      return `${suite.name}: ${t('suites.sleeps', { count: suite.sleeps })}.`
+    if (guestCount > (suite.maxGuests ?? suite.sleeps)) {
+      return `${suite.name}: ${t('suites.sleeps', { count: suite.maxGuests ?? suite.sleeps })}.`
     }
     return ''
   }, [arrival, departure, guestCount, suite])
@@ -479,20 +484,10 @@ function BookingPanel({ suite }) {
             />
           </label>
 
-          <label className={`${styles.field} ${styles.fullField}`}>
+          <div className={`${styles.field} ${styles.fullField}`}>
             <span>{t('common.guests')}</span>
-            <select
-              value={guests}
-              onChange={(event) => updateValue({ guests: event.target.value })}
-              className={styles.input}
-            >
-              {Array.from({ length: 10 }, (_, index) => index + 1).map((count) => (
-                <option key={count} value={count}>
-                  {count} {count === 1 ? t('common.guest') : t('common.guests')}
-                </option>
-              ))}
-            </select>
-          </label>
+            <GuestPicker value={bookingValue} onChange={updateValue} maxGuests={suite.maxGuests ?? 12} />
+          </div>
         </div>
 
         {error && (
@@ -509,10 +504,28 @@ function BookingPanel({ suite }) {
               </span>
               <strong>{formatPrice(visibleEstimate.nightlySubtotal)}</strong>
             </div>
-            {visibleEstimate.discount > 0 && (
+            {visibleEstimate.weeklyDiscount > 0 && (
               <div className={styles.lineItem}>
                 <span>{t('booking.weeklyDiscount')}</span>
-                <strong>-{formatPrice(visibleEstimate.discount)}</strong>
+                <strong>-{formatPrice(visibleEstimate.weeklyDiscount)}</strong>
+              </div>
+            )}
+            {visibleEstimate.lastMinuteDiscount > 0 && (
+              <div className={styles.lineItem}>
+                <span>{t('booking.lastMinuteDiscount')}</span>
+                <strong>-{formatPrice(visibleEstimate.lastMinuteDiscount)}</strong>
+              </div>
+            )}
+            {visibleEstimate.extraGuestFee > 0 && (
+              <div className={styles.lineItem}>
+                <span>{t('booking.extraGuestFee', { count: visibleEstimate.extraGuests })}</span>
+                <strong>{formatPrice(visibleEstimate.extraGuestFee)}</strong>
+              </div>
+            )}
+            {visibleEstimate.petFee > 0 && (
+              <div className={styles.lineItem}>
+                <span>{t('booking.petFee', { count: visibleEstimate.petCount })}</span>
+                <strong>{formatPrice(visibleEstimate.petFee)}</strong>
               </div>
             )}
             <div className={styles.lineItem}>
@@ -633,6 +646,9 @@ export default function SuiteDetailPage() {
                 <LuCalendarDays size={20} />
                 <h3>{t('suites.fees')}</h3>
                 <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.cleaningFee)} {t('booking.cleaningFee').toLowerCase()}</p>
+                {(suite.maxGuests ?? suite.sleeps) > suite.sleeps && (
+                  <p>{t('suites.extraGuestFeeNote', { amount: `$${EXTRA_GUEST_NIGHTLY_FEE}` })}</p>
+                )}
                 <p>{t('suites.discount')}</p>
               </div>
             </div>

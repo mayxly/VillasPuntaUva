@@ -69,6 +69,13 @@
   font-weight: 600;
 }
 
+.messageSubtext {
+  margin-top: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
 .filterBar {
   display: flex;
   align-items: center;
@@ -126,6 +133,10 @@
 .suiteCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 18px 44px rgba(15, 23, 42, 0.12);
+}
+
+.suiteCardDimmed .cardImage {
+  filter: grayscale(1);
 }
 
 .cardImageWrap {
