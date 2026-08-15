@@ -178,7 +178,7 @@ export const suites = [
       'Access to shared infinity pool, gym, yoga platform, and parking',
     ],
     sharedAmenities,
-    amenitiesPreview: ['Beach access', 'Shared infinity pool', 'Chef-ready kitchen', 'Wi-Fi', 'Air conditioning', 'Private patio or balcony'],
+    amenitiesPreview: ['Public beach access 5 minute walk', 'Shared infinity pool', 'Chef-ready kitchen', 'Wi-Fi', 'Air conditioning', 'Private patio or balcony'],
     amenities: [
       {
         title: 'Bathroom',
@@ -194,7 +194,7 @@ export const suites = [
       },
       {
         title: 'Outdoor and location',
-        items: ['Beach access', 'Private entrance', 'Private patio or balcony', 'Private backyard', 'Outdoor furniture', 'Barbecue grill', 'Beach essentials', 'Sun loungers'],
+        items: ['Public beach access 5 minute walk', 'Private entrance', 'Private patio or balcony', 'Private backyard', 'Outdoor furniture', 'Barbecue grill', 'Beach essentials', 'Sun loungers'],
       },
       {
         title: 'Parking and services',
@@ -255,7 +255,7 @@ export const suites = [
       'Surrounded by lush tropical nature',
     ],
     sharedAmenities: ['Infinity pool', 'Gym', 'Yoga platform'],
-    amenitiesPreview: ['Beach access', 'Pool', 'Shared gym', 'Wi-Fi', 'Kitchen', '50-inch HDTV with Netflix'],
+    amenitiesPreview: ['Public beach access 5 minute walk', 'Pool', 'Shared gym', 'Wi-Fi', 'Kitchen', '50-inch HDTV with Netflix'],
     amenities: [
       {
         title: 'Bathroom',
@@ -271,7 +271,7 @@ export const suites = [
       },
       {
         title: 'Location and outdoor',
-        items: ['Beach access', 'Laundromat nearby', 'Shared barbecue grill', 'Sun loungers'],
+        items: ['Public beach access 5 minute walk', 'Laundromat nearby', 'Shared barbecue grill', 'Sun loungers'],
       },
       {
         title: 'Parking and services',
@@ -336,7 +336,7 @@ export const suites = [
       'Access to shared infinity pool, gym, yoga platform, and parking',
     ],
     sharedAmenities,
-    amenitiesPreview: ['Shared beach access', 'Shared pool', 'Gym', 'Chef-ready kitchen', 'Wi-Fi', 'Dedicated workspace'],
+    amenitiesPreview: ['Public beach access 5 minute walk', 'Shared pool', 'Gym', 'Chef-ready kitchen', 'Wi-Fi', 'Dedicated workspace'],
     amenities: [
       {
         title: 'Views and bathroom',
@@ -352,7 +352,7 @@ export const suites = [
       },
       {
         title: 'Location and outdoor',
-        items: ['Shared beach access', 'Private entrance', 'Laundromat nearby', 'Patio or balcony', 'Private backyard', 'Private gas barbecue grill', 'Beach essentials', 'Sun loungers'],
+        items: ['Public beach access 5 minute walk', 'Private entrance', 'Laundromat nearby', 'Patio or balcony', 'Private backyard', 'Private gas barbecue grill', 'Beach essentials', 'Sun loungers'],
       },
       {
         title: 'Parking and services',
@@ -412,7 +412,7 @@ export const suites = [
       'Access to shared infinity pool, gym, yoga platform, and parking',
     ],
     sharedAmenities,
-    amenitiesPreview: ['Shared outdoor pool', 'Shared gym', 'Kitchen', 'Wi-Fi', 'Air conditioning', 'Private rancho'],
+    amenitiesPreview: ['Public beach access 5 minute walk', 'Shared outdoor pool', 'Shared gym', 'Kitchen', 'Wi-Fi', 'Air conditioning'],
     amenities: [
       {
         title: 'Bathroom',
@@ -428,7 +428,7 @@ export const suites = [
       },
       {
         title: 'Outdoor and facilities',
-        items: ['Sun loungers', 'Free parking on premises', 'Shared outdoor pool', 'Shared gym in building'],
+        items: ['Public beach access 5 minute walk', 'Sun loungers', 'Free parking on premises', 'Shared outdoor pool', 'Shared gym in building'],
       },
       {
         title: 'Services',
@@ -489,7 +489,7 @@ export const suites = [
       'Outdoor space for barbecuing',
     ],
     sharedAmenities: ['Infinity pool', 'Parking'],
-    amenitiesPreview: ['Beach access', 'Shared infinity pool', 'Kitchen', 'Wi-Fi', 'Air conditioning', 'Hammock'],
+    amenitiesPreview: ['Public beach access 5 minute walk', 'Shared infinity pool', 'Kitchen', 'Wi-Fi', 'Air conditioning', 'Hammock'],
     amenities: [
       {
         title: 'Bathroom',
@@ -505,7 +505,7 @@ export const suites = [
       },
       {
         title: 'Outdoor and location',
-        items: ['Beach access', 'Private entrance', 'Private patio or balcony', 'Backyard', 'Outdoor furniture', 'Hammock', 'Shared gas barbecue grill', 'Sun loungers'],
+        items: ['Public beach access 5 minute walk', 'Private entrance', 'Private patio or balcony', 'Backyard', 'Outdoor furniture', 'Hammock', 'Shared gas barbecue grill', 'Sun loungers'],
       },
       {
         title: 'Parking and services',
@@ -552,7 +552,7 @@ export const suites = [
     shortDescription:
       'A natural wood three-bedroom home with expansive decks, private natural pool, and lush fruit-tree surroundings.',
     description:
-      'Villa Cacha feels like stepping into a private slice of rainforest, with three bedrooms, two bathrooms, air conditioning, and a private natural pool filtered by plants and lava rock. The all-wood home sits on a lush 13-acre retreat surrounded by fruit trees, sloths, monkeys, and birds, just a five-minute walk from Arrecife/Punta Uva Beach. Expansive decks, peaceful grounds, and a spring-like pool experience make it especially memorable for guests who want nature, privacy, and comfort in one place.',
+      'Villa Cacha feels like stepping into a private slice of rainforest, with three bedrooms, two bathrooms, air conditioning, and a private natural pool filtered by plants and lava rock. The all-wood home sits on a lush 13-acre retreat surrounded by fruit trees, sloths, monkeys, and birds, about a seven-minute walk from Arrecife/Punta Uva Beach. Expansive decks, peaceful grounds, and a spring-like pool experience make it especially memorable for guests who want nature, privacy, and comfort in one place.',
     sleepingArrangements: [
       { label: 'Bedroom 1', bed: '1 King Bed', image: '/images/suites/cacha/cacha-24.webp' },
       { label: 'Bedroom 2', bed: '1 Queen Bed', image: '/images/suites/cacha/cacha-29.webp' },
@@ -567,7 +567,7 @@ export const suites = [
       'Private tropical living with modern comforts',
     ],
     sharedAmenities: ['Private natural pool', 'Parking'],
-    amenitiesPreview: ['Private natural pool', 'Beach access', 'Kitchen', 'Wi-Fi', 'Air conditioning', 'Private barbecue grill'],
+    amenitiesPreview: ['Private natural pool', 'Public beach access 7 minute walk', 'Kitchen', 'Wi-Fi', 'Air conditioning', 'Private barbecue grill'],
     amenities: [
       {
         title: 'Bathroom',
@@ -583,7 +583,7 @@ export const suites = [
       },
       {
         title: 'Outdoor and location',
-        items: ['Beach access', 'Private entrance', 'Patio or balcony', 'Backyard', 'Outdoor furniture', 'Outdoor dining area', 'Private gas barbecue grill'],
+        items: ['Public beach access 7 minute walk', 'Private entrance', 'Patio or balcony', 'Backyard', 'Outdoor furniture', 'Outdoor dining area', 'Private gas barbecue grill'],
       },
       {
         title: 'Parking and services',
@@ -628,9 +628,9 @@ export const suites = [
     cleaningFee: 50,
     petFriendly: true,
     shortDescription:
-      'A cozy two-bedroom wood home with air conditioning, porch seating, beach access, and shared infinity pool access nearby.',
+      'A cozy two-bedroom wood home with air conditioning, porch seating, and shared infinity pool access nearby.',
     description:
-      'Villa Carey is a charming two-bedroom wood home designed for quiet mornings, easy cooking, and relaxed wildlife watching from the porch. Each bedroom has a queen bed, TV, and air conditioning, while the beach is only a five-minute stroll away. Set within a 13-acre retreat with exotic fruit trees and access to a shared infinity pool across the street, it is a cozy option for a peaceful Caribbean stay.',
+      'Villa Carey is a charming two-bedroom wood home designed for quiet mornings, easy cooking, and relaxed wildlife watching from the porch. Each bedroom has a queen bed, TV, and air conditioning, while the beach is about a seven-minute stroll away. Set within a 13-acre retreat with exotic fruit trees and access to a shared infinity pool across the street, it is a cozy option for a peaceful Caribbean stay.',
     sleepingArrangements: [
       { label: 'Bedroom 1', bed: '1 Queen Bed', image: '/images/suites/carey/carey-10.webp' },
       { label: 'Bedroom 2', bed: '1 Queen Bed', image: '/images/suites/carey/carey-12.webp' },
@@ -644,7 +644,7 @@ export const suites = [
       'Peaceful Caribbean setting',
     ],
     sharedAmenities: ['Parking'],
-    amenitiesPreview: ['Beach access', 'Shared infinity pool', 'Kitchen', 'Wi-Fi', 'Air conditioning', 'Patio or balcony'],
+    amenitiesPreview: ['Public beach access 7 minute walk', 'Shared infinity pool', 'Kitchen', 'Wi-Fi', 'Air conditioning', 'Patio or balcony'],
     amenities: [
       {
         title: 'Bathroom',
@@ -660,7 +660,7 @@ export const suites = [
       },
       {
         title: 'Outdoor and location',
-        items: ['Beach access', 'Patio or balcony', 'Backyard'],
+        items: ['Public beach access 7 minute walk', 'Patio or balcony', 'Backyard'],
       },
       {
         title: 'Parking and services',
@@ -751,7 +751,7 @@ export const calculateSuiteStay = (suite, arrival, departure) => {
 const spanishSuiteText = {
   'Kitchen': 'Cocina', 'Dining Room': 'Comedor', 'Living Room': 'Sala', 'Patio': 'Patio', 'Pool': 'Piscina', 'Beach': 'Playa', 'Balcony': 'Balcón', 'Exterior': 'Exterior', 'Bathroom': 'Baño', 'Studio': 'Estudio',
   'Bedroom 1': 'Habitación 1', 'Bedroom 2': 'Habitación 2', 'Bedroom 3': 'Habitación 3', 'Bedroom 4': 'Habitación 4', 'Bedroom 5': 'Habitación 5', '1 King Bed': '1 cama king', '1 Queen Bed': '1 cama queen',
-  'Infinity pool': 'Piscina infinita', 'Gym': 'Gimnasio', 'Yoga platform': 'Plataforma de yoga', 'Parking': 'Estacionamiento', 'Beach access': 'Acceso a la playa', 'Shared beach access': 'Acceso compartido a la playa', 'Shared infinity pool': 'Piscina infinita compartida', 'Shared pool': 'Piscina compartida', 'Pool': 'Piscina', 'Shared outdoor pool': 'Piscina exterior compartida', 'Private natural pool': 'Piscina natural privada', 'Shared gym': 'Gimnasio compartido', 'Kitchen': 'Cocina', 'Chef-ready kitchen': 'Cocina lista para chef', 'Wi-Fi': 'Wi‑Fi', 'Air conditioning': 'Aire acondicionado', 'Private patio or balcony': 'Patio o balcón privado', 'Patio or balcony': 'Patio o balcón', 'Private rancho': 'Rancho privado', 'Hammock': 'Hamaca', 'Dedicated workspace': 'Espacio de trabajo dedicado',
+  'Infinity pool': 'Piscina infinita', 'Gym': 'Gimnasio', 'Yoga platform': 'Plataforma de yoga', 'Parking': 'Estacionamiento', 'Public beach access 5 minute walk': 'Acceso a la playa pública a 5 minutos caminando', 'Public beach access 7 minute walk': 'Acceso a la playa pública a 7 minutos caminando', 'Shared infinity pool': 'Piscina infinita compartida', 'Shared pool': 'Piscina compartida', 'Pool': 'Piscina', 'Shared outdoor pool': 'Piscina exterior compartida', 'Private natural pool': 'Piscina natural privada', 'Shared gym': 'Gimnasio compartido', 'Kitchen': 'Cocina', 'Chef-ready kitchen': 'Cocina lista para chef', 'Wi-Fi': 'Wi‑Fi', 'Air conditioning': 'Aire acondicionado', 'Private patio or balcony': 'Patio o balcón privado', 'Patio or balcony': 'Patio o balcón', 'Private rancho': 'Rancho privado', 'Hammock': 'Hamaca', 'Dedicated workspace': 'Espacio de trabajo dedicado',
   '5 beds': '5 camas', '3 beds': '3 camas', '2 beds': '2 camas', '1 bedroom studio': 'Estudio de 1 habitación', '5 baths': '5 baños', '2 baths': '2 baños', '1 bath': '1 baño',
   'Bathroom': 'Baño', 'Bedroom and laundry': 'Habitación y lavandería', 'Kitchen and dining': 'Cocina y comedor', 'Outdoor and location': 'Exteriores y ubicación', 'Location and outdoor': 'Ubicación y exteriores', 'Outdoor and facilities': 'Exteriores e instalaciones', 'Parking and services': 'Estacionamiento y servicios', 'Services': 'Servicios', 'Views and bathroom': 'Vistas y baño', 'Guest access': 'Acceso de huéspedes', 'Other things to note': 'Otros aspectos a tener en cuenta', 'Not included': 'No incluido',
   'Bathtub': 'Bañera', 'Hair dryer': 'Secadora de cabello', 'Body soap': 'Jabón corporal', 'Outdoor shower': 'Ducha exterior', 'Hot water': 'Agua caliente', 'Shower gel': 'Gel de ducha', 'Essentials': 'Artículos esenciales', 'Hangers': 'Ganchos', 'Bed linens': 'Ropa de cama', 'Cotton linens': 'Sábanas de algodón', 'Extra pillows and blankets': 'Almohadas y mantas adicionales', 'Room-darkening shades': 'Cortinas opacas', 'Iron': 'Plancha', 'Safe': 'Caja fuerte', 'Wardrobe storage': 'Armario', 'Clothing storage': 'Espacio para ropa', 'Dresser storage': 'Cómoda', 'Refrigerator': 'Refrigerador', 'Double refrigerator': 'Refrigerador doble', 'Microwave': 'Microondas', 'Dishwasher': 'Lavavajillas', 'Freezer': 'Congelador', 'Gas stove': 'Cocina de gas', 'Electric stove': 'Cocina eléctrica', 'Stove': 'Cocina', 'Oven': 'Horno', 'Coffee maker': 'Cafetera', 'Dining table': 'Mesa de comedor', 'Beach essentials': 'Artículos de playa', 'Sun loungers': 'Tumbonas', 'Pets allowed': 'Se permiten mascotas', 'Long-term stays allowed': 'Se permiten estadías largas', 'Self check-in with keypad': 'Entrada autónoma con teclado', 'Housekeeping is available at an extra cost': 'Servicio de limpieza disponible con costo adicional', 'Free parking on premises': 'Estacionamiento gratuito en el lugar', 'Luggage drop-off allowed': 'Se permite dejar equipaje', 'Private entrance': 'Entrada privada', 'Backyard': 'Patio trasero', 'Outdoor furniture': 'Muebles de exterior', 'Barbecue grill': 'Parrilla', 'Private barbecue grill': 'Parrilla privada', 'Private gas barbecue grill': 'Parrilla de gas privada', 'Shared gas barbecue grill': 'Parrilla de gas compartida', 'Shared barbecue grill': 'Parrilla compartida',
