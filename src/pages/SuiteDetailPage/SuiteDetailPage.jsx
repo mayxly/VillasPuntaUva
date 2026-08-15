@@ -574,7 +574,7 @@ export default function SuiteDetailPage() {
         <div>
           <Link to="/suites" className={styles.backText}>{t('suites.all')}</Link>
           <h1>{suite.name}</h1>
-          <p className={styles.location}>{suite.location}, Limon, Costa Rica</p>
+          <p className={styles.location}>{suite.location}, Costa Rica</p>
         </div>
         <p className={styles.heroPrice}>
           <span>{t('common.from')}</span>

@@ -55,8 +55,8 @@ export default function Footer() {
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>{t('footer.contact')}</h4>
             <div className={styles.contactInfo}>
-              <p>Punta Uva Puerto Viejo</p>
-              <p>Costa Rica</p>
+              <p>Punta Uva, Puerto Viejo</p>
+              <p>Limón, Costa Rica</p>
               <p>+506 6145 9916</p>
               <p>info@villaspuntauva.com</p>
             </div>

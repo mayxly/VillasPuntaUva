@@ -44,7 +44,7 @@ export default function ContactPage() {
               <HiLocationMarker size={28} />
             </div>
             <h3 className={styles.cardLabel}>{t('pages.location')}</h3>
-            <p className={styles.cardDetail}>Punta Uva Puerto Viejo, CR</p>
+            <p className={styles.cardDetail}>Punta Uva, Puerto Viejo, Limón, Costa Rica</p>
           </div>
         </div>
       </section>

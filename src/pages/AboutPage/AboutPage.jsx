@@ -12,7 +12,7 @@ const aboutValues = [
   },
   {
     title: 'A place to slow down',
-    text: 'Guests come for the beaches, food, culture, and wildlife, then settle into the simple rhythm of life in Punta Uva.',
+    text: 'Guests come for the beaches, food, culture, and wildlife, then settle into the simple rhythm of life in Puerto Viejo.',
   },
 ]
 
@@ -22,7 +22,7 @@ export default function AboutPage() {
   const values = spanish ? [
     { title: 'Hospitalidad familiar', text: 'Villas Punta Uva es un negocio familiar construido con cuidado, intención y amor por recibir huéspedes en este rincón de Costa Rica.' },
     { title: 'Lujo en la naturaleza', text: 'Los hogares están diseñados para brindar comodidad y mantener la selva, la vida silvestre y la costa caribeña en el corazón de la experiencia.' },
-    { title: 'Un lugar para bajar el ritmo', text: 'Los huéspedes llegan por las playas, la gastronomía, la cultura y la vida silvestre, y se acomodan al ritmo sencillo de Punta Uva.' },
+    { title: 'Un lugar para bajar el ritmo', text: 'Los huéspedes llegan por las playas, la gastronomía, la cultura y la vida silvestre, y se acomodan al ritmo sencillo de Puerto Viejo.' },
   ] : aboutValues
   return (
     <div className={styles.page}>
@@ -43,7 +43,7 @@ export default function AboutPage() {
       <section className={styles.story}>
         <div className={styles.storyText}>
           <p className={styles.eyebrow}>{spanish ? 'Nuestra historia' : 'Our Story'}</p>
-          <h2>{spanish ? 'De un sueño en Costa Rica a un hogar en Punta Uva' : 'From a dream of Costa Rica to a home in Punta Uva'}</h2>
+          <h2>{spanish ? 'De un sueño en Costa Rica a un hogar en Puerto Viejo' : 'From a dream of Costa Rica to a home in Puerto Viejo'}</h2>
           <p>
             {spanish ? 'Desde 2011, nuestra familia ha recorrido gran parte de Costa Rica y ha vuelto una y otra vez a la belleza que nos conquistó: la selva, la vida silvestre, la calidez de su gente, la cultura y la gastronomía.' : 'Since 2011, our family has travelled through much of Costa Rica and kept returning to the beauty that first captured us: the jungle, the wildlife, the warmth of the people, the culture, and the food.'}
           </p>
@@ -60,7 +60,7 @@ export default function AboutPage() {
           <p className={styles.eyebrow}>{spanish ? 'Un negocio familiar' : 'A Family Business'}</p>
           <h2>{spanish ? 'Creado para compartir el lugar que amamos' : 'Built to share the place we love'}</h2>
           <p>
-            {spanish ? 'Villas Punta Uva es el resultado de un sueño familiar que cobró vida antes de lo esperado: después de mudarnos de Canadá a Punta Uva en 2021, el paraíso se convirtió en nuestro hogar y la visión de estas villas pasó a formar parte de la vida cotidiana.' : 'Villas Punta Uva is the result of a family dream that came to life sooner than expected: after moving from Canada to Punta Uva in 2021, paradise became home, and the vision for these villas became part of everyday life.'}
+            {spanish ? 'Villas Punta Uva es el resultado de un sueño familiar que cobró vida antes de lo esperado: después de mudarnos de Canadá a la costa caribeña de Costa Rica en 2021, el paraíso se convirtió en nuestro hogar y la visión de estas villas pasó a formar parte de la vida cotidiana.' : 'Villas Punta Uva is the result of a family dream that came to life sooner than expected: after moving from Canada to the Caribbean coast of Costa Rica in 2021, paradise became home, and the vision for these villas became part of everyday life.'}
           </p>
           <p>
             {spanish ? 'El objetivo siempre ha sido sencillo: construir algo significativo y compartir este hermoso país con huéspedes de todo el mundo.' : 'The goal has always been simple: build something meaningful and share this beautiful country with guests from around the world.'}

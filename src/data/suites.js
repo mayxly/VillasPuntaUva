@@ -144,7 +144,7 @@ export const suites = [
   {
     id: 1,
     name: 'Villa Mariposa',
-    location: 'Punta Uva',
+    location: 'Puerto Viejo',
     slug: 'villa-mariposa',
     airbnbUrl: 'https://www.airbnb.ca/rooms/1110956901295044381',
     image: '/images/suites/mariposa.webp',
@@ -224,7 +224,7 @@ export const suites = [
   {
     id: 2,
     name: 'Villa Tucan',
-    location: 'Punta Uva',
+    location: 'Puerto Viejo',
     slug: 'villa-tucan',
     airbnbUrl: 'https://www.airbnb.ca/rooms/1113377681101829744',
     image: '/images/suites/tucan.webp',
@@ -301,7 +301,7 @@ export const suites = [
   {
     id: 3,
     name: 'Villa Presidente',
-    location: 'Punta Uva',
+    location: 'Puerto Viejo',
     slug: 'villa-presidente',
     airbnbUrl: 'https://www.airbnb.ca/rooms/938421023355226897',
     image: '/images/suites/presidente.webp',
@@ -382,7 +382,7 @@ export const suites = [
   {
     id: 4,
     name: 'Villa Colibri',
-    location: 'Punta Uva',
+    location: 'Puerto Viejo',
     slug: 'villa-colibri',
     airbnbUrl: 'https://www.airbnb.ca/rooms/1121764501882415469',
     image: '/images/suites/colibri.webp',
@@ -458,7 +458,7 @@ export const suites = [
   {
     id: 5,
     name: 'Villa Angel',
-    location: 'Punta Uva',
+    location: 'Puerto Viejo',
     slug: 'villa-angel',
     airbnbUrl: 'https://www.airbnb.ca/rooms/773962707352739865',
     image: '/images/suites/angel.webp',
@@ -535,7 +535,7 @@ export const suites = [
   {
     id: 6,
     name: 'Villa Cacha',
-    location: 'Arrecife',
+    location: 'Puerto Viejo',
     slug: 'villa-cacha',
     airbnbUrl: 'https://www.airbnb.ca/rooms/1248597947139254573',
     image: '/images/suites/cacha.webp',
@@ -613,7 +613,7 @@ export const suites = [
   {
     id: 7,
     name: 'Villa Carey',
-    location: 'Arrecife',
+    location: 'Puerto Viejo',
     slug: 'carey-house',
     airbnbUrl: 'https://www.airbnb.ca/rooms/1360877574407543821',
     image: '/images/suites/carey.webp',
