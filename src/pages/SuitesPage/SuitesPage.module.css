@@ -59,7 +59,7 @@
 
 .message {
   max-width: 680px;
-  margin: 0 auto 24px;
+  margin: 24px auto;
   padding: 14px 18px;
   border: 1px solid rgba(139, 94, 60, 0.24);
   border-radius: var(--border-radius);

@@ -618,6 +618,26 @@
   grid-column: 1 / -1;
 }
 
+.minNightsNote {
+  padding: 8px 12px;
+  border-top: 1px solid #eef2f4;
+  color: var(--color-text-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+  text-align: center;
+}
+
+.field span.minNightsHint {
+  margin-top: -2px;
+  color: var(--color-text-light);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
 .input {
   width: 100%;
   min-height: 46px;

@@ -377,7 +377,8 @@ function BookingPanel({ suite }) {
   const { arrival, departure, guests, pets } = bookingValue
   const guestCount = Number(guests)
   const petCount = Number(pets) || 0
-  const minCheckoutDate = arrival ? addDays(arrival, 1) : new Date()
+  const minNights = suite.minNights ?? 1
+  const minCheckoutDate = arrival ? addDays(arrival, minNights) : new Date()
 
   const estimate = useMemo(() => {
     if (!arrival || !departure || departure <= arrival) return null
@@ -389,6 +390,12 @@ function BookingPanel({ suite }) {
     if (arrival && departure && departure <= arrival) {
       return t('booking.checkoutAfterArrival')
     }
+    if (arrival && departure) {
+      const nights = Math.round((departure - arrival) / (1000 * 60 * 60 * 24))
+      if (nights < minNights) {
+        return t('booking.minNightsError', { count: minNights })
+      }
+    }
     if (!Number.isFinite(guestCount) || guestCount < 1) {
       return t('booking.selectGuest')
     }
@@ -396,7 +403,7 @@ function BookingPanel({ suite }) {
       return `${suite.name}: ${t('suites.sleeps', { count: suite.maxGuests ?? suite.sleeps })}.`
     }
     return ''
-  }, [arrival, departure, guestCount, suite])
+  }, [arrival, departure, guestCount, suite, minNights])
   const visibleEstimate = error ? null : estimate
 
   const updateValue = (updates) => {
@@ -458,7 +465,11 @@ function BookingPanel({ suite }) {
               onInputClick={() => setArrivalOpen(true)}
               onClickOutside={closeArrivalCalendar}
               onSelect={closeArrivalCalendar}
-            />
+            >
+              {minNights > 1 && (
+                <div className={styles.minNightsNote}>{t('booking.minNightsNote', { count: minNights })}</div>
+              )}
+            </DatePicker>
           </label>
 
           <label className={styles.field}>
@@ -481,7 +492,14 @@ function BookingPanel({ suite }) {
               onInputClick={() => setCheckoutOpen(true)}
               onClickOutside={closeCheckoutCalendar}
               onSelect={closeCheckoutCalendar}
-            />
+            >
+              {minNights > 1 && (
+                <div className={styles.minNightsNote}>{t('booking.minNightsNote', { count: minNights })}</div>
+              )}
+            </DatePicker>
+            {minNights > 1 && (
+              <span className={styles.minNightsHint}>{t('booking.minNightsNote', { count: minNights })}</span>
+            )}
           </label>
 
           <div className={`${styles.field} ${styles.fullField}`}>
@@ -557,8 +575,6 @@ function BookingPanel({ suite }) {
         ) : (
           <p className={styles.prompt}>{t('booking.selectDates')}</p>
         )}
-
-        <p className={styles.rateFinePrint}>{suite.rateNote}</p>
       </aside>
 
       {bookingOpen && <BookingModal onClose={() => setBookingOpen(false)} />}
@@ -652,7 +668,6 @@ export default function SuiteDetailPage() {
                 <p>{t('suites.discount')}</p>
               </div>
             </div>
-            <p className={styles.rateNote}>{suite.rateNote}</p>
           </div>
 
           <AirbnbSection suite={suite} />

@@ -142,6 +142,13 @@ export default function SuitesPage() {
     return nights === 1
   }, [appliedStay])
 
+  const availableSuites = oneNightStay
+    ? filteredSuites.filter((suite) => NO_MINIMUM_SLUGS.includes(suite.slug))
+    : filteredSuites
+  const restrictedSuites = oneNightStay
+    ? filteredSuites.filter((suite) => !NO_MINIMUM_SLUGS.includes(suite.slug))
+    : []
+
   const handleSearch = ({ arrival, departure, guests, kidsUnder5, pets }) => {
     const guestCount = Number(guests)
 
@@ -231,23 +238,30 @@ export default function SuitesPage() {
           </div>
         )}
 
-        {!error && oneNightStay && (
-          <div className={styles.message}>
-            <p>{t('suites.twoNightMinimum')}</p>
-            <p className={styles.messageSubtext}>{t('suites.twoNightMinimumException')}</p>
-          </div>
-        )}
-
         {filteredSuites.length > 0 ? (
-          <div className={styles.grid}>
-            {filteredSuites.map((suite) => (
-              <SuiteListingCard
-                key={suite.id}
-                suite={suite}
-                dimmed={oneNightStay && !NO_MINIMUM_SLUGS.includes(suite.slug)}
-              />
-            ))}
-          </div>
+          <>
+            {availableSuites.length > 0 && (
+              <div className={styles.grid}>
+                {availableSuites.map((suite) => (
+                  <SuiteListingCard key={suite.id} suite={suite} dimmed={false} />
+                ))}
+              </div>
+            )}
+
+            {!error && oneNightStay && restrictedSuites.length > 0 && (
+              <>
+                <div className={styles.message}>
+                  <p>{t('suites.twoNightMinimum')}</p>
+                  <p className={styles.messageSubtext}>{t('suites.twoNightMinimumException')}</p>
+                </div>
+                <div className={styles.grid}>
+                  {restrictedSuites.map((suite) => (
+                    <SuiteListingCard key={suite.id} suite={suite} dimmed />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
         ) : (
           <div className={styles.emptyState}>
             <h2>{t('suites.noMatch')}</h2>
