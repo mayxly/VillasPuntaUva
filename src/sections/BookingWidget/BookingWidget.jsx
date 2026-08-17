@@ -8,7 +8,7 @@ import DateRangePicker from '../../components/DateRangePicker/DateRangePicker'
 const defaultValue = {
   arrival: null,
   departure: null,
-  guests: '2',
+  guests: '1',
   kidsUnder5: 0,
   pets: 0,
 }

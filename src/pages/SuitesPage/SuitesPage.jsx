@@ -10,7 +10,7 @@ import { useLanguage } from '../../i18n/LanguageContext'
 const initialBookingValue = {
   arrival: null,
   departure: null,
-  guests: '2',
+  guests: '1',
   kidsUnder5: 0,
   pets: 0,
 }

@@ -40,6 +40,7 @@ export default function Footer() {
               <Link to="/about">{t('nav.about')}</Link>
               <Link to="/attractions">{t('nav.attractions')}</Link>
               <Link to="/contact">{t('nav.contact')}</Link>
+              <Link to="/faq">{t('nav.faqs')}</Link>
             </nav>
           </div>
 
@@ -58,7 +59,7 @@ export default function Footer() {
               <p>Punta Uva, Puerto Viejo</p>
               <p>Limón, Costa Rica</p>
               <p>+506 6145 9916</p>
-              <p>info@villaspuntauva.com</p>
+              <p>villaspuntauva@gmail.com</p>
             </div>
           </div>
 

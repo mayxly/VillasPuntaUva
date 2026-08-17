@@ -63,7 +63,7 @@ function getBookingValueFromParams(searchParams) {
   return {
     arrival: parseDateParam(searchParams.get('arrival')),
     departure: parseDateParam(searchParams.get('departure')),
-    guests: searchParams.get('guests') || '2',
+    guests: searchParams.get('guests') || '1',
     kidsUnder5: Number(searchParams.get('kidsUnder5')) || 0,
     pets: Number(searchParams.get('pets')) || 0,
   }
@@ -466,7 +466,7 @@ function BookingPanel({ suite }) {
   }
 
   const handleClear = () => {
-    setBookingValue({ arrival: null, departure: null, guests: '2', kidsUnder5: 0, pets: 0 })
+    setBookingValue({ arrival: null, departure: null, guests: '1', kidsUnder5: 0, pets: 0 })
   }
 
   return (

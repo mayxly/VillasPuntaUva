@@ -83,6 +83,7 @@ export default function GuestPicker({ value, onChange, maxGuests = 12, maxKids =
         <div className={styles.panel}>
           <Stepper
             label={t('common.guests')}
+            description={t('common.guestsNote')}
             value={guests}
             min={1}
             max={maxGuests}

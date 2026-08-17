@@ -37,7 +37,7 @@ export default function ContactPage() {
               <HiMail size={28} />
             </div>
             <h3 className={styles.cardLabel}>{t('pages.email')}</h3>
-            <p className={styles.cardDetail}>info@villaspuntauva.com</p>
+            <p className={styles.cardDetail}>villaspuntauva@gmail.com</p>
           </div>
           <div className={styles.card}>
             <div className={styles.iconCircle}>

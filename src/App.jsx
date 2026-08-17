@@ -9,6 +9,7 @@ import SuiteDetailPage from './pages/SuiteDetailPage/SuiteDetailPage'
 import AboutPage from './pages/AboutPage/AboutPage'
 import AttractionsPage from './pages/AttractionsPage/AttractionsPage'
 import ContactPage from './pages/ContactPage/ContactPage'
+import FAQPage from './pages/FAQPage/FAQPage'
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/attractions" element={<AttractionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/faq" element={<FAQPage />} />
         </Routes>
       </main>
       <Footer />
