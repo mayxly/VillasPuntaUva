@@ -29,6 +29,7 @@ import {
   suites,
   EXTRA_GUEST_NIGHTLY_FEE,
 } from '../../data/suites'
+import airbnbAvailability from '../../data/airbnbAvailability.json'
 import BookingModal from '../../components/BookingModal/BookingModal'
 import GuestPicker from '../../components/GuestPicker/GuestPicker'
 import styles from './SuiteDetailPage.module.css'
@@ -65,6 +66,21 @@ function addDays(date, days) {
   const nextDate = new Date(date)
   nextDate.setDate(nextDate.getDate() + days)
   return nextDate
+}
+
+function parseIsoDate(value) {
+  const [year, month, day] = value.split('-').map(Number)
+  return new Date(year, month - 1, day)
+}
+
+function getBlockedRanges(slug) {
+  const ranges = airbnbAvailability[slug] ?? []
+  // Airbnb's DTEND is the checkout day, which is bookable again as a new arrival,
+  // so the excluded range only covers through the night before checkout.
+  return ranges.map((range) => ({
+    start: parseIsoDate(range.start),
+    end: addDays(parseIsoDate(range.end), -1),
+  }))
 }
 
 function uniqueImages(images) {
@@ -379,6 +395,7 @@ function BookingPanel({ suite }) {
   const petCount = Number(pets) || 0
   const minNights = suite.minNights ?? 1
   const minCheckoutDate = arrival ? addDays(arrival, minNights) : new Date()
+  const blockedRanges = useMemo(() => getBlockedRanges(suite.slug), [suite.slug])
 
   const estimate = useMemo(() => {
     if (!arrival || !departure || departure <= arrival) return null
@@ -458,6 +475,7 @@ function BookingPanel({ suite }) {
               placeholderText={t('common.selectDate')}
               className={styles.input}
               minDate={new Date()}
+              excludeDateIntervals={blockedRanges}
               dateFormat="MMM d, yyyy"
               locale={language === 'es' ? 'es' : undefined}
               shouldCloseOnSelect
@@ -484,6 +502,7 @@ function BookingPanel({ suite }) {
               placeholderText={t('common.selectDate')}
               className={styles.input}
               minDate={minCheckoutDate}
+              excludeDateIntervals={blockedRanges}
               dateFormat="MMM d, yyyy"
               locale={language === 'es' ? 'es' : undefined}
               shouldCloseOnSelect
