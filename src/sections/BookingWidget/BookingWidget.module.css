@@ -14,6 +14,34 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   padding: 32px 40px;
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.clearRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.clearBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border: none;
+  background: none;
+  color: var(--color-text-light);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition: color var(--transition-speed) ease;
+}
+
+.clearBtn:hover {
+  color: var(--color-primary);
+}
+
+.fieldsRow {
+  display: flex;
   align-items: flex-end;
   gap: 24px;
 }
@@ -77,9 +105,12 @@
 
 @media (max-width: 768px) {
   .card {
+    padding: 24px;
+  }
+
+  .fieldsRow {
     flex-direction: column;
     align-items: stretch;
-    padding: 24px;
     gap: 16px;
   }
 

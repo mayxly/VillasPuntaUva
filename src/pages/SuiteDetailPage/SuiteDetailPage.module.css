@@ -589,6 +589,29 @@
   margin-bottom: 4px;
 }
 
+.clearRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: -4px;
+}
+
+.clearBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  border: none;
+  background: none;
+  color: var(--color-text-light);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition: color var(--transition-speed) ease;
+}
+
+.clearBtn:hover {
+  color: var(--color-primary);
+}
+
 .bookingFields {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

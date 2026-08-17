@@ -66,3 +66,150 @@
   font-weight: 700;
   text-align: center;
 }
+
+.popupHeader {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  /* Never let this row (or the footer) out-stretch the two-month grid below
+     it — react-datepicker sizes the whole popup to its widest child, so a
+     wide header/footer would drag the container (and the next-month arrow
+     anchored to its edge) wider than the calendar itself. */
+  max-width: 680px;
+  padding: 18px 20px 14px;
+  background: var(--color-white);
+  border-bottom: 1px solid #eef2f4;
+}
+
+.popupSummary {
+  min-height: 1px;
+}
+
+.nightsHeading {
+  color: var(--color-dark);
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.rangeSubtitle {
+  margin-top: 2px;
+  color: var(--color-text-light);
+  font-size: 0.875rem;
+}
+
+.pillRow {
+  display: flex;
+  gap: 6px;
+}
+
+.popupPill {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 104px;
+  padding: 8px 26px 8px 10px;
+  border: 1.5px solid #dce5e8;
+  border-radius: 10px;
+  background: var(--color-white);
+}
+
+.popupPillActive {
+  border-color: var(--color-dark);
+}
+
+.popupPillLabel {
+  color: var(--color-text-light);
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.popupPillValue {
+  color: var(--color-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.popupPillClear {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--color-text-light);
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.popupPillClear:hover {
+  background: var(--color-bg-blue);
+  color: var(--color-dark);
+}
+
+.popupFooter {
+  /* The library floats the month grids internally, and this footer follows
+     them in source order — without clearing, it renders up beside the
+     floated months instead of underneath them. */
+  clear: both;
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--color-white);
+  border-top: 1px solid #eef2f4;
+}
+
+.clearDatesBtn {
+  border: none;
+  background: none;
+  color: var(--color-dark);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.closeBtn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 50px;
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.closeBtn:hover {
+  background: #0f172a;
+}
+
+@media (max-width: 720px) {
+  .pillRow {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .popupPill {
+    flex: 1;
+    min-width: 0;
+  }
+}

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { IoBedOutline, IoPeopleOutline } from 'react-icons/io5'
 import {
   LuBath,
@@ -45,12 +45,28 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
   day: 'numeric',
 })
 
-const initialBookingValue = {
-  arrival: null,
-  departure: null,
-  guests: '2',
-  kidsUnder5: 0,
-  pets: 0,
+function parseDateParam(value) {
+  if (!value) return null
+
+  const [year, month, day] = value.split('-').map(Number)
+  if (!year || !month || !day) return null
+
+  const date = new Date(year, month - 1, day)
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+    return null
+  }
+
+  return date
+}
+
+function getBookingValueFromParams(searchParams) {
+  return {
+    arrival: parseDateParam(searchParams.get('arrival')),
+    departure: parseDateParam(searchParams.get('departure')),
+    guests: searchParams.get('guests') || '2',
+    kidsUnder5: Number(searchParams.get('kidsUnder5')) || 0,
+    pets: Number(searchParams.get('pets')) || 0,
+  }
 }
 
 function formatPrice(value) {
@@ -401,11 +417,13 @@ function BookingPanel({ suite }) {
   const { locale, t } = useLanguage()
   const priceFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
   const dateFormatter = new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric' })
-  const [bookingValue, setBookingValue] = useState(initialBookingValue)
+  const [searchParams] = useSearchParams()
+  const [bookingValue, setBookingValue] = useState(() => getBookingValueFromParams(searchParams))
   const [bookingOpen, setBookingOpen] = useState(false)
-  const { arrival, departure, guests, pets } = bookingValue
+  const { arrival, departure, guests, kidsUnder5, pets } = bookingValue
   const guestCount = Number(guests)
   const petCount = Number(pets) || 0
+  const hasSearchValue = Boolean(arrival || departure || guestCount !== 2 || kidsUnder5 || pets)
   const minNights = suite.minNights ?? 1
   const blockedRanges = useMemo(() => getBlockedRanges(suite.slug), [suite.slug])
   const arrivalExcludedRanges = useMemo(
@@ -447,6 +465,10 @@ function BookingPanel({ suite }) {
     }))
   }
 
+  const handleClear = () => {
+    setBookingValue({ arrival: null, departure: null, guests: '2', kidsUnder5: 0, pets: 0 })
+  }
+
   return (
     <>
       <aside className={styles.bookingPanel} aria-label={t('booking.estimate')}>
@@ -457,6 +479,15 @@ function BookingPanel({ suite }) {
           </p>
           <span>/{t('common.night')}</span>
         </div>
+
+        {hasSearchValue && (
+          <div className={styles.clearRow}>
+            <button type="button" className={styles.clearBtn} onClick={handleClear}>
+              <LuX size={14} />
+              {t('suites.clear')}
+            </button>
+          </div>
+        )}
 
         <div className={styles.bookingFields}>
           <div className={`${styles.field} ${styles.fullField}`}>

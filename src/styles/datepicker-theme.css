@@ -2,18 +2,35 @@
    villa's booking calendar. Overrides the library's default styling —
    these are global class names the library renders, not CSS-module scoped. */
 
+/* Portaled to document.body (see portalId on DatePicker) so it always draws
+   above the navbar and any card/section with its own stacking context —
+   without this a "Show more" button or similar could otherwise bleed
+   through the calendar despite a numerically higher z-index here. */
 .react-datepicker-popper {
-  z-index: 30;
+  z-index: 1000;
+  width: max-content;
+  max-width: calc(100vw - 32px);
 }
 
 .react-datepicker-popper .react-datepicker__triangle {
   display: none;
 }
 
+/* Sized to fit content (the two floated month grids). The header/pills row
+   is kept narrower than the two-month grid (see DateRangePicker.module.css)
+   so the months stay the widest element and determine this width — letting
+   the header stretch it wider was what dragged the next-month arrow (which
+   anchors to this container's edge) away from January.
+   Height is capped with internal scroll so the popup rarely needs its full
+   ~600px to fit below the trigger, which keeps it from flipping above. */
 .react-datepicker {
+  width: max-content;
+  max-width: 100%;
+  max-height: min(600px, calc(100vh - 88px));
+  overflow-x: hidden;
+  overflow-y: auto;
   border: none;
   border-radius: 16px;
-  overflow: hidden;
   background: var(--color-white);
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
   font-family: var(--font-body);
@@ -46,27 +63,31 @@
 }
 
 .react-datepicker__navigation {
-  top: 14px;
+  top: 18px;
   width: 32px;
   height: 32px;
+  border: 1.5px solid #dce5e8;
   border-radius: 50%;
-  transition: background-color var(--transition-speed) ease;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 
 .react-datepicker__navigation:hover {
+  border-color: var(--color-primary);
   background-color: var(--color-bg-blue);
 }
 
 .react-datepicker__navigation--previous {
-  left: 10px;
+  left: 16px;
 }
 
 .react-datepicker__navigation--next {
-  right: 10px;
+  right: 16px;
 }
 
 .react-datepicker__navigation-icon::before {
-  border-color: var(--color-text-light);
+  border-color: var(--color-text);
   border-width: 2px 2px 0 0;
   width: 7px;
   height: 7px;
@@ -89,8 +110,12 @@
   letter-spacing: 0.04em;
 }
 
+.react-datepicker__month-container {
+  padding: 0 16px;
+}
+
 .react-datepicker__month {
-  margin: 4px 12px 12px;
+  margin: 4px 0 12px;
 }
 
 .react-datepicker__week {
@@ -153,19 +178,41 @@
   background-color: var(--color-primary-dark);
 }
 
-/* No special fill for "in range"/"in selecting range" days: with excluded
-   (booked) dates breaking up the span, that highlight lands on scattered
-   individual days instead of a clean block and reads as a rendering glitch.
-   Only the chosen check-in/check-out anchors get a filled circle. */
+/* Days between check-in and check-out get a continuous light band rather
+   than per-cell circles, so the span reads as one connected range. This is
+   safe now because both endpoints of a CONFIRMED range are guaranteed gap-free
+   (excluded/booked dates already block selecting a range that crosses them).
+   The hover preview (in-selecting-range) can still cross a not-yet-validated
+   gap, which is an acceptable, momentary cosmetic tradeoff. */
 .react-datepicker__day--in-range,
 .react-datepicker__day--in-selecting-range {
   /* !important: the library ships a higher-specificity :not() selector for
      this exact state, so a plain override here would silently lose to it. */
-  background-color: transparent !important;
+  background-color: var(--color-bg-blue) !important;
   color: var(--color-dark) !important;
   font-weight: 500;
-  border-radius: 50% !important;
+  border-radius: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   box-shadow: none;
+}
+
+/* The exact check-in/check-out days sit on top of the band as filled circles. */
+.react-datepicker__day--range-start,
+.react-datepicker__day--range-end,
+.react-datepicker__day--selecting-range-start,
+.react-datepicker__day--selecting-range-end {
+  position: relative;
+  background-color: var(--color-primary) !important;
+  color: var(--color-white) !important;
+  font-weight: 700;
+  border-radius: 50% !important;
+  z-index: 1;
+}
+
+.react-datepicker__day--range-start:not([aria-disabled='true']):hover,
+.react-datepicker__day--range-end:not([aria-disabled='true']):hover {
+  background-color: var(--color-primary-dark) !important;
 }
 
 .react-datepicker__day--keyboard-selected {
@@ -175,4 +222,17 @@
 
 .react-datepicker__day--keyboard-selected:not([aria-disabled='true']):hover {
   background-color: var(--color-secondary);
+}
+
+/* Two months side by side need real estate the search bar/sidebar don't have
+   on narrow screens — fall back to a single month there. */
+@media (max-width: 720px) {
+  .react-datepicker,
+  .react-datepicker-popper {
+    width: 312px;
+  }
+
+  .react-datepicker__month-container ~ .react-datepicker__month-container {
+    display: none;
+  }
 }

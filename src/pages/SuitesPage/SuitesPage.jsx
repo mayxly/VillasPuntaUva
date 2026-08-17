@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { IoBedOutline, IoPeopleOutline } from 'react-icons/io5'
 import { LuBath } from 'react-icons/lu'
 import BookingWidget from '../../sections/BookingWidget/BookingWidget'
-import { getLocalizedSuites, getLowestNightlyRate } from '../../data/suites'
+import { getLocalizedSuites, getLowestNightlyRate, isSuiteAvailable } from '../../data/suites'
 import styles from './SuitesPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
@@ -67,11 +67,15 @@ function getMaxGuests(suite) {
   return suite.maxGuests ?? suite.sleeps
 }
 
-function SuiteListingCard({ suite, dimmed }) {
+function SuiteListingCard({ suite, dimmed, searchParams }) {
   const { language, locale, t } = useLanguage()
   const formatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const query = searchParams?.toString()
   return (
-    <Link to={`/suites/${suite.slug}`} className={`${styles.suiteCard} ${dimmed ? styles.suiteCardDimmed : ''}`}>
+    <Link
+      to={`/suites/${suite.slug}${query ? `?${query}` : ''}`}
+      className={`${styles.suiteCard} ${dimmed ? styles.suiteCardDimmed : ''}`}
+    >
       <div className={styles.cardImageWrap}>
         <img
           src={suite.image}
@@ -128,13 +132,25 @@ export default function SuitesPage() {
   })
   const [error, setError] = useState('')
 
-  const filteredSuites = useMemo(() => {
-    if (!guestFilter) return localizedSuites
-    return localizedSuites
-      .filter((suite) => getMaxGuests(suite) >= guestFilter)
+  const guestFilteredSuites = useMemo(() => {
+    const filtered = localizedSuites.filter((suite) => !guestFilter || getMaxGuests(suite) >= guestFilter)
+
+    if (!guestFilter && !appliedStay) return filtered
+
+    return filtered
       .slice()
       .sort((a, b) => a.sleeps - b.sleeps || getLowestNightlyRate(a) - getLowestNightlyRate(b))
-  }, [guestFilter, localizedSuites])
+  }, [guestFilter, appliedStay, localizedSuites])
+
+  const conflictSuites = useMemo(() => {
+    if (!appliedStay) return []
+    return guestFilteredSuites.filter((suite) => !isSuiteAvailable(suite.slug, appliedStay.arrival, appliedStay.departure))
+  }, [guestFilteredSuites, appliedStay])
+
+  const filteredSuites = useMemo(() => {
+    if (!appliedStay) return guestFilteredSuites
+    return guestFilteredSuites.filter((suite) => isSuiteAvailable(suite.slug, appliedStay.arrival, appliedStay.departure))
+  }, [guestFilteredSuites, appliedStay])
 
   const oneNightStay = useMemo(() => {
     if (!appliedStay) return false
@@ -148,6 +164,16 @@ export default function SuitesPage() {
   const restrictedSuites = oneNightStay
     ? filteredSuites.filter((suite) => !NO_MINIMUM_SLUGS.includes(suite.slug))
     : []
+
+  // Dimmed (unavailable) cards must not carry the searched dates onward —
+  // landing on that villa's page with those dates pre-filled would make it
+  // look bookable and show a price, when it's actually not available then.
+  const dimmedSearchParams = useMemo(() => {
+    const params = new URLSearchParams(searchParams)
+    params.delete('arrival')
+    params.delete('departure')
+    return params
+  }, [searchParams])
 
   const handleSearch = ({ arrival, departure, guests, kidsUnder5, pets }) => {
     const guestCount = Number(guests)
@@ -238,12 +264,12 @@ export default function SuitesPage() {
           </div>
         )}
 
-        {filteredSuites.length > 0 ? (
+        {guestFilteredSuites.length > 0 ? (
           <>
             {availableSuites.length > 0 && (
               <div className={styles.grid}>
                 {availableSuites.map((suite) => (
-                  <SuiteListingCard key={suite.id} suite={suite} dimmed={false} />
+                  <SuiteListingCard key={suite.id} suite={suite} dimmed={false} searchParams={searchParams} />
                 ))}
               </div>
             )}
@@ -256,7 +282,20 @@ export default function SuitesPage() {
                 </div>
                 <div className={styles.grid}>
                   {restrictedSuites.map((suite) => (
-                    <SuiteListingCard key={suite.id} suite={suite} dimmed />
+                    <SuiteListingCard key={suite.id} suite={suite} dimmed searchParams={dimmedSearchParams} />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {!error && conflictSuites.length > 0 && (
+              <>
+                <div className={styles.message}>
+                  <p>{t('suites.datesUnavailable')}</p>
+                </div>
+                <div className={styles.grid}>
+                  {conflictSuites.map((suite) => (
+                    <SuiteListingCard key={suite.id} suite={suite} dimmed searchParams={dimmedSearchParams} />
                   ))}
                 </div>
               </>

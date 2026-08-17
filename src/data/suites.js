@@ -1,3 +1,5 @@
+import airbnbAvailability from './airbnbAvailability.json'
+
 const makeGallery = (folder, count, skipped = []) =>
   Array.from({ length: count }, (_, index) => index + 1)
     .filter((number) => !skipped.includes(number))
@@ -222,6 +224,10 @@ export const suites = [
       high: { weekday: 500, weekend: 550 },
       low: { weekday: 400, weekend: 425 },
     },
+    holidayRates: [
+      { start: '2026-12-19', end: '2026-12-30', rate: 700 },
+      { start: '2026-12-31', end: '2027-01-02', rate: 850 },
+    ],
   },
   {
     id: 2,
@@ -301,6 +307,10 @@ export const suites = [
       high: { weekday: 180, weekend: 200 },
       low: { weekday: 150, weekend: 175 },
     },
+    holidayRates: [
+      { start: '2026-12-19', end: '2026-12-30', rate: 250 },
+      { start: '2026-12-31', end: '2027-01-02', rate: 300 },
+    ],
   },
   {
     id: 3,
@@ -384,6 +394,10 @@ export const suites = [
       high: { weekday: 500, weekend: 550 },
       low: { weekday: 400, weekend: 425 },
     },
+    holidayRates: [
+      { start: '2026-12-19', end: '2026-12-30', rate: 700 },
+      { start: '2026-12-31', end: '2027-01-02', rate: 850 },
+    ],
   },
   {
     id: 4,
@@ -461,6 +475,10 @@ export const suites = [
       high: { weekday: 90, weekend: 100 },
       low: { weekday: 80, weekend: 90 },
     },
+    holidayRates: [
+      { start: '2026-12-19', end: '2026-12-30', rate: 125 },
+      { start: '2026-12-31', end: '2027-01-02', rate: 175 },
+    ],
   },
   {
     id: 5,
@@ -540,6 +558,10 @@ export const suites = [
       high: { weekday: 200, weekend: 225 },
       low: { weekday: 175, weekend: 200 },
     },
+    holidayRates: [
+      { start: '2026-12-19', end: '2026-12-30', rate: 300 },
+      { start: '2026-12-31', end: '2027-01-02', rate: 400 },
+    ],
   },
   {
     id: 6,
@@ -620,6 +642,10 @@ export const suites = [
       high: { weekday: 300, weekend: 325 },
       low: { weekday: 250, weekend: 275 },
     },
+    holidayRates: [
+      { start: '2026-12-19', end: '2026-12-30', rate: 400 },
+      { start: '2026-12-31', end: '2027-01-02', rate: 500 },
+    ],
   },
   {
     id: 7,
@@ -698,6 +724,10 @@ export const suites = [
       high: { weekday: 130, weekend: 150 },
       low: { weekday: 130, weekend: 150 },
     },
+    holidayRates: [
+      { start: '2026-12-19', end: '2026-12-30', rate: 200 },
+      { start: '2026-12-31', end: '2027-01-02', rate: 250 },
+    ],
   },
 ]
 
@@ -711,7 +741,16 @@ export const isWeekendDate = (date) => {
   return day === 5 || day === 6
 }
 
+function getHolidayRate(suite, date) {
+  const ranges = suite.holidayRates ?? []
+  const match = ranges.find((range) => date >= parseIsoDate(range.start) && date <= parseIsoDate(range.end))
+  return match?.rate ?? null
+}
+
 export const getNightlyRate = (suite, date) => {
+  const holidayRate = getHolidayRate(suite, date)
+  if (holidayRate != null) return holidayRate
+
   const season = isLowSeasonDate(date) ? 'low' : 'high'
   const dayType = isWeekendDate(date) ? 'weekend' : 'weekday'
   return suite.rates[season][dayType]
@@ -738,6 +777,26 @@ export const getStayNights = (arrival, departure) => {
   }
 
   return nights
+}
+
+function parseIsoDate(value) {
+  const [year, month, day] = value.split('-').map(Number)
+  return new Date(year, month - 1, day)
+}
+
+// Checks the real Airbnb-synced reservations for this suite (not the
+// minimum-nights rule, which is handled separately) — used to hide suites
+// that are already booked for the requested dates from search results.
+export const isSuiteAvailable = (slug, arrival, departure) => {
+  if (!arrival || !departure) return true
+
+  const ranges = airbnbAvailability[slug] ?? []
+
+  return !ranges.some((range) => {
+    const rangeStart = parseIsoDate(range.start)
+    const rangeEnd = parseIsoDate(range.end)
+    return arrival < rangeEnd && rangeStart < departure
+  })
 }
 
 export const getDaysUntilArrival = (arrival) => {
