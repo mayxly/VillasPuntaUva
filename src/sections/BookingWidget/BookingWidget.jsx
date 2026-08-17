@@ -1,13 +1,8 @@
 import { useState } from 'react'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import styles from './BookingWidget.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
-import { es } from 'date-fns/locale'
-import { registerLocale } from 'react-datepicker'
 import GuestPicker from '../../components/GuestPicker/GuestPicker'
-
-registerLocale('es', es)
+import DateRangePicker from '../../components/DateRangePicker/DateRangePicker'
 
 const defaultValue = {
   arrival: null,
@@ -23,10 +18,8 @@ export default function BookingWidget({
   onSearch,
   buttonLabel = 'View Suites',
 }) {
-  const { language, t } = useLanguage()
+  const { t } = useLanguage()
   const [localValue, setLocalValue] = useState(defaultValue)
-  const [arrivalOpen, setArrivalOpen] = useState(false)
-  const [departureOpen, setDepartureOpen] = useState(false)
 
   const bookingValue = value ?? localValue
   const { arrival, departure } = bookingValue
@@ -44,19 +37,6 @@ export default function BookingWidget({
     }
   }
 
-  const handleArrivalChange = (date) => {
-    updateValue({
-      arrival: date,
-      departure: departure && date && departure <= date ? null : departure,
-    })
-    setArrivalOpen(false)
-  }
-
-  const handleDepartureChange = (date) => {
-    updateValue({ departure: date })
-    setDepartureOpen(false)
-  }
-
   const handleSearch = () => {
     if (onSearch) {
       onSearch(bookingValue)
@@ -66,38 +46,8 @@ export default function BookingWidget({
   return (
     <section className={styles.section} id="book">
       <div className={styles.card}>
-        <div className={styles.field}>
-          <label className={styles.label}>{t('common.arrival')}</label>
-          <DatePicker
-            selected={arrival}
-            onChange={handleArrivalChange}
-            placeholderText={t('common.selectDate')}
-            className={styles.input}
-            minDate={new Date()}
-            dateFormat="MMM d, yyyy"
-            locale={language === 'es' ? 'es' : undefined}
-            open={arrivalOpen}
-            onInputClick={() => setArrivalOpen(true)}
-            onClickOutside={() => setArrivalOpen(false)}
-            onSelect={() => setArrivalOpen(false)}
-          />
-        </div>
-
-        <div className={styles.field}>
-          <label className={styles.label}>{t('common.departure')}</label>
-          <DatePicker
-            selected={departure}
-            onChange={handleDepartureChange}
-            placeholderText={t('common.selectDate')}
-            className={styles.input}
-            minDate={arrival || new Date()}
-            dateFormat="MMM d, yyyy"
-            locale={language === 'es' ? 'es' : undefined}
-            open={departureOpen}
-            onInputClick={() => setDepartureOpen(true)}
-            onClickOutside={() => setDepartureOpen(false)}
-            onSelect={() => setDepartureOpen(false)}
-          />
+        <div className={styles.dateField}>
+          <DateRangePicker arrival={arrival} departure={departure} onChange={updateValue} />
         </div>
 
         <div className={styles.field}>

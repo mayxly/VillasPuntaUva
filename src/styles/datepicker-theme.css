@@ -1,0 +1,178 @@
+/* Modern theme for react-datepicker, shared by the search bars and each
+   villa's booking calendar. Overrides the library's default styling —
+   these are global class names the library renders, not CSS-module scoped. */
+
+.react-datepicker-popper {
+  z-index: 30;
+}
+
+.react-datepicker-popper .react-datepicker__triangle {
+  display: none;
+}
+
+.react-datepicker {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--color-white);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+  font-family: var(--font-body);
+  color: var(--color-dark);
+}
+
+/* The library floats the month grid, and this container (which holds our
+   min-nights footer note, passed as DatePicker's children) isn't cleared
+   below it by default — it ends up overlapping the grid instead of sitting
+   underneath it as a footer strip. */
+.react-datepicker__children-container {
+  clear: both;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: auto;
+}
+
+.react-datepicker__header {
+  background: var(--color-white);
+  border-bottom: none;
+  padding: 16px 12px 8px;
+}
+
+.react-datepicker__current-month {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.react-datepicker__navigation {
+  top: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.react-datepicker__navigation:hover {
+  background-color: var(--color-bg-blue);
+}
+
+.react-datepicker__navigation--previous {
+  left: 10px;
+}
+
+.react-datepicker__navigation--next {
+  right: 10px;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--color-text-light);
+  border-width: 2px 2px 0 0;
+  width: 7px;
+  height: 7px;
+}
+
+.react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
+  border-color: var(--color-primary);
+}
+
+.react-datepicker__day-names {
+  margin-top: 4px;
+}
+
+.react-datepicker__day-name {
+  width: 2.25rem;
+  color: var(--color-text-light);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.react-datepicker__month {
+  margin: 4px 12px 12px;
+}
+
+.react-datepicker__week {
+  display: flex;
+}
+
+.react-datepicker__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  line-height: 1;
+  margin: 2px;
+  border-radius: 50%;
+  color: var(--color-dark);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.react-datepicker__day:not([aria-disabled='true']):hover {
+  background-color: var(--color-bg-blue);
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day {
+  display: inline-flex;
+}
+
+.react-datepicker__day--outside-month {
+  color: #cbd5e1;
+}
+
+/* Blocked: past dates, Airbnb-reserved nights, and gaps too short for the
+   minimum stay all land here — the one place that needs to read unmistakably
+   as "not available." */
+.react-datepicker__day--disabled {
+  color: #c7ced4;
+  font-weight: 400;
+  text-decoration: line-through;
+  text-decoration-color: #c7ced4;
+  cursor: not-allowed;
+}
+
+.react-datepicker__day--today {
+  position: relative;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1.5px var(--color-primary);
+}
+
+.react-datepicker__day--selected {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.react-datepicker__day--selected:not([aria-disabled='true']):hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* No special fill for "in range"/"in selecting range" days: with excluded
+   (booked) dates breaking up the span, that highlight lands on scattered
+   individual days instead of a clean block and reads as a rendering glitch.
+   Only the chosen check-in/check-out anchors get a filled circle. */
+.react-datepicker__day--in-range,
+.react-datepicker__day--in-selecting-range {
+  /* !important: the library ships a higher-specificity :not() selector for
+     this exact state, so a plain override here would silently lose to it. */
+  background-color: transparent !important;
+  color: var(--color-dark) !important;
+  font-weight: 500;
+  border-radius: 50% !important;
+  box-shadow: none;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: var(--color-secondary);
+  color: var(--color-dark);
+}
+
+.react-datepicker__day--keyboard-selected:not([aria-disabled='true']):hover {
+  background-color: var(--color-secondary);
+}

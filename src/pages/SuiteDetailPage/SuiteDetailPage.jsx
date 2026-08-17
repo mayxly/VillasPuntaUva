@@ -1,7 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import { IoBedOutline, IoPeopleOutline } from 'react-icons/io5'
 import {
   LuBath,
@@ -32,12 +30,9 @@ import {
 import airbnbAvailability from '../../data/airbnbAvailability.json'
 import BookingModal from '../../components/BookingModal/BookingModal'
 import GuestPicker from '../../components/GuestPicker/GuestPicker'
+import DateRangePicker from '../../components/DateRangePicker/DateRangePicker'
 import styles from './SuiteDetailPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
-import { es } from 'date-fns/locale'
-import { registerLocale } from 'react-datepicker'
-
-registerLocale('es', es)
 
 const priceFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -80,6 +75,29 @@ function getBlockedRanges(slug) {
   return ranges.map((range) => ({
     start: parseIsoDate(range.start),
     end: addDays(parseIsoDate(range.end), -1),
+  }))
+}
+
+// A gap shorter than minNights right before a reservation can't fit a stay,
+// so treat those lead-in days as unavailable too (e.g. a single free night
+// squeezed between two bookings on a suite with a 2-night minimum).
+function getInsufficientRunwayRanges(occupiedRanges, minNights) {
+  if (minNights <= 1) return []
+
+  return occupiedRanges.map((range) => ({
+    start: addDays(range.start, -(minNights - 1)),
+    end: addDays(range.start, -1),
+  }))
+}
+
+// A checkout date isn't itself an occupied night — the guest leaves that
+// morning, so the next reservation can start the same day (same-day
+// turnover). What actually makes a checkout date invalid is the night
+// before it being occupied, so shift each occupied range forward a day.
+function getCheckoutExcludedRanges(occupiedRanges) {
+  return occupiedRanges.map((range) => ({
+    start: addDays(range.start, 1),
+    end: addDays(range.end, 1),
   }))
 }
 
@@ -380,22 +398,21 @@ function AirbnbSection({ suite }) {
 }
 
 function BookingPanel({ suite }) {
-  const { language, locale, t } = useLanguage()
+  const { locale, t } = useLanguage()
   const priceFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
   const dateFormatter = new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric' })
   const [bookingValue, setBookingValue] = useState(initialBookingValue)
-  const [arrivalOpen, setArrivalOpen] = useState(false)
-  const [checkoutOpen, setCheckoutOpen] = useState(false)
-  const [checkoutOpenDate, setCheckoutOpenDate] = useState(null)
   const [bookingOpen, setBookingOpen] = useState(false)
-  const arrivalPickerRef = useRef(null)
-  const checkoutPickerRef = useRef(null)
   const { arrival, departure, guests, pets } = bookingValue
   const guestCount = Number(guests)
   const petCount = Number(pets) || 0
   const minNights = suite.minNights ?? 1
-  const minCheckoutDate = arrival ? addDays(arrival, minNights) : new Date()
   const blockedRanges = useMemo(() => getBlockedRanges(suite.slug), [suite.slug])
+  const arrivalExcludedRanges = useMemo(
+    () => [...blockedRanges, ...getInsufficientRunwayRanges(blockedRanges, minNights)],
+    [blockedRanges, minNights],
+  )
+  const checkoutExcludedRanges = useMemo(() => getCheckoutExcludedRanges(blockedRanges), [blockedRanges])
 
   const estimate = useMemo(() => {
     if (!arrival || !departure || departure <= arrival) return null
@@ -430,30 +447,6 @@ function BookingPanel({ suite }) {
     }))
   }
 
-  const closeArrivalCalendar = () => {
-    setArrivalOpen(false)
-    arrivalPickerRef.current?.setOpen(false)
-  }
-
-  const closeCheckoutCalendar = () => {
-    setCheckoutOpen(false)
-    checkoutPickerRef.current?.setOpen(false)
-  }
-
-  const handleArrivalChange = (date) => {
-    setBookingValue((current) => ({
-      ...current,
-      arrival: date,
-      departure: null,
-    }))
-    closeArrivalCalendar()
-    setCheckoutOpenDate(date)
-
-    if (date) {
-      window.setTimeout(() => setCheckoutOpen(true), 0)
-    }
-  }
-
   return (
     <>
       <aside className={styles.bookingPanel} aria-label={t('booking.estimate')}>
@@ -466,60 +459,16 @@ function BookingPanel({ suite }) {
         </div>
 
         <div className={styles.bookingFields}>
-          <label className={styles.field}>
-            <span>{t('common.checkIn')}</span>
-            <DatePicker
-              ref={arrivalPickerRef}
-              selected={arrival}
-              onChange={handleArrivalChange}
-              placeholderText={t('common.selectDate')}
-              className={styles.input}
-              minDate={new Date()}
-              excludeDateIntervals={blockedRanges}
-              dateFormat="MMM d, yyyy"
-              locale={language === 'es' ? 'es' : undefined}
-              shouldCloseOnSelect
-              open={arrivalOpen}
-              onInputClick={() => setArrivalOpen(true)}
-              onClickOutside={closeArrivalCalendar}
-              onSelect={closeArrivalCalendar}
-            >
-              {minNights > 1 && (
-                <div className={styles.minNightsNote}>{t('booking.minNightsNote', { count: minNights })}</div>
-              )}
-            </DatePicker>
-          </label>
-
-          <label className={styles.field}>
-            <span>{t('common.checkout')}</span>
-            <DatePicker
-              ref={checkoutPickerRef}
-              selected={departure}
-              onChange={(date) => {
-                updateValue({ departure: date })
-                closeCheckoutCalendar()
-              }}
-              placeholderText={t('common.selectDate')}
-              className={styles.input}
-              minDate={minCheckoutDate}
-              excludeDateIntervals={blockedRanges}
-              dateFormat="MMM d, yyyy"
-              locale={language === 'es' ? 'es' : undefined}
-              shouldCloseOnSelect
-              openToDate={checkoutOpenDate || arrival || undefined}
-              open={checkoutOpen}
-              onInputClick={() => setCheckoutOpen(true)}
-              onClickOutside={closeCheckoutCalendar}
-              onSelect={closeCheckoutCalendar}
-            >
-              {minNights > 1 && (
-                <div className={styles.minNightsNote}>{t('booking.minNightsNote', { count: minNights })}</div>
-              )}
-            </DatePicker>
-            {minNights > 1 && (
-              <span className={styles.minNightsHint}>{t('booking.minNightsNote', { count: minNights })}</span>
-            )}
-          </label>
+          <div className={`${styles.field} ${styles.fullField}`}>
+            <DateRangePicker
+              arrival={arrival}
+              departure={departure}
+              onChange={updateValue}
+              minNights={minNights}
+              arrivalExcludedRanges={arrivalExcludedRanges}
+              checkoutExcludedRanges={checkoutExcludedRanges}
+            />
+          </div>
 
           <div className={`${styles.field} ${styles.fullField}`}>
             <span>{t('common.guests')}</span>
@@ -687,6 +636,7 @@ export default function SuiteDetailPage() {
                 <p>{t('suites.discount')}</p>
               </div>
             </div>
+            <p className={styles.rateNote}>{t('suites.holidayPricingNote')}</p>
           </div>
 
           <AirbnbSection suite={suite} />

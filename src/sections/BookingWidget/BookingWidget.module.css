@@ -25,11 +25,12 @@
   gap: 8px;
 }
 
-.field :global(.react-datepicker-wrapper) {
-  width: 100%;
+.dateField {
+  flex: 2;
+  min-width: 0;
 }
 
-.field :global(.react-datepicker__input-container) {
+.dateField :global(.react-datepicker-wrapper) {
   width: 100%;
 }
 
@@ -82,7 +83,8 @@
     gap: 16px;
   }
 
-  .field {
+  .field,
+  .dateField {
     width: 100%;
     align-items: center;
   }

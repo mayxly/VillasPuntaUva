@@ -1,0 +1,68 @@
+.trigger {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #dce5e8;
+  border-radius: var(--border-radius);
+  background: var(--color-white);
+  cursor: pointer;
+  transition: border-color var(--transition-speed) ease;
+}
+
+.trigger:hover {
+  border-color: var(--color-primary);
+}
+
+.field {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px 14px;
+}
+
+.divider {
+  align-self: center;
+  width: 1px;
+  height: 28px;
+  background: #e2e8f0;
+  flex-shrink: 0;
+}
+
+.label {
+  color: var(--color-text-light);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.value,
+.placeholder {
+  overflow: hidden;
+  font-size: 0.9375rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.value {
+  color: var(--color-dark);
+  font-weight: 500;
+}
+
+.placeholder {
+  color: var(--color-text-light);
+  font-weight: 400;
+}
+
+.minNightsNote {
+  padding: 10px 12px;
+  background: var(--color-bg-blue);
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}
