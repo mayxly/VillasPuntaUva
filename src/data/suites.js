@@ -360,7 +360,7 @@ export const suites = [
       },
       {
         title: 'Bedroom and laundry',
-        items: ['Washer and dryer in unit', 'Free laundry for stays of 5 nights or more', '$10/night laundry fee for the whole reservation on stays under 5 nights', 'Essentials', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Clothing storage'],
+        items: ['Washer and dryer in unit', 'Free laundry for stays of 5 nights or more', '$10/night laundry fee for the whole reservation on stays under 5 nights', 'Essentials', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Safe', 'Clothing storage'],
       },
       {
         title: 'Kitchen and dining',
@@ -441,7 +441,7 @@ export const suites = [
       },
       {
         title: 'Bedroom and laundry',
-        items: ['Essentials', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Dresser storage'],
+        items: ['Essentials', 'Hangers', 'Bed linens', 'Extra pillows and blankets', 'Room-darkening shades', 'Iron', 'Safe', 'Dresser storage'],
       },
       {
         title: 'Kitchen and dining',
@@ -690,7 +690,7 @@ export const suites = [
       },
       {
         title: 'Bedroom and laundry',
-        items: ['Washer and dryer in unit', 'Free laundry for stays of 5 nights or more', '$10/night laundry fee for the whole reservation on stays under 5 nights', 'Bed linens', 'Cotton linens', 'Dresser storage'],
+        items: ['Washer and dryer in unit', 'Free laundry for stays of 5 nights or more', '$10/night laundry fee for the whole reservation on stays under 5 nights', 'Bed linens', 'Cotton linens', 'Safe', 'Dresser storage'],
       },
       {
         title: 'Kitchen and dining',
@@ -816,10 +816,13 @@ export const calculateSuiteStay = (suite, arrival, departure, guests, pets = 0) 
     rate: getNightlyRate(suite, date),
   }))
   const nightlySubtotal = nightlyRates.reduce((total, night) => total + night.rate, 0)
-  const weeklyDiscount = nights.length >= 7 ? Math.round(nightlySubtotal * 0.1) : 0
+  // Monthly (28+ nights) supersedes weekly (7+ nights) rather than stacking —
+  // a 28-night stay already clears the weekly threshold too.
+  const monthlyDiscount = nights.length >= 28 ? Math.round(nightlySubtotal * 0.35) : 0
+  const weeklyDiscount = monthlyDiscount === 0 && nights.length >= 7 ? Math.round(nightlySubtotal * 0.1) : 0
   const daysUntilArrival = getDaysUntilArrival(arrival)
   const lastMinuteDiscount = daysUntilArrival >= 0 && daysUntilArrival <= 7 ? Math.round(nightlySubtotal * 0.1) : 0
-  const discount = weeklyDiscount + lastMinuteDiscount
+  const discount = monthlyDiscount + weeklyDiscount + lastMinuteDiscount
   const extraGuests = Math.max(0, (guests ?? suite.sleeps) - suite.sleeps)
   const extraGuestFee = extraGuests * nights.length * EXTRA_GUEST_NIGHTLY_FEE
   const petCount = Math.max(0, Number(pets) || 0)
@@ -830,6 +833,7 @@ export const calculateSuiteStay = (suite, arrival, departure, guests, pets = 0) 
     nights,
     nightlyRates,
     nightlySubtotal,
+    monthlyDiscount,
     weeklyDiscount,
     lastMinuteDiscount,
     discount,

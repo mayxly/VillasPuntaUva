@@ -521,6 +521,12 @@ function BookingPanel({ suite }) {
               </span>
               <strong>{formatPrice(visibleEstimate.nightlySubtotal)}</strong>
             </div>
+            {visibleEstimate.monthlyDiscount > 0 && (
+              <div className={styles.lineItem}>
+                <span>{t('booking.monthlyDiscount')}</span>
+                <strong>-{formatPrice(visibleEstimate.monthlyDiscount)}</strong>
+              </div>
+            )}
             {visibleEstimate.weeklyDiscount > 0 && (
               <div className={styles.lineItem}>
                 <span>{t('booking.weeklyDiscount')}</span>
