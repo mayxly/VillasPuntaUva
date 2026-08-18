@@ -55,6 +55,19 @@ export default function DateRangePicker({
   const minDate = arrival ? addDays(arrival, minNights) : new Date()
   const excludeDateIntervals = arrival ? checkoutExcludedRanges : arrivalExcludedRanges
 
+  // excludeDateIntervals only disables individual days from being clicked — it
+  // doesn't stop a checkout date from being chosen past a booked stretch, which
+  // would silently span a stay straight through occupied nights (e.g. picking
+  // check-in before a booking and checkout after it, skipping over the gap).
+  // Cap checkout at the day before the nearest booking that starts after arrival.
+  const maxDate = arrival
+    ? checkoutExcludedRanges.reduce((earliest, range) => {
+        const cap = addDays(range.start, -1)
+        if (cap <= arrival) return earliest
+        return !earliest || cap < earliest ? cap : earliest
+      }, null)
+    : undefined
+
   const close = () => {
     setOpen(false)
     pickerRef.current?.setOpen(false)
@@ -98,6 +111,7 @@ export default function DateRangePicker({
       endDate={departure}
       onChange={handleChange}
       minDate={minDate}
+      maxDate={maxDate}
       excludeDateIntervals={excludeDateIntervals}
       openToDate={arrival ? minDate : undefined}
       dateFormat="MMM d, yyyy"

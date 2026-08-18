@@ -212,7 +212,7 @@ export const suites = [
       },
       {
         title: 'Other things to note',
-        items: ['The double refrigerators include ice makers.', 'The property is gated and has exterior security cameras for safety.', 'Parties are not allowed.'],
+        items: ['The double refrigerators include ice makers.', 'The property is gated and has exterior security cameras for safety.'],
       },
       {
         title: 'Not included',
@@ -382,7 +382,7 @@ export const suites = [
       },
       {
         title: 'Other things to note',
-        items: ['The two large freezers produce ice for guest use.', 'Exterior cameras monitor the gate, parking area, and backyard for safety.', 'Parties are not allowed.'],
+        items: ['The two large freezers produce ice for guest use.', 'Exterior cameras monitor the gate, parking area, and backyard for safety.'],
       },
       {
         title: 'Not included',

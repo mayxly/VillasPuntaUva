@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { IoBedOutline, IoPeopleOutline } from 'react-icons/io5'
 import {
+  LuBadgePercent,
   LuBath,
   LuCalendarDays,
   LuChevronDown,
@@ -12,6 +13,8 @@ import {
   LuInfo,
   LuMonitor,
   LuCircleParking,
+  LuReceipt,
+  LuShieldCheck,
   LuTreePalm,
   LuWaves,
   LuWifi,
@@ -24,8 +27,10 @@ import {
   calculateSuiteStay,
   getLowestNightlyRate,
   getLocalizedSuite,
+  isSuiteAvailable,
   suites,
   EXTRA_GUEST_NIGHTLY_FEE,
+  PET_NIGHTLY_FEE,
 } from '../../data/suites'
 import airbnbAvailability from '../../data/airbnbAvailability.json'
 import BookingModal from '../../components/BookingModal/BookingModal'
@@ -347,25 +352,43 @@ function AmenityIcon({ label }) {
   return <LuSparkles size={18} />
 }
 
-function NotesSection({ suite }) {
-  const { t } = useLanguage()
-  if (!suite.notes?.length) return null
+const houseRulesEn = [
+  'Check-in after 3:00 PM',
+  'Checkout before 11:00 AM',
+  'No parties or events',
+  'Quiet hours: 11:00 PM – 7:00 AM',
+]
 
-  const guestAccessItems = suite.notes
-    .filter((group) => group.title === 'Guest access')
+const houseRulesEs = [
+  'Llegada después de las 3:00 PM',
+  'Salida antes de las 11:00 AM',
+  'No se permiten fiestas ni eventos',
+  'Horario de silencio: 11:00 PM – 7:00 AM',
+]
+
+// getLocalizedSuite() translates note group titles into Spanish, so matching
+// must accept both the English source title and its Spanish translation.
+const isGuestAccessTitle = (title) => title === 'Guest access' || title === 'Acceso de huéspedes'
+const isOtherNotesTitle = (title) => title === 'Other things to note' || title === 'Otros aspectos a tener en cuenta'
+const isNotIncludedTitle = (title) => title === 'Not included' || title === 'No incluido'
+
+function NotesSection({ suite }) {
+  const { t, language } = useLanguage()
+  const houseRules = language === 'es' ? houseRulesEs : houseRulesEn
+
+  const guestAccessItems = (suite.notes ?? [])
+    .filter((group) => isGuestAccessTitle(group.title))
     .flatMap((group) => group.items)
-  const displayNotes = suite.notes
-    .filter((group) => group.title === 'Other things to note' || group.title === 'Not included')
+  const displayNotes = (suite.notes ?? [])
+    .filter((group) => isOtherNotesTitle(group.title) || isNotIncludedTitle(group.title))
     .map((group) => {
-      if (group.title !== 'Other things to note') return group
+      if (!isOtherNotesTitle(group.title)) return group
 
       return {
         ...group,
         items: [...guestAccessItems, ...group.items],
       }
     })
-
-  if (!displayNotes.length) return null
 
   return (
     <div className={styles.sectionBlock}>
@@ -384,6 +407,17 @@ function NotesSection({ suite }) {
             </ul>
           </article>
         ))}
+        <article className={styles.noteCard}>
+          <div className={styles.noteHeader}>
+            <LuInfo size={18} />
+            <h3>{t('suites.houseRules')}</h3>
+          </div>
+          <ul>
+            {houseRules.map((rule) => (
+              <li key={rule}>{rule}</li>
+            ))}
+          </ul>
+        </article>
       </div>
     </div>
   )
@@ -446,6 +480,9 @@ function BookingPanel({ suite }) {
       const nights = Math.round((departure - arrival) / (1000 * 60 * 60 * 24))
       if (nights < minNights) {
         return t('booking.minNightsError', { count: minNights })
+      }
+      if (!isSuiteAvailable(suite.slug, arrival, departure)) {
+        return t('booking.datesNotAvailable')
       }
     }
     if (!Number.isFinite(guestCount) || guestCount < 1) {
@@ -663,16 +700,53 @@ export default function SuiteDetailPage() {
                 <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rates.low.weekday)} {t('suites.weekdays')}</p>
                 <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rates.low.weekend)} {t('suites.weekends')}</p>
               </div>
-              <div className={styles.rateCard}>
-                <LuCalendarDays size={20} />
-                <h3>{t('suites.fees')}</h3>
-                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.cleaningFee)} {t('booking.cleaningFee').toLowerCase()}</p>
-                {(suite.maxGuests ?? suite.sleeps) > suite.sleeps && (
-                  <p>{t('suites.extraGuestFeeNote', { amount: `$${EXTRA_GUEST_NIGHTLY_FEE}` })}</p>
-                )}
-                <p>{t('suites.discount')}</p>
+            </div>
+
+            <div className={styles.feesGrid}>
+              <div className={styles.feesColumn}>
+                <h3><LuReceipt size={18} />{t('suites.feesLabel')}</h3>
+                <ul className={styles.feesList}>
+                  <li>
+                    <span>{t('booking.cleaningFee')}</span>
+                    <strong>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.cleaningFee)}</strong>
+                  </li>
+                  {(suite.maxGuests ?? suite.sleeps) > suite.sleeps && (
+                    <li>
+                      <span>{t('suites.extraGuestFeeLabel')}</span>
+                      <strong>${EXTRA_GUEST_NIGHTLY_FEE}/{t('common.night')}</strong>
+                    </li>
+                  )}
+                  <li>
+                    <span>{t('suites.petFeeLabel')}</span>
+                    <strong>${PET_NIGHTLY_FEE}/{t('common.night')}</strong>
+                  </li>
+                </ul>
+              </div>
+
+              <div className={styles.feesColumn}>
+                <h3><LuBadgePercent size={18} />{t('suites.discountsLabel')}</h3>
+                <ul className={styles.feesList}>
+                  <li>
+                    <span>{t('suites.weeklyDiscountNote')}</span>
+                    <strong>10%</strong>
+                  </li>
+                  <li>
+                    <span>{t('suites.monthlyDiscountNote')}</span>
+                    <strong>35%</strong>
+                  </li>
+                  <li>
+                    <span>{t('suites.lastMinuteDiscountNote')}</span>
+                    <strong>10%</strong>
+                  </li>
+                </ul>
               </div>
             </div>
+
+            <div className={styles.policyCard}>
+              <h3><LuShieldCheck size={18} />{t('suites.cancellationPolicyLabel')}</h3>
+              <p>{t('suites.cancellationPolicyText')}</p>
+            </div>
+
             <p className={styles.rateNote}>{t('suites.holidayPricingNote')}</p>
           </div>
 

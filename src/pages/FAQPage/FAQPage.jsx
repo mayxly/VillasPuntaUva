@@ -66,7 +66,15 @@ const faqSectionsEn = [
       },
       {
         question: 'How do I book?',
-        answer: 'Message us on WhatsApp at +506 6145 9916, or reserve directly through this site to avoid third-party platform fees.',
+        answer: 'Message us on WhatsApp at +506 6145 9916 to book your stay.',
+      },
+      {
+        question: 'What payment methods do you accept?',
+        answer: 'Zelle, Canadian e-Transfer, Wise, national SINPE or bank transfer, and on some occasions international wire transfer.',
+      },
+      {
+        question: 'What is your cancellation policy?',
+        answer: 'A 50% deposit is required to confirm your reservation and block your dates. Cancel up to 14 days before arrival for a full refund of your deposit. The remaining 50% balance is due exactly 14 days before arrival. Cancellations made within 14 days of arrival are refunded 50% of the total reservation amount.',
       },
     ],
   },
@@ -160,7 +168,15 @@ const faqSectionsEs = [
       },
       {
         question: '¿Cómo puedo reservar?',
-        answer: 'Envíenos un mensaje por WhatsApp al +506 6145 9916, o reserve directamente en este sitio para evitar cargos de plataformas externas.',
+        answer: 'Envíenos un mensaje por WhatsApp al +506 6145 9916 para reservar su estadía.',
+      },
+      {
+        question: '¿Qué métodos de pago aceptan?',
+        answer: 'Zelle, e-Transfer canadiense, Wise, SINPE nacional o transferencia bancaria, y en algunas ocasiones transferencia bancaria internacional.',
+      },
+      {
+        question: '¿Cuál es su política de cancelación?',
+        answer: 'Se requiere un depósito del 50% para confirmar su reserva y bloquear sus fechas. Puede cancelar hasta 14 días antes de la llegada y recibirá un reembolso completo de su depósito. El 50% restante del pago se solicita exactamente 14 días antes de la llegada. Las cancelaciones realizadas dentro de los 14 días previos a la llegada recibirán un reembolso del 50% del monto total de la reserva.',
       },
     ],
   },

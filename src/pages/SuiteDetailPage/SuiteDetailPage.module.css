@@ -434,6 +434,10 @@
   background: var(--color-bg-light);
 }
 
+.noteCard:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .noteHeader {
   display: flex;
   align-items: center;
@@ -447,7 +451,7 @@
 
 .rateCards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -470,6 +474,90 @@
 }
 
 .rateCard p {
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.feesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.feesColumn {
+  padding: 18px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.feesColumn h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: var(--color-dark);
+}
+
+.feesColumn h3 svg {
+  color: var(--color-primary-dark);
+}
+
+.feesList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feesList li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.feesList li span {
+  color: var(--color-text);
+}
+
+.feesList li strong {
+  flex-shrink: 0;
+  color: var(--color-dark);
+  font-weight: 700;
+}
+
+.policyCard {
+  margin-top: 14px;
+  padding: 18px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.policyCard h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: var(--color-dark);
+}
+
+.policyCard h3 svg {
+  color: var(--color-primary-dark);
+}
+
+.policyCard p {
+  margin: 0;
   color: var(--color-text);
   font-size: 0.9375rem;
   line-height: 1.55;
@@ -798,6 +886,10 @@
   }
 
   .rateCards {
+    grid-template-columns: 1fr;
+  }
+
+  .feesGrid {
     grid-template-columns: 1fr;
   }
 }
