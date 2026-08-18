@@ -62,15 +62,27 @@
   color: var(--color-dark);
 }
 
+/* The nav buttons are absolutely positioned relative to the whole popup, not
+   the month's own "August 2026" header — and our custom sticky header (with
+   the check-in/checkout pills) sits right on top of their default position,
+   hiding and un-clickable-ing them. Push them down below our header instead.
+   The header is taller when the min-nights note is present, so account for
+   both heights precisely rather than picking one and living with an overlap
+   or a big gap in the other case. */
 .react-datepicker__navigation {
-  top: 18px;
+  top: 93px;
   width: 32px;
   height: 32px;
+  z-index: 3;
   border: 1.5px solid #dce5e8;
   border-radius: 50%;
   background-color: var(--color-white);
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
   transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.react-datepicker:has([class*='minNightsNote']) .react-datepicker__navigation {
+  top: 128px;
 }
 
 .react-datepicker__navigation:hover {
