@@ -1,0 +1,83 @@
+.carouselWrap {
+  position: relative;
+  padding: 0 24px;
+}
+
+.carousel {
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.carousel:active {
+  cursor: grabbing;
+}
+
+.track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.slide {
+  position: relative;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  color: var(--color-text-light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-speed) ease;
+}
+
+.arrow:hover {
+  color: var(--color-dark);
+}
+
+.arrowLeft {
+  left: -8px;
+}
+
+.arrowRight {
+  right: -8px;
+}
+
+@media (max-width: 768px) {
+  .carouselWrap {
+    padding: 0 16px;
+  }
+
+  .slide {
+    padding: 0 4px;
+  }
+
+  .arrowLeft {
+    left: -4px;
+  }
+
+  .arrowRight {
+    right: -4px;
+  }
+}

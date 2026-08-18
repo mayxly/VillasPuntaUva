@@ -1,0 +1,383 @@
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/images/beach/beach-12.webp') center center / cover no-repeat;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 80px 24px;
+}
+
+.heroIcon {
+  width: 48px;
+  height: 48px;
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--color-white);
+  line-height: 1.1;
+}
+
+.heroText {
+  max-width: 480px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+}
+
+/* Shared section typography */
+.eyebrow {
+  margin-bottom: 10px;
+  color: var(--color-primary-dark);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eyebrowLight {
+  margin-bottom: 10px;
+  color: var(--color-secondary);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.beachSection h2,
+.areaSection h2,
+.sisterSection h2,
+.compareSection h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--color-dark);
+  line-height: 1.1;
+}
+
+.bodyText {
+  margin-top: 20px;
+  color: var(--color-text);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.sectionHeader {
+  margin-bottom: 8px;
+}
+
+/* Section 1: Location to the beach (full-bleed, image left) */
+.beachSection {
+  display: grid;
+  grid-template-columns: minmax(320px, 42vw) minmax(0, 1fr);
+  gap: 0;
+  width: 100%;
+  align-items: stretch;
+  margin-top: 72px;
+  background-color: var(--color-bg-taupe);
+}
+
+.beachImage {
+  min-height: 560px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.beachContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px max(24px, calc((100vw - var(--container-max-width)) / 2 + 24px)) 64px 56px;
+}
+
+/* Section 2: Where we're located (full-bleed, image right) */
+.areaSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 42vw);
+  gap: 0;
+  width: 100%;
+  align-items: stretch;
+  background-color: var(--color-white);
+}
+
+.areaImage {
+  min-height: 560px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.areaContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px 56px 64px max(24px, calc((100vw - var(--container-max-width)) / 2 + 24px));
+}
+
+/* Section 3: Sister properties (contained, image right) */
+.sisterSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+  gap: 48px;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 80px 24px;
+  align-items: center;
+}
+
+.sisterImage {
+  min-height: 480px;
+  border-radius: var(--border-radius);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
+}
+
+/* Section 4: Caribbean side vs Pacific side (contained, two stacked images) */
+.compareSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 400px);
+  gap: 48px;
+  max-width: var(--container-max-width);
+  margin: 0 auto 72px;
+  padding: 80px 24px;
+  align-items: center;
+  background-color: var(--color-bg-taupe);
+}
+
+.compareImages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.compareImage {
+  min-height: 220px;
+  border-radius: var(--border-radius);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
+}
+
+.mapBtn {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 28px;
+  padding: 12px 32px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.mapBtn:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Proof / recognition section */
+.proofSection {
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 96px 24px;
+}
+
+.proofSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.proofContent {
+  position: relative;
+  z-index: 1;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.proofHeading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--color-white);
+  line-height: 1.1;
+  margin-bottom: 48px;
+}
+
+.citations {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.citationCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  color: var(--color-white);
+  transition: background var(--transition-speed) ease;
+}
+
+.citationCard:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.citationTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-white);
+}
+
+.citationText {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.citationSource {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+/* Gallery */
+.gallerySection {
+  padding: var(--section-padding);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.galleryHeading {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 400;
+  color: var(--color-dark);
+  margin-bottom: 12px;
+}
+
+.galleryText {
+  color: var(--color-text-light);
+  font-size: 1rem;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 1024px) {
+  .sisterSection {
+    grid-template-columns: 1fr;
+  }
+
+  .sisterImage {
+    min-height: 380px;
+    order: -1;
+  }
+
+  .beachSection,
+  .areaSection {
+    grid-template-columns: 1fr;
+  }
+
+  .beachImage,
+  .areaImage {
+    min-height: 380px;
+  }
+
+  .beachContent,
+  .areaContent {
+    padding: 48px 24px;
+  }
+
+  .compareSection {
+    grid-template-columns: 1fr;
+  }
+
+  .compareImages {
+    flex-direction: row;
+    order: -1;
+  }
+
+  .compareImage {
+    min-height: 220px;
+  }
+
+  .citations {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 400px;
+  }
+
+  .heroTitle {
+    font-size: 2.25rem;
+  }
+
+  .beachSection {
+    margin-top: 40px;
+  }
+
+  .sisterSection,
+  .compareSection {
+    padding: 56px 24px;
+    gap: 32px;
+  }
+
+  .compareSection {
+    margin-bottom: 40px;
+  }
+
+  .compareImages {
+    flex-direction: column;
+  }
+
+  .proofSection {
+    padding: 64px 24px;
+  }
+}

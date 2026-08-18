@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import Hero from '../../sections/Hero/Hero'
 import BookingWidget from '../../sections/BookingWidget/BookingWidget'
+import Location from '../../sections/Location/Location'
 import SuitesGallery from '../../sections/SuitesGallery/SuitesGallery'
 import AboutPreview from '../../sections/AboutPreview/AboutPreview'
+import Experience from '../../sections/Experience/Experience'
 import Attractions from '../../sections/Attractions/Attractions'
 import AboutUs from '../../sections/AboutUs/AboutUs'
 import Reviews from '../../sections/Reviews/Reviews'
@@ -38,8 +40,10 @@ export default function HomePage() {
     <>
       <Hero />
       <BookingWidget onSearch={handleSuiteSearch} />
+      <Location />
       <SuitesGallery />
       <AboutPreview />
+      <Experience />
       <Attractions />
       <AboutUs />
       <Reviews />

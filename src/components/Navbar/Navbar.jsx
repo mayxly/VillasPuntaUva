@@ -33,6 +33,7 @@ export default function Navbar() {
   const navLinks = [
     { to: '/', label: t('nav.home') },
     { to: '/suites', label: t('nav.suites'), hasDropdown: true },
+    { to: '/location', label: t('nav.location') },
     { to: '/attractions', label: t('nav.attractions') },
     { to: '/about', label: t('nav.about') },
     { to: '/contact', label: t('nav.contact') },
