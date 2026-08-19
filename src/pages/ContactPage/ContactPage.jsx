@@ -1,11 +1,25 @@
 import { HiPhone, HiMail, HiLocationMarker } from 'react-icons/hi'
 import styles from './ContactPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
+import SEO from '../../components/SEO/SEO'
+
+const seoText = {
+  en: {
+    title: 'Contact Us | Villas Punta Uva, Puerto Viejo Costa Rica',
+    description: 'Get in touch with Villas Punta Uva by phone, WhatsApp, or email to book your Caribbean coast Costa Rica villa.',
+  },
+  es: {
+    title: 'Contáctenos | Villas Punta Uva, Puerto Viejo Costa Rica',
+    description: 'Póngase en contacto con Villas Punta Uva por teléfono, WhatsApp o correo electrónico para reservar su villa en la costa caribeña de Costa Rica.',
+  },
+}
 
 export default function ContactPage() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
+  const seo = seoText[language]
   return (
     <div className={styles.page}>
+      <SEO title={seo.title} description={seo.description} path="/contact" />
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <img

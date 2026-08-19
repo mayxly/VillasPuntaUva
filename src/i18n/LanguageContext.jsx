@@ -1,9 +1,20 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const LanguageContext = createContext(null)
-const STORAGE_KEY = 'villas-punta-uva-language'
 
 export const locales = { en: 'en-US', es: 'es-CR' }
+
+// Language is derived from the URL (an /es prefix) rather than stored
+// preference, so each language has its own crawlable, indexable URL.
+export function languageFromPathname(pathname) {
+  return pathname === '/es' || pathname.startsWith('/es/') ? 'es' : 'en'
+}
+
+export function localizePathForLanguage(path, language) {
+  if (language !== 'es') return path
+  return path === '/' ? '/es' : `/es${path}`
+}
 
 export const messages = {
   en: {
@@ -34,26 +45,29 @@ function interpolate(value, variables) {
   return String(value).replace(/{{(\w+)}}/g, (_, key) => variables[key] ?? '')
 }
 
-function initialLanguage() {
-  const saved = window.localStorage.getItem(STORAGE_KEY)
-  if (saved === 'en' || saved === 'es') return saved
-  return navigator.languages?.some((language) => language.toLowerCase().startsWith('es')) ? 'es' : 'en'
-}
-
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState(initialLanguage)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const language = languageFromPathname(location.pathname)
 
   useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, language)
     document.documentElement.lang = language
   }, [language])
 
   const value = useMemo(() => ({
     language,
-    setLanguage,
+    // Navigates to the equivalent page in the target language, preserving
+    // the current path, query string, and hash.
+    setLanguage: (nextLanguage) => {
+      if (nextLanguage === language) return
+      const currentPath = language === 'es' ? location.pathname.replace(/^\/es/, '') || '/' : location.pathname
+      const nextPath = localizePathForLanguage(currentPath, nextLanguage)
+      navigate(`${nextPath}${location.search}${location.hash}`)
+    },
+    localizePath: (path) => localizePathForLanguage(path, language),
     locale: locales[language],
     t: (path, variables = {}) => interpolate(getByPath(messages[language], path) ?? getByPath(messages.en, path) ?? path, variables),
-  }), [language])
+  }), [language, location.pathname, location.search, location.hash, navigate])
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
 }

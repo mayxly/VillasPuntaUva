@@ -4,7 +4,7 @@ import styles from './Attractions.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function Attractions() {
-  const { language, t } = useLanguage()
+  const { language, t, localizePath } = useLanguage()
   const attractionNames = {
     'Ocean Adventures': 'Aventuras en el océano',
     'Jungle & Wildlife': 'Selva y vida silvestre',
@@ -22,7 +22,7 @@ export default function Attractions() {
           {attractions.map((item) => (
             <Link
               key={item.id}
-              to={`/attractions#${item.targetId}`}
+              to={localizePath(`/attractions#${item.targetId}`)}
               className={styles.card}
             >
               <img
@@ -38,7 +38,7 @@ export default function Attractions() {
           ))}
         </div>
         <div className={styles.btnWrap}>
-          <Link to="/attractions" className={styles.btn}>{t('home.viewAttractions')}</Link>
+          <Link to={localizePath('/attractions')} className={styles.btn}>{t('home.viewAttractions')}</Link>
         </div>
       </div>
     </section>

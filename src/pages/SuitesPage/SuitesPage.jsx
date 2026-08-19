@@ -6,6 +6,18 @@ import BookingWidget from '../../sections/BookingWidget/BookingWidget'
 import { getLocalizedSuites, getLowestNightlyRate, isSuiteAvailable } from '../../data/suites'
 import styles from './SuitesPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
+import SEO from '../../components/SEO/SEO'
+
+const seoText = {
+  en: {
+    title: 'Villas & Rates | Villas Punta Uva, Puerto Viejo Costa Rica',
+    description: "Browse 7 private villas in Punta Uva, Puerto Viejo — from cozy studios to 5-bedroom homes. Check real-time availability and 2026 rates, and book direct.",
+  },
+  es: {
+    title: 'Villas y Tarifas | Villas Punta Uva, Puerto Viejo Costa Rica',
+    description: 'Explore 7 villas privadas en Punta Uva, Puerto Viejo — desde estudios acogedores hasta casas de 5 habitaciones. Consulte disponibilidad en tiempo real y tarifas 2026, y reserve directo.',
+  },
+}
 
 const initialBookingValue = {
   arrival: null,
@@ -68,12 +80,12 @@ function getMaxGuests(suite) {
 }
 
 function SuiteListingCard({ suite, dimmed, searchParams }) {
-  const { language, locale, t } = useLanguage()
+  const { language, locale, t, localizePath } = useLanguage()
   const formatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
   const query = searchParams?.toString()
   return (
     <Link
-      to={`/suites/${suite.slug}${query ? `?${query}` : ''}`}
+      to={localizePath(`/suites/${suite.slug}${query ? `?${query}` : ''}`)}
       className={`${styles.suiteCard} ${dimmed ? styles.suiteCardDimmed : ''}`}
     >
       <div className={styles.cardImageWrap}>
@@ -116,7 +128,8 @@ function SuiteListingCard({ suite, dimmed, searchParams }) {
 }
 
 export default function SuitesPage() {
-  const { language, t } = useLanguage()
+  const { language, t, localizePath } = useLanguage()
+  const seo = seoText[language]
   const localizedSuites = getLocalizedSuites(language)
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -208,7 +221,7 @@ export default function SuitesPage() {
 
     setGuestFilter(guestCount)
     setAppliedStay({ arrival, departure })
-    navigate(`/suites?${params.toString()}#available-suites`, { replace: true })
+    navigate(localizePath(`/suites?${params.toString()}#available-suites`), { replace: true })
     setError('')
   }
 
@@ -222,6 +235,7 @@ export default function SuitesPage() {
 
   return (
     <div className={styles.page}>
+      <SEO title={seo.title} description={seo.description} path="/suites" />
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <img

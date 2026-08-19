@@ -2,6 +2,18 @@ import { useState } from 'react'
 import { LuChevronDown } from 'react-icons/lu'
 import styles from './FAQPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
+import SEO from '../../components/SEO/SEO'
+
+const seoText = {
+  en: {
+    title: 'Frequently Asked Questions | Villas Punta Uva',
+    description: 'Answers about booking, minimum stays, pets, discounts, cancellation policy, and amenities at Villas Punta Uva in Punta Uva, Costa Rica.',
+  },
+  es: {
+    title: 'Preguntas Frecuentes | Villas Punta Uva',
+    description: 'Respuestas sobre reservas, estadías mínimas, mascotas, descuentos, política de cancelación y comodidades en Villas Punta Uva, Costa Rica.',
+  },
+}
 
 const faqSectionsEn = [
   {
@@ -223,9 +235,21 @@ export default function FAQPage() {
   const { language } = useLanguage()
   const sections = language === 'es' ? faqSectionsEs : faqSectionsEn
   const [openKey, setOpenKey] = useState('0-0')
+  const seo = seoText[language]
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: sections.flatMap((section) => section.items).map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  }
 
   return (
     <div className={styles.page}>
+      <SEO title={seo.title} description={seo.description} path="/faq" jsonLd={faqJsonLd} />
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <img src="/images/logos/logo-white.png" alt="" className={styles.heroIcon} />

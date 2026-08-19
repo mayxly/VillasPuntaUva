@@ -1,6 +1,18 @@
 import styles from './LocationPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
+import SEO from '../../components/SEO/SEO'
+
+const seoText = {
+  en: {
+    title: 'Location | Villas Punta Uva — Steps From Punta Uva Beach, Puerto Viejo',
+    description: "Villas Punta Uva sits just off the main road in Punta Uva, a 5-minute walk to Playa Arrecife/Punta Uva Beach — one of the World's 50 Best Beaches. See directions and the area.",
+  },
+  es: {
+    title: 'Ubicación | Villas Punta Uva — A Pasos de Playa Punta Uva, Puerto Viejo',
+    description: "Villas Punta Uva está a poca distancia de la carretera principal en Punta Uva, a 5 minutos caminando de Playa Arrecife/Punta Uva — una de las 50 Mejores Playas del Mundo. Vea las indicaciones y la zona.",
+  },
+}
 
 // Excludes 2, 4, 5, 10, 12, and 13 — already shown elsewhere on this page
 // (beach, area, sister-properties, compare, proof sections, and the hero).
@@ -17,7 +29,8 @@ const CITATION_LINKS = {
 }
 
 export default function LocationPage() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
+  const seo = seoText[language]
 
   const galleryPhotos = BEACH_PHOTOS.map((src, index) => ({
     id: BEACH_PHOTO_IDS[index],
@@ -42,6 +55,7 @@ export default function LocationPage() {
 
   return (
     <div className={styles.page}>
+      <SEO title={seo.title} description={seo.description} path="/location" />
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <img

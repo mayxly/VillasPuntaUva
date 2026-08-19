@@ -1,5 +1,17 @@
 import styles from './AboutPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
+import SEO from '../../components/SEO/SEO'
+
+const seoText = {
+  en: {
+    title: 'About Us | Villas Punta Uva, A Family-Run Retreat in Costa Rica',
+    description: "Meet the family behind Villas Punta Uva — a Caribbean coast retreat built to share Costa Rica's jungle, wildlife, and beaches with guests from around the world.",
+  },
+  es: {
+    title: 'Sobre Nosotros | Villas Punta Uva, Un Refugio Familiar en Costa Rica',
+    description: 'Conozca a la familia detrás de Villas Punta Uva, un refugio en la costa caribeña creado para compartir la selva, la vida silvestre y las playas de Costa Rica con huéspedes de todo el mundo.',
+  },
+}
 
 const aboutValues = [
   {
@@ -19,6 +31,7 @@ const aboutValues = [
 export default function AboutPage() {
   const { language, t } = useLanguage()
   const spanish = language === 'es'
+  const seo = seoText[language]
   const values = spanish ? [
     { title: 'Hospitalidad familiar', text: 'Villas Punta Uva es un negocio familiar construido con cuidado, intención y amor por recibir huéspedes en este rincón de Costa Rica.' },
     { title: 'Lujo en la naturaleza', text: 'Los hogares están diseñados para brindar comodidad y mantener la selva, la vida silvestre y la costa caribeña en el corazón de la experiencia.' },
@@ -26,6 +39,7 @@ export default function AboutPage() {
   ] : aboutValues
   return (
     <div className={styles.page}>
+      <SEO title={seo.title} description={seo.description} path="/about" />
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <img

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.villaspuntauva.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/" />
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/" />
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/suites</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites" />
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/suites</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites" />
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/suites/villa-mariposa</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-mariposa" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-mariposa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-mariposa" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/suites/villa-mariposa</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-mariposa" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-mariposa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-mariposa" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/suites/villa-tucan</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-tucan" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-tucan" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-tucan" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/suites/villa-tucan</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-tucan" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-tucan" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-tucan" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/suites/villa-presidente</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-presidente" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-presidente" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-presidente" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/suites/villa-presidente</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-presidente" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-presidente" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-presidente" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/suites/villa-colibri</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-colibri" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-colibri" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-colibri" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/suites/villa-colibri</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-colibri" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-colibri" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-colibri" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/suites/villa-angel</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-angel" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-angel" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-angel" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/suites/villa-angel</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-angel" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-angel" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-angel" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/suites/villa-cacha</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-cacha" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-cacha" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-cacha" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/suites/villa-cacha</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/villa-cacha" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/villa-cacha" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/villa-cacha" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/suites/carey-house</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/carey-house" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/carey-house" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/carey-house" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/suites/carey-house</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/suites/carey-house" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/suites/carey-house" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/suites/carey-house" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/location</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/location" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/location" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/location" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/location</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/location" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/location" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/location" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/about" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/about" />
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/about" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/about" />
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/attractions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/attractions" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/attractions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/attractions" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/attractions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/attractions" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/attractions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/attractions" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/contact" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/contact" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://www.villaspuntauva.com/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/faq" />
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.villaspuntauva.com/es/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.villaspuntauva.com/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.villaspuntauva.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.villaspuntauva.com/faq" />
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>

@@ -12,6 +12,19 @@ import AttractionsPage from './pages/AttractionsPage/AttractionsPage'
 import ContactPage from './pages/ContactPage/ContactPage'
 import FAQPage from './pages/FAQPage/FAQPage'
 
+// Each route is also registered under an /es prefix, so the Spanish version
+// of every page has its own crawlable, indexable URL (see LanguageContext).
+const routes = [
+  { path: '/', element: <HomePage /> },
+  { path: '/suites', element: <SuitesPage /> },
+  { path: '/suites/:slug', element: <SuiteDetailPage /> },
+  { path: '/location', element: <LocationPage /> },
+  { path: '/about', element: <AboutPage /> },
+  { path: '/attractions', element: <AttractionsPage /> },
+  { path: '/contact', element: <ContactPage /> },
+  { path: '/faq', element: <FAQPage /> },
+]
+
 export default function App() {
   return (
     <>
@@ -19,14 +32,12 @@ export default function App() {
       <Navbar />
       <main>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/suites" element={<SuitesPage />} />
-          <Route path="/suites/:slug" element={<SuiteDetailPage />} />
-          <Route path="/location" element={<LocationPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/attractions" element={<AttractionsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/faq" element={<FAQPage />} />
+          {routes.map(({ path, element }) => (
+            <Route key={path} path={path} element={element} />
+          ))}
+          {routes.map(({ path, element }) => (
+            <Route key={`es-${path}`} path={path === '/' ? '/es' : `/es${path}`} element={element} />
+          ))}
         </Routes>
       </main>
       <Footer />

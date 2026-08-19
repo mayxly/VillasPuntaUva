@@ -3,7 +3,7 @@ import styles from './AboutUs.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function AboutUs() {
-  const { t } = useLanguage()
+  const { t, localizePath } = useLanguage()
   return (
     <section className={styles.section}>
       <div className={styles.brandSide}>
@@ -18,7 +18,7 @@ export default function AboutUs() {
           <p className={styles.text}>
             {t('home.aboutText')}
           </p>
-          <Link to="/about" className={styles.btn}>{t('nav.about')}</Link>
+          <Link to={localizePath('/about')} className={styles.btn}>{t('nav.about')}</Link>
         </div>
       </div>
     </section>

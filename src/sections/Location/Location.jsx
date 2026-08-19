@@ -4,7 +4,7 @@ import styles from './Location.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function Location() {
-  const { t } = useLanguage()
+  const { t, localizePath } = useLanguage()
 
   const badges = [
     { icon: <FaWalking size={18} />, text: t('home.locationBadgeWalk') },
@@ -29,7 +29,7 @@ export default function Location() {
           ))}
         </div>
 
-        <Link to="/location" className={styles.btn}>{t('home.viewLocation')}</Link>
+        <Link to={localizePath('/location')} className={styles.btn}>{t('home.viewLocation')}</Link>
       </div>
     </section>
   )

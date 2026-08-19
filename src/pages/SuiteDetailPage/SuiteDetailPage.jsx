@@ -38,6 +38,7 @@ import GuestPicker from '../../components/GuestPicker/GuestPicker'
 import DateRangePicker from '../../components/DateRangePicker/DateRangePicker'
 import styles from './SuiteDetailPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
+import SEO, { SITE_URL } from '../../components/SEO/SEO'
 
 const priceFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -626,7 +627,7 @@ function BookingPanel({ suite }) {
 
 export default function SuiteDetailPage() {
   const { slug } = useParams()
-  const { language, locale, t } = useLanguage()
+  const { language, locale, t, localizePath } = useLanguage()
   const suite = getLocalizedSuite(suites.find((item) => item.slug === slug), language)
 
   if (!suite) {
@@ -634,16 +635,47 @@ export default function SuiteDetailPage() {
       <div className={styles.notFound}>
         <h1>{t('suites.notFound')}</h1>
         <p>{t('suites.missing')}</p>
-        <Link to="/suites" className={styles.backLink}>{t('suites.back')}</Link>
+        <Link to={localizePath('/suites')} className={styles.backLink}>{t('suites.back')}</Link>
       </div>
     )
   }
 
+  const suiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LodgingBusiness',
+    name: suite.name,
+    description: suite.shortDescription,
+    image: (suite.featuredGallery?.length ? suite.featuredGallery : [suite.image]).map((image) => `${SITE_URL}${image}`),
+    url: `${SITE_URL}/suites/${suite.slug}`,
+    telephone: '+506-6145-9916',
+    priceRange: `$${getLowestNightlyRate(suite)}`,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Punta Uva',
+      addressLocality: 'Puerto Viejo',
+      addressRegion: 'Limón',
+      addressCountry: 'CR',
+    },
+    numberOfRooms: suite.bedrooms,
+    petsAllowed: Boolean(suite.petFriendly),
+    amenityFeature: (suite.amenitiesPreview ?? []).map((name) => ({
+      '@type': 'LocationFeatureSpecification',
+      name,
+    })),
+  }
+
   return (
     <div className={styles.page}>
+      <SEO
+        title={`${suite.name} | Villas Punta Uva, Punta Uva Beach Costa Rica`}
+        description={suite.shortDescription}
+        path={`/suites/${suite.slug}`}
+        image={`${SITE_URL}${suite.image}`}
+        jsonLd={suiteJsonLd}
+      />
       <section className={styles.hero}>
         <div>
-          <Link to="/suites" className={styles.backText}>{t('suites.all')}</Link>
+          <Link to={localizePath('/suites')} className={styles.backText}>{t('suites.all')}</Link>
           <h1>{suite.name}</h1>
           <p className={styles.location}>{suite.location}, Costa Rica</p>
         </div>

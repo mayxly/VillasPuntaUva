@@ -7,7 +7,7 @@ import styles from './SuiteCard.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function SuiteCard({ name, location, slug, image, bedrooms, bathrooms, description }) {
-  const { t } = useLanguage()
+  const { t, localizePath } = useLanguage()
   return (
     <div className={styles.card}>
       {/* Front face — image + name overlay */}
@@ -55,7 +55,7 @@ export default function SuiteCard({ name, location, slug, image, bedrooms, bathr
           </span>
         </div>
         <p className={styles.backDesc}>{description}</p>
-        <Link to={`/suites/${slug}`} className={styles.viewLink}>
+        <Link to={localizePath(`/suites/${slug}`)} className={styles.viewLink}>
           {t('suites.viewDetails')} <HiArrowRight size={18} />
         </Link>
       </div>

@@ -5,7 +5,7 @@ import styles from './Footer.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function Footer() {
-  const { language, t } = useLanguage()
+  const { language, t, localizePath } = useLanguage()
   const suites = getLocalizedSuites(language)
   return (
     <footer className={styles.footer}>
@@ -35,12 +35,12 @@ export default function Footer() {
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>{t('footer.quickLinks')}</h4>
             <nav className={styles.links}>
-              <Link to="/">{t('nav.home')}</Link>
-              <Link to="/suites">{t('nav.suites')}</Link>
-              <Link to="/about">{t('nav.about')}</Link>
-              <Link to="/attractions">{t('nav.attractions')}</Link>
-              <Link to="/contact">{t('nav.contact')}</Link>
-              <Link to="/faq">{t('nav.faqs')}</Link>
+              <Link to={localizePath('/')}>{t('nav.home')}</Link>
+              <Link to={localizePath('/suites')}>{t('nav.suites')}</Link>
+              <Link to={localizePath('/about')}>{t('nav.about')}</Link>
+              <Link to={localizePath('/attractions')}>{t('nav.attractions')}</Link>
+              <Link to={localizePath('/contact')}>{t('nav.contact')}</Link>
+              <Link to={localizePath('/faq')}>{t('nav.faqs')}</Link>
             </nav>
           </div>
 
@@ -48,7 +48,7 @@ export default function Footer() {
             <h4 className={styles.columnTitle}>{t('nav.suites')}</h4>
             <nav className={styles.links}>
               {suites.map((suite) => (
-                <Link key={suite.id} to={`/suites/${suite.slug}`}>{suite.name}</Link>
+                <Link key={suite.id} to={localizePath(`/suites/${suite.slug}`)}>{suite.name}</Link>
               ))}
             </nav>
           </div>

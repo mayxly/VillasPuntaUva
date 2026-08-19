@@ -13,10 +13,10 @@ export default function Navbar() {
   const [bookingOpen, setBookingOpen] = useState(false)
   const scrollY = useScrollPosition()
   const location = useLocation()
-  const { language, setLanguage, t } = useLanguage()
+  const { language, setLanguage, t, localizePath } = useLanguage()
   const localizedSuites = getLocalizedSuites(language)
 
-  const isHome = location.pathname === '/'
+  const isHome = location.pathname === '/' || location.pathname === '/es'
   const isScrolled = scrollY > 80
   const solid = !isHome || isScrolled
 
@@ -31,12 +31,12 @@ export default function Navbar() {
   }, [location])
 
   const navLinks = [
-    { to: '/', label: t('nav.home') },
-    { to: '/suites', label: t('nav.suites'), hasDropdown: true },
-    { to: '/location', label: t('nav.location') },
-    { to: '/attractions', label: t('nav.attractions') },
-    { to: '/about', label: t('nav.about') },
-    { to: '/contact', label: t('nav.contact') },
+    { to: localizePath('/'), label: t('nav.home') },
+    { to: localizePath('/suites'), label: t('nav.suites'), hasDropdown: true },
+    { to: localizePath('/location'), label: t('nav.location') },
+    { to: localizePath('/attractions'), label: t('nav.attractions') },
+    { to: localizePath('/about'), label: t('nav.about') },
+    { to: localizePath('/contact'), label: t('nav.contact') },
   ]
 
   const isActiveLink = (link) => {
@@ -73,7 +73,7 @@ export default function Navbar() {
     <>
       <header className={`${styles.navbar} ${solid ? styles.solid : ''}`}>
         <div className={styles.container}>
-          <Link to="/" className={styles.logoLink} onClick={handleLogoClick}>
+          <Link to={localizePath('/')} className={styles.logoLink} onClick={handleLogoClick}>
             <img
               src={solid ? '/images/logos/logo-black-text.png' : '/images/logos/logo-white-text.png'}
               alt="Villas Punta Uva"
@@ -102,7 +102,7 @@ export default function Navbar() {
                     {localizedSuites.map((suite) => (
                       <Link
                         key={suite.id}
-                        to={`/suites/${suite.slug}`}
+                        to={localizePath(`/suites/${suite.slug}`)}
                         className={styles.dropdownLink}
                       >
                         {suite.name}

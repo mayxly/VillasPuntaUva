@@ -1,5 +1,17 @@
 import styles from './AttractionsPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
+import SEO from '../../components/SEO/SEO'
+
+const seoText = {
+  en: {
+    title: 'Attractions Near Punta Uva & Puerto Viejo, Costa Rica | Villas Punta Uva',
+    description: 'Tours, diving, surf lessons, chocolate tours, horseback riding, wildlife sanctuaries, and nightlife near Punta Uva and Puerto Viejo, Costa Rica.',
+  },
+  es: {
+    title: 'Atracciones Cerca de Punta Uva y Puerto Viejo, Costa Rica | Villas Punta Uva',
+    description: 'Tours, buceo, clases de surf, tours de chocolate, cabalgatas, santuarios de vida silvestre y vida nocturna cerca de Punta Uva y Puerto Viejo, Costa Rica.',
+  },
+}
 
 const spanishLabels = {
   'Outdoor Adventures': 'Aventuras al aire libre',
@@ -471,8 +483,10 @@ function ActivitySection({ section, index, language }) {
 
 export default function AttractionsPage() {
   const { language, t } = useLanguage()
+  const seo = seoText[language]
   return (
     <div className={styles.page}>
+      <SEO title={seo.title} description={seo.description} path="/attractions" />
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <img
