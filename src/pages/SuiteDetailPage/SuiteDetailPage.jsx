@@ -643,6 +643,7 @@ export default function SuiteDetailPage() {
   const suiteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LodgingBusiness',
+    '@id': `${SITE_URL}/suites/${suite.slug}#business`,
     name: suite.name,
     description: suite.shortDescription,
     image: (suite.featuredGallery?.length ? suite.featuredGallery : [suite.image]).map((image) => `${SITE_URL}${image}`),
@@ -656,12 +657,23 @@ export default function SuiteDetailPage() {
       addressRegion: 'Limón',
       addressCountry: 'CR',
     },
+    containedInPlace: { '@id': `${SITE_URL}/#property` },
     numberOfRooms: suite.bedrooms,
     petsAllowed: Boolean(suite.petFriendly),
     amenityFeature: (suite.amenitiesPreview ?? []).map((name) => ({
       '@type': 'LocationFeatureSpecification',
       name,
     })),
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t('nav.home'), item: `${SITE_URL}${localizePath('/')}` },
+      { '@type': 'ListItem', position: 2, name: t('nav.suites'), item: `${SITE_URL}${localizePath('/suites')}` },
+      { '@type': 'ListItem', position: 3, name: suite.name, item: `${SITE_URL}${localizePath(`/suites/${suite.slug}`)}` },
+    ],
   }
 
   return (
@@ -671,7 +683,7 @@ export default function SuiteDetailPage() {
         description={suite.shortDescription}
         path={`/suites/${suite.slug}`}
         image={`${SITE_URL}${suite.image}`}
-        jsonLd={suiteJsonLd}
+        jsonLd={[suiteJsonLd, breadcrumbJsonLd]}
       />
       <section className={styles.hero}>
         <div>

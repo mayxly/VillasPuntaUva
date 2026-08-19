@@ -37,6 +37,7 @@ export default function Navbar() {
     { to: localizePath('/attractions'), label: t('nav.attractions') },
     { to: localizePath('/about'), label: t('nav.about') },
     { to: localizePath('/contact'), label: t('nav.contact') },
+    { to: localizePath('/faq'), label: t('nav.faqs') },
   ]
 
   const isActiveLink = (link) => {

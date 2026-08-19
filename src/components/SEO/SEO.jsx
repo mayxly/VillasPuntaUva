@@ -35,7 +35,7 @@ function upsertLink(rel, href, extraAttrs) {
 // language's /es prefix (if any) is applied here so callers don't repeat it.
 // title is the full page title (including the " | Villas Punta Uva" suffix)
 // so each page controls its own title order and keyword placement.
-export default function SEO({ title, description, path = '/', image = DEFAULT_OG_IMAGE, type = 'website', jsonLd }) {
+export default function SEO({ title, description, path = '/', image = DEFAULT_OG_IMAGE, type = 'website', jsonLd, noindex = false }) {
   const { language } = useLanguage()
   const jsonLdKey = jsonLd ? JSON.stringify(jsonLd) : null
 
@@ -46,6 +46,7 @@ export default function SEO({ title, description, path = '/', image = DEFAULT_OG
 
     document.title = title
     upsertMeta('name', 'description', description)
+    upsertMeta('name', 'robots', noindex ? 'noindex, follow' : 'index, follow')
     upsertLink('canonical', canonicalUrl)
     upsertLink('alternate', enUrl, { hreflang: 'en' })
     upsertLink('alternate', esUrl, { hreflang: 'es' })
@@ -74,7 +75,7 @@ export default function SEO({ title, description, path = '/', image = DEFAULT_OG
     return () => {
       if (script) script.remove()
     }
-  }, [title, description, path, image, type, jsonLdKey, language])
+  }, [title, description, path, image, type, jsonLdKey, language, noindex])
 
   return null
 }

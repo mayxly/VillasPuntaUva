@@ -12,11 +12,11 @@ import { useLanguage } from '../../i18n/LanguageContext'
 
 const seoText = {
   en: {
-    title: 'Villas Punta Uva | Luxury Vacation Rentals Near Punta Uva Beach, Costa Rica',
+    title: 'Villas Punta Uva | Luxury Villas, Punta Uva, Costa Rica',
     description: "Steps from one of Costa Rica's most beautiful beaches, Villas Punta Uva brings families, friends, and couples together for laid-back luxury wrapped in jungle and Caribbean sea air.",
   },
   es: {
-    title: 'Villas Punta Uva | Villas de Lujo Cerca de Playa Punta Uva, Costa Rica',
+    title: 'Villas Punta Uva | Villas de Lujo, Punta Uva, Costa Rica',
     description: 'A pasos de una de las playas más hermosas de Costa Rica, Villas Punta Uva reúne a familias, amigos y parejas en un lujo relajado, rodeado de selva y aire del mar Caribe.',
   },
 }

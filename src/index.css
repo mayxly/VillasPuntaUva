@@ -67,3 +67,20 @@ img {
 ul {
   list-style: none;
 }
+
+.skipLink {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  z-index: 2000;
+  padding: 12px 20px;
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: top var(--transition-speed) ease;
+}
+
+.skipLink:focus {
+  top: 16px;
+}
