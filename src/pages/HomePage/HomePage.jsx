@@ -13,11 +13,11 @@ import { useLanguage } from '../../i18n/LanguageContext'
 const seoText = {
   en: {
     title: 'Villas Punta Uva | Luxury Vacation Rentals Near Punta Uva Beach, Costa Rica',
-    description: 'Private luxury villas steps from Punta Uva Beach in Puerto Viejo, Costa Rica. Shared infinity pool, jungle views, and villas for couples, families, and groups. Book direct.',
+    description: "Steps from one of Costa Rica's most beautiful beaches, Villas Punta Uva brings families, friends, and couples together for laid-back luxury wrapped in jungle and Caribbean sea air.",
   },
   es: {
     title: 'Villas Punta Uva | Villas de Lujo Cerca de Playa Punta Uva, Costa Rica',
-    description: 'Villas privadas de lujo a pasos de Playa Punta Uva en Puerto Viejo, Costa Rica. Piscina infinita compartida, vistas a la selva, y villas para parejas, familias y grupos. Reserve directo.',
+    description: 'A pasos de una de las playas más hermosas de Costa Rica, Villas Punta Uva reúne a familias, amigos y parejas en un lujo relajado, rodeado de selva y aire del mar Caribe.',
   },
 }
 
