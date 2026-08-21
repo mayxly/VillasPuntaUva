@@ -14,9 +14,9 @@ const seoText = {
   },
 }
 
-// Excludes 2, 4, 5, 10, 12, and 13 — already shown elsewhere on this page
-// (beach, area, sister-properties, compare, proof sections, and the hero).
-const BEACH_PHOTO_IDS = [3, 8, 9, 11, 14, 15, 16, 17]
+// Excludes 2, 4, 5, 10, and 13 — already shown elsewhere on this page
+// (beach, area, sister-properties, compare, and proof sections).
+const BEACH_PHOTO_IDS = [3, 8, 9, 11, 12]
 const BEACH_PHOTOS = BEACH_PHOTO_IDS.map((id) => `/images/beach/beach-${id}.webp`)
 
 const GOOGLE_MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Villas+Punta+Uva%2C+Puerto+Viejo%2C+Lim%C3%B3n%2C+Costa+Rica'

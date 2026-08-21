@@ -33,13 +33,10 @@ const sharedPoolImages = [
 ]
 
 const sharedBeachImages = [
-  '/images/beach/beach-1.webp',
   '/images/beach/beach-2.webp',
   '/images/beach/beach-3.webp',
   '/images/beach/beach-4.webp',
   '/images/beach/beach-5.webp',
-  '/images/beach/beach-6.webp',
-  '/images/beach/beach-7.webp',
 ]
 
 const mariposaFeaturedGallery = makeSuiteImages('mariposa', [1, 8, 30, 37, 66])
