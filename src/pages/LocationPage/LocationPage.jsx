@@ -1,6 +1,6 @@
+import { useEffect, useRef } from 'react'
 import styles from './LocationPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
-import PhotoCarousel from '../../components/PhotoCarousel/PhotoCarousel'
 import SEO from '../../components/SEO/SEO'
 
 const seoText = {
@@ -14,11 +14,6 @@ const seoText = {
   },
 }
 
-// Excludes 2, 4, 5, 10, and 13 — already shown elsewhere on this page
-// (beach, area, sister-properties, compare, and proof sections).
-const BEACH_PHOTO_IDS = [3, 8, 9, 11, 12]
-const BEACH_PHOTOS = BEACH_PHOTO_IDS.map((id) => `/images/beach/beach-${id}.webp`)
-
 const GOOGLE_MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Villas+Punta+Uva%2C+Puerto+Viejo%2C+Lim%C3%B3n%2C+Costa+Rica'
 const PUNTA_UVA_BEACH_MAPS_URL = 'https://maps.app.goo.gl/FcyoXvCmKSrKsCDD7'
 const VILLAS_ARRECIFE_WAZE_URL = 'https://waze.com/ul/hd1tny67yu'
@@ -31,12 +26,13 @@ const CITATION_LINKS = {
 export default function LocationPage() {
   const { language, t } = useLanguage()
   const seo = seoText[language]
+  const videoRef = useRef(null)
 
-  const galleryPhotos = BEACH_PHOTOS.map((src, index) => ({
-    id: BEACH_PHOTO_IDS[index],
-    src,
-    alt: t('pages.locationGallery'),
-  }))
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) video.pause()
+  }, [])
 
   const citations = [
     {
@@ -193,7 +189,17 @@ export default function LocationPage() {
       <section className={styles.gallerySection}>
         <h2 className={styles.galleryHeading}>{t('pages.locationGallery')}</h2>
         <p className={styles.galleryText}>{t('pages.locationGalleryText')}</p>
-        <PhotoCarousel photos={galleryPhotos} />
+        <video
+          ref={videoRef}
+          className={styles.galleryVideo}
+          src="/videos/punta-uva-beach.mp4"
+          poster="/videos/punta-uva-beach-poster.webp"
+          aria-label={t('pages.locationGallery')}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
       </section>
     </div>
   )
