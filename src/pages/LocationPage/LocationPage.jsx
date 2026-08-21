@@ -31,7 +31,20 @@ export default function LocationPage() {
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) video.pause()
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    // Client-side route changes mount this <video> without a full page
+    // load, which some mobile browsers (notably iOS Safari) don't treat as
+    // a reliable autoplay trigger — so kick off playback explicitly instead
+    // of relying on the autoplay attribute alone.
+    const tryPlay = () => video.play().catch(() => {})
+
+    if (video.readyState >= 2) {
+      tryPlay()
+    } else {
+      video.addEventListener('loadeddata', tryPlay, { once: true })
+      return () => video.removeEventListener('loadeddata', tryPlay)
+    }
   }, [])
 
   const citations = [
@@ -199,6 +212,7 @@ export default function LocationPage() {
           muted
           loop
           playsInline
+          preload="auto"
         />
       </section>
     </div>
