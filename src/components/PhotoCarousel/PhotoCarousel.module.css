@@ -64,6 +64,41 @@
   right: -8px;
 }
 
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-text-light);
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity var(--transition-speed) ease, background var(--transition-speed) ease, width var(--transition-speed) ease;
+}
+
+.dot:hover {
+  opacity: 0.6;
+}
+
+.dotActive {
+  width: 20px;
+  border-radius: 4px;
+  background: var(--color-primary);
+  opacity: 1;
+}
+
+.dotActive:hover {
+  opacity: 1;
+}
+
 @media (max-width: 768px) {
   .carouselWrap {
     padding: 0 16px;

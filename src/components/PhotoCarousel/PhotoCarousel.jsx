@@ -17,6 +17,10 @@ export default function PhotoCarousel({ photos, intervalMs = 2000 }) {
   const maxIndex = Math.max(0, photos.length - visibleCount)
   const cardWidthPercent = 100 / visibleCount
 
+  const dotCount = Math.min(maxIndex + 1, 8)
+  const activeDot =
+    dotCount > 1 ? Math.round((activeIndex / maxIndex) * (dotCount - 1)) : 0
+
   const updateVisibleCount = useCallback(() => {
     const w = window.innerWidth
     if (w >= 1024) setVisibleCount(3)
@@ -147,6 +151,24 @@ export default function PhotoCarousel({ photos, intervalMs = 2000 }) {
       >
         <HiChevronRight size={26} />
       </button>
+
+      {maxIndex > 0 && (
+        <div className={styles.dots}>
+          {Array.from({ length: dotCount }, (_, dot) => {
+            const targetIndex = Math.round((dot / (dotCount - 1)) * maxIndex)
+            return (
+              <button
+                key={dot}
+                type="button"
+                className={`${styles.dot} ${dot === activeDot ? styles.dotActive : ''}`}
+                onClick={() => scrollTo(targetIndex)}
+                aria-label={t('common.goToSlide', { number: dot + 1 })}
+                aria-current={dot === activeDot}
+              />
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
