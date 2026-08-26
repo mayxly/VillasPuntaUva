@@ -27,6 +27,7 @@ import {
   calculateSuiteStay,
   getLowestNightlyRate,
   getLocalizedSuite,
+  getRatesForDate,
   isSuiteAvailable,
   suites,
   EXTRA_GUEST_NIGHTLY_FEE,
@@ -640,6 +641,8 @@ export default function SuiteDetailPage() {
     )
   }
 
+  const currentRates = getRatesForDate(suite, new Date())
+
   const suiteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LodgingBusiness',
@@ -735,14 +738,14 @@ export default function SuiteDetailPage() {
               <div className={styles.rateCard}>
                 <LuCalendarDays size={20} />
                 <h3>{t('suites.rateHigh')}</h3>
-                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rates.high.weekday)} {t('suites.weekdays')}</p>
-                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rates.high.weekend)} {t('suites.weekends')}</p>
+                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(currentRates.high.weekday)} {t('suites.weekdays')}</p>
+                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(currentRates.high.weekend)} {t('suites.weekends')}</p>
               </div>
               <div className={styles.rateCard}>
                 <LuCalendarDays size={20} />
                 <h3>{t('suites.rateLow')}</h3>
-                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rates.low.weekday)} {t('suites.weekdays')}</p>
-                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.rates.low.weekend)} {t('suites.weekends')}</p>
+                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(currentRates.low.weekday)} {t('suites.weekdays')}</p>
+                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(currentRates.low.weekend)} {t('suites.weekends')}</p>
               </div>
             </div>
 

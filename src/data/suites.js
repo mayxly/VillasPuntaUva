@@ -221,9 +221,21 @@ export const suites = [
       high: { weekday: 500, weekend: 550 },
       low: { weekday: 400, weekend: 425 },
     },
+    rateSchedule: [
+      {
+        from: '2027-01-01',
+        rates: {
+          high: { weekday: 550, weekend: 600 },
+          low: { weekday: 500, weekend: 550 },
+        },
+      },
+    ],
     holidayRates: [
       { start: '2026-12-19', end: '2026-12-30', rate: 700 },
       { start: '2026-12-31', end: '2027-01-02', rate: 850 },
+      { start: '2027-03-25', end: '2027-03-27', rate: 850 },
+      { start: '2027-12-18', end: '2027-12-30', rate: 700 },
+      { start: '2027-12-31', end: '2028-01-02', rate: 850 },
     ],
   },
   {
@@ -304,9 +316,21 @@ export const suites = [
       high: { weekday: 180, weekend: 200 },
       low: { weekday: 150, weekend: 175 },
     },
+    rateSchedule: [
+      {
+        from: '2027-01-01',
+        rates: {
+          high: { weekday: 200, weekend: 225 },
+          low: { weekday: 175, weekend: 200 },
+        },
+      },
+    ],
     holidayRates: [
       { start: '2026-12-19', end: '2026-12-30', rate: 250 },
       { start: '2026-12-31', end: '2027-01-02', rate: 300 },
+      { start: '2027-03-25', end: '2027-03-27', rate: 300 },
+      { start: '2027-12-18', end: '2027-12-30', rate: 250 },
+      { start: '2027-12-31', end: '2028-01-02', rate: 300 },
     ],
   },
   {
@@ -391,9 +415,21 @@ export const suites = [
       high: { weekday: 500, weekend: 550 },
       low: { weekday: 400, weekend: 425 },
     },
+    rateSchedule: [
+      {
+        from: '2027-01-01',
+        rates: {
+          high: { weekday: 550, weekend: 600 },
+          low: { weekday: 500, weekend: 550 },
+        },
+      },
+    ],
     holidayRates: [
       { start: '2026-12-19', end: '2026-12-30', rate: 700 },
       { start: '2026-12-31', end: '2027-01-02', rate: 850 },
+      { start: '2027-03-25', end: '2027-03-27', rate: 850 },
+      { start: '2027-12-18', end: '2027-12-30', rate: 700 },
+      { start: '2027-12-31', end: '2028-01-02', rate: 850 },
     ],
   },
   {
@@ -472,9 +508,21 @@ export const suites = [
       high: { weekday: 90, weekend: 100 },
       low: { weekday: 80, weekend: 90 },
     },
+    rateSchedule: [
+      {
+        from: '2027-01-01',
+        rates: {
+          high: { weekday: 90, weekend: 110 },
+          low: { weekday: 90, weekend: 110 },
+        },
+      },
+    ],
     holidayRates: [
       { start: '2026-12-19', end: '2026-12-30', rate: 125 },
       { start: '2026-12-31', end: '2027-01-02', rate: 175 },
+      { start: '2027-03-25', end: '2027-03-27', rate: 175 },
+      { start: '2027-12-18', end: '2027-12-30', rate: 125 },
+      { start: '2027-12-31', end: '2028-01-02', rate: 175 },
     ],
   },
   {
@@ -555,9 +603,21 @@ export const suites = [
       high: { weekday: 200, weekend: 225 },
       low: { weekday: 175, weekend: 200 },
     },
+    rateSchedule: [
+      {
+        from: '2027-01-01',
+        rates: {
+          high: { weekday: 220, weekend: 250 },
+          low: { weekday: 200, weekend: 225 },
+        },
+      },
+    ],
     holidayRates: [
       { start: '2026-12-19', end: '2026-12-30', rate: 300 },
       { start: '2026-12-31', end: '2027-01-02', rate: 400 },
+      { start: '2027-03-25', end: '2027-03-27', rate: 400 },
+      { start: '2027-12-18', end: '2027-12-30', rate: 300 },
+      { start: '2027-12-31', end: '2028-01-02', rate: 400 },
     ],
   },
   {
@@ -639,9 +699,21 @@ export const suites = [
       high: { weekday: 300, weekend: 325 },
       low: { weekday: 250, weekend: 275 },
     },
+    rateSchedule: [
+      {
+        from: '2027-01-01',
+        rates: {
+          high: { weekday: 350, weekend: 400 },
+          low: { weekday: 300, weekend: 350 },
+        },
+      },
+    ],
     holidayRates: [
       { start: '2026-12-19', end: '2026-12-30', rate: 400 },
       { start: '2026-12-31', end: '2027-01-02', rate: 500 },
+      { start: '2027-03-25', end: '2027-03-27', rate: 500 },
+      { start: '2027-12-18', end: '2027-12-30', rate: 400 },
+      { start: '2027-12-31', end: '2028-01-02', rate: 500 },
     ],
   },
   {
@@ -721,9 +793,21 @@ export const suites = [
       high: { weekday: 130, weekend: 150 },
       low: { weekday: 130, weekend: 150 },
     },
+    rateSchedule: [
+      {
+        from: '2027-01-01',
+        rates: {
+          high: { weekday: 150, weekend: 175 },
+          low: { weekday: 150, weekend: 175 },
+        },
+      },
+    ],
     holidayRates: [
       { start: '2026-12-19', end: '2026-12-30', rate: 200 },
       { start: '2026-12-31', end: '2027-01-02', rate: 250 },
+      { start: '2027-03-25', end: '2027-03-27', rate: 250 },
+      { start: '2027-12-18', end: '2027-12-30', rate: 200 },
+      { start: '2027-12-31', end: '2028-01-02', rate: 250 },
     ],
   },
 ]
@@ -744,22 +828,29 @@ function getHolidayRate(suite, date) {
   return match?.rate ?? null
 }
 
+// Picks the base rate card in effect for a given date: the suite's default
+// `rates`, or a later entry from `rateSchedule` if its `from` date has passed.
+export const getRatesForDate = (suite, date) => {
+  const schedule = suite.rateSchedule ?? []
+  return schedule.reduce(
+    (effective, entry) => (date >= parseIsoDate(entry.from) ? entry.rates : effective),
+    suite.rates,
+  )
+}
+
 export const getNightlyRate = (suite, date) => {
   const holidayRate = getHolidayRate(suite, date)
   if (holidayRate != null) return holidayRate
 
   const season = isLowSeasonDate(date) ? 'low' : 'high'
   const dayType = isWeekendDate(date) ? 'weekend' : 'weekday'
-  return suite.rates[season][dayType]
+  return getRatesForDate(suite, date)[season][dayType]
 }
 
-export const getLowestNightlyRate = (suite) =>
-  Math.min(
-    suite.rates.high.weekday,
-    suite.rates.high.weekend,
-    suite.rates.low.weekday,
-    suite.rates.low.weekend,
-  )
+export const getLowestNightlyRate = (suite, referenceDate = new Date()) => {
+  const rates = getRatesForDate(suite, referenceDate)
+  return Math.min(rates.high.weekday, rates.high.weekend, rates.low.weekday, rates.low.weekend)
+}
 
 export const getStayNights = (arrival, departure) => {
   if (!arrival || !departure || departure <= arrival) return []
