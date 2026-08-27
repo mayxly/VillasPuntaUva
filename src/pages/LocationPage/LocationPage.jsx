@@ -78,7 +78,7 @@ export default function LocationPage() {
       </section>
 
       {/* Section 1: Location to the beach */}
-      <section className={styles.beachSection}>
+      <section id="beach" className={styles.beachSection}>
         <div
           className={styles.beachImage}
           style={{ backgroundImage: "url('/images/beach/beach-2.webp')" }}
@@ -103,7 +103,7 @@ export default function LocationPage() {
       </section>
 
       {/* Section 2: Where we're located / getting around */}
-      <section className={styles.areaSection}>
+      <section id="getting-around" className={styles.areaSection}>
         <div className={styles.areaContent}>
           <div className={styles.sectionHeader}>
             <p className={styles.eyebrow}>{t('pages.locationAreaEyebrow')}</p>
@@ -128,7 +128,7 @@ export default function LocationPage() {
       </section>
 
       {/* Section 3: Villas Punta Uva & sister property Villas Arrecife */}
-      <section className={styles.sisterSection}>
+      <section id="sister" className={styles.sisterSection}>
         <div className={styles.sisterText}>
           <p className={styles.eyebrow}>{t('pages.locationSisterEyebrow')}</p>
           <h2>{t('pages.locationSisterHeading')}</h2>
@@ -151,7 +151,7 @@ export default function LocationPage() {
       </section>
 
       {/* Section 4: Caribbean side vs Pacific side */}
-      <section className={styles.compareSection}>
+      <section id="compare" className={styles.compareSection}>
         <div className={styles.compareText}>
           <p className={styles.eyebrow}>{t('pages.locationCompareEyebrow')}</p>
           <h2>{t('pages.locationCompareHeading')}</h2>
@@ -174,6 +174,7 @@ export default function LocationPage() {
       </section>
 
       <section
+        id="proof"
         className={styles.proofSection}
         style={{ backgroundImage: "url('/images/beach/beach-5.webp')" }}
       >

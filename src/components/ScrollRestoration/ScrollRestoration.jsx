@@ -20,9 +20,14 @@ export default function ScrollRestoration() {
 
   useLayoutEffect(() => {
     const key = getScrollKey(location)
-    const frame = window.requestAnimationFrame(() => {
-      const root = document.documentElement
-      const previousScrollBehavior = root.style.scrollBehavior
+    const root = document.documentElement
+    const previousScrollBehavior = root.style.scrollBehavior
+    let frame
+
+    // Hash targets can live on lazy-loaded routes (see App.jsx's Suspense
+    // boundary), so the element may not exist yet on the first frame after
+    // navigation — retry for a bit instead of giving up and scrolling to 0.
+    const attemptScroll = (attemptsLeft) => {
       root.style.scrollBehavior = 'auto'
 
       if (location.hash) {
@@ -33,11 +38,18 @@ export default function ScrollRestoration() {
           root.style.scrollBehavior = previousScrollBehavior
           return
         }
+
+        if (attemptsLeft > 0) {
+          frame = window.requestAnimationFrame(() => attemptScroll(attemptsLeft - 1))
+          return
+        }
       }
 
       window.scrollTo(0, scrollPositions.current.get(key) ?? 0)
       root.style.scrollBehavior = previousScrollBehavior
-    })
+    }
+
+    frame = window.requestAnimationFrame(() => attemptScroll(60))
 
     return () => {
       window.cancelAnimationFrame(frame)

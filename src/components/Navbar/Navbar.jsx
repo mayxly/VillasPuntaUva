@@ -9,7 +9,7 @@ import styles from './Navbar.module.css'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [suitesOpen, setSuitesOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState(null)
   const [bookingOpen, setBookingOpen] = useState(false)
   const scrollY = useScrollPosition()
   const location = useLocation()
@@ -27,14 +27,50 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobileOpen(false)
-    setSuitesOpen(false)
+    setOpenDropdown(null)
   }, [location])
 
   const navLinks = [
     { to: localizePath('/'), label: t('nav.home') },
-    { to: localizePath('/suites'), label: t('nav.suites'), hasDropdown: true },
-    { to: localizePath('/location'), label: t('nav.location') },
-    { to: localizePath('/attractions'), label: t('nav.attractions') },
+    {
+      to: localizePath('/suites'),
+      label: t('nav.suites'),
+      hasDropdown: true,
+      dropdownItems: localizedSuites.map((suite) => ({
+        key: suite.id,
+        to: localizePath(`/suites/${suite.slug}`),
+        label: suite.name,
+        sublabel: suite.location,
+      })),
+    },
+    {
+      to: localizePath('/location'),
+      label: t('nav.location'),
+      hasDropdown: true,
+      dropdownItems: [
+        { key: 'beach', to: `${localizePath('/location')}#beach`, label: t('nav.locationBeach') },
+        { key: 'getting-around', to: `${localizePath('/location')}#getting-around`, label: t('nav.locationGettingAround') },
+        { key: 'sister', to: `${localizePath('/location')}#sister`, label: t('nav.locationSister') },
+        { key: 'compare', to: `${localizePath('/location')}#compare`, label: t('nav.locationCompare') },
+        { key: 'proof', to: `${localizePath('/location')}#proof`, label: t('nav.locationProof') },
+      ],
+    },
+    {
+      to: localizePath('/attractions'),
+      label: t('nav.attractions'),
+      hasDropdown: true,
+      dropdownItems: [
+        { key: 'outdoor-adventures', to: `${localizePath('/attractions')}#outdoor-adventures`, label: t('nav.attractionsOutdoorAdventures') },
+        { key: 'diving', to: `${localizePath('/attractions')}#diving`, label: t('nav.attractionsDiving') },
+        { key: 'canopy-tour', to: `${localizePath('/attractions')}#canopy-tour`, label: t('nav.attractionsCanopyTour') },
+        { key: 'surf-lessons', to: `${localizePath('/attractions')}#surf-lessons`, label: t('nav.attractionsSurfLessons') },
+        { key: 'chocolate-tours', to: `${localizePath('/attractions')}#chocolate-tours`, label: t('nav.attractionsChocolateTours') },
+        { key: 'horseback-riding', to: `${localizePath('/attractions')}#horseback-riding`, label: t('nav.attractionsHorsebackRiding') },
+        { key: 'nature', to: `${localizePath('/attractions')}#nature`, label: t('nav.attractionsNature') },
+        { key: 'activities', to: `${localizePath('/attractions')}#activities`, label: t('nav.attractionsActivities') },
+        { key: 'night-life', to: `${localizePath('/attractions')}#night-life`, label: t('nav.attractionsNightLife') },
+      ],
+    },
     { to: localizePath('/about'), label: t('nav.about') },
     { to: localizePath('/contact'), label: t('nav.contact') },
     { to: localizePath('/faq'), label: t('nav.faqs') },
@@ -51,12 +87,12 @@ export default function Navbar() {
     event.preventDefault()
     window.scrollTo({ top: 0, behavior: 'smooth' })
     setMobileOpen(false)
-    setSuitesOpen(false)
+    setOpenDropdown(null)
   }
 
   const handleLogoClick = (event) => {
     setMobileOpen(false)
-    setSuitesOpen(false)
+    setOpenDropdown(null)
 
     if (isHome) {
       event.preventDefault()
@@ -66,7 +102,7 @@ export default function Navbar() {
 
   const openBookingModal = () => {
     setMobileOpen(false)
-    setSuitesOpen(false)
+    setOpenDropdown(null)
     setBookingOpen(true)
   }
 
@@ -88,8 +124,8 @@ export default function Navbar() {
                 <div
                   key={link.to}
                   className={styles.dropdownWrap}
-                  onMouseEnter={() => setSuitesOpen(true)}
-                  onMouseLeave={() => setSuitesOpen(false)}
+                  onMouseEnter={() => setOpenDropdown(link.to)}
+                  onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <Link
                     to={link.to}
@@ -97,17 +133,17 @@ export default function Navbar() {
                     onClick={(event) => handleNavClick(event, link)}
                   >
                     {link.label}
-                    <HiChevronDown size={16} className={`${styles.chevron} ${suitesOpen ? styles.chevronOpen : ''}`} />
+                    <HiChevronDown size={16} className={`${styles.chevron} ${openDropdown === link.to ? styles.chevronOpen : ''}`} />
                   </Link>
-                  <div className={`${styles.dropdown} ${suitesOpen ? styles.dropdownVisible : ''}`}>
-                    {localizedSuites.map((suite) => (
+                  <div className={`${styles.dropdown} ${openDropdown === link.to ? styles.dropdownVisible : ''}`}>
+                    {link.dropdownItems.map((item) => (
                       <Link
-                        key={suite.id}
-                        to={localizePath(`/suites/${suite.slug}`)}
+                        key={item.key}
+                        to={item.to}
                         className={styles.dropdownLink}
                       >
-                        {suite.name}
-                        <span className={styles.dropdownLocation}>{suite.location}</span>
+                        {item.label}
+                        {item.sublabel && <span className={styles.dropdownLocation}>{item.sublabel}</span>}
                       </Link>
                     ))}
                   </div>
@@ -165,13 +201,13 @@ export default function Navbar() {
               </Link>
               {link.hasDropdown && (
                 <div className={styles.drawerSub}>
-                  {localizedSuites.map((suite) => (
+                  {link.dropdownItems.map((item) => (
                     <Link
-                      key={suite.id}
-                      to={`/suites/${suite.slug}`}
+                      key={item.key}
+                      to={item.to}
                       className={styles.drawerSubLink}
                     >
-                      {suite.name}
+                      {item.label}
                     </Link>
                   ))}
                 </div>
