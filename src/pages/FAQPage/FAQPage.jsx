@@ -86,7 +86,7 @@ const faqSectionsEn = [
       },
       {
         question: 'What is your cancellation policy?',
-        answer: 'A 50% deposit is required to confirm your reservation and block your dates. Cancel up to 14 days before arrival for a full refund of your deposit. The remaining 50% balance is due exactly 14 days before arrival. Cancellations made within 14 days of arrival are refunded 50% of the total reservation amount.',
+        answer: 'A 50% deposit is required to confirm your reservation and block your dates. Cancel up to 14 days before arrival for a full refund of your deposit. The remaining 50% balance is due exactly 14 days before arrival. Cancellations made within 14 days of arrival are not eligible for a refund.',
       },
     ],
   },
@@ -188,7 +188,7 @@ const faqSectionsEs = [
       },
       {
         question: '¿Cuál es su política de cancelación?',
-        answer: 'Se requiere un depósito del 50% para confirmar su reserva y bloquear sus fechas. Puede cancelar hasta 14 días antes de la llegada y recibirá un reembolso completo de su depósito. El 50% restante del pago se solicita exactamente 14 días antes de la llegada. Las cancelaciones realizadas dentro de los 14 días previos a la llegada recibirán un reembolso del 50% del monto total de la reserva.',
+        answer: 'Se requiere un depósito del 50% para confirmar su reserva y bloquear sus fechas. Puede cancelar hasta 14 días antes de la llegada y recibirá un reembolso completo de su depósito. El 50% restante del pago se solicita exactamente 14 días antes de la llegada. Las cancelaciones realizadas dentro de los 14 días previos a la llegada no son elegibles para reembolso.',
       },
     ],
   },
