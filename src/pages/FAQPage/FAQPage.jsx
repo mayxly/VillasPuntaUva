@@ -58,11 +58,11 @@ const faqSectionsEn = [
       },
       {
         question: 'Is there a fee for extra guests?',
-        answer: 'Yes, $15 per night for each guest beyond a villa’s base capacity.',
+        answer: 'Yes, ₡6,750 per night for each guest beyond a villa’s base capacity.',
       },
       {
         question: 'Can I bring a pet?',
-        answer: 'Yes, every villa is pet-friendly. Pets are $10 per night.',
+        answer: 'Yes, every villa is pet-friendly. Pets are ₡4,500 per night.',
       },
       {
         question: 'Does pricing change during the holidays?',
@@ -160,11 +160,11 @@ const faqSectionsEs = [
       },
       {
         question: '¿Hay un cargo por huéspedes adicionales?',
-        answer: 'Sí, $15 por noche por cada huésped adicional a la capacidad base de la villa.',
+        answer: 'Sí, ₡6 750 por noche por cada huésped adicional a la capacidad base de la villa.',
       },
       {
         question: '¿Puedo llevar una mascota?',
-        answer: 'Sí, todas las villas son pet-friendly. Las mascotas tienen un costo de $10 por noche.',
+        answer: 'Sí, todas las villas son pet-friendly. Las mascotas tienen un costo de ₡4 500 por noche.',
       },
       {
         question: '¿Las tarifas cambian en fechas festivas?',

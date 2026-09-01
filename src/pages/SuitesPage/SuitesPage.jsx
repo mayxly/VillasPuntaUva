@@ -7,6 +7,7 @@ import { getLocalizedSuites, getLowestNightlyRate, isSuiteAvailable } from '../.
 import styles from './SuitesPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 import SEO from '../../components/SEO/SEO'
+import { formatColones } from '../../utils/currency'
 
 const seoText = {
   en: {
@@ -26,12 +27,6 @@ const initialBookingValue = {
   kidsUnder5: 0,
   pets: 0,
 }
-
-const priceFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumFractionDigits: 0,
-})
 
 function parseDateParam(value) {
   if (!value) return null
@@ -81,7 +76,6 @@ function getMaxGuests(suite) {
 
 function SuiteListingCard({ suite, dimmed, searchParams }) {
   const { language, locale, t, localizePath } = useLanguage()
-  const formatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
   const query = searchParams?.toString()
   return (
     <Link
@@ -104,7 +98,7 @@ function SuiteListingCard({ suite, dimmed, searchParams }) {
             <p className={styles.cardLocation}>{suite.location}, Costa Rica</p>
           </div>
           <p className={styles.price}>
-            <span className={styles.priceMeta}>{t('common.from')}</span> {formatter.format(getLowestNightlyRate(suite))}
+            <span className={styles.priceMeta}>{t('common.from')}</span> {formatColones(getLowestNightlyRate(suite), locale)}
             <span className={styles.priceNight}>/{t('common.night')}</span>
           </p>
         </div>

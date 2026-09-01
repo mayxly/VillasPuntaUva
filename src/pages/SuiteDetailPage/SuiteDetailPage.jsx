@@ -40,12 +40,7 @@ import DateRangePicker from '../../components/DateRangePicker/DateRangePicker'
 import styles from './SuiteDetailPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 import SEO, { SITE_URL } from '../../components/SEO/SEO'
-
-const priceFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumFractionDigits: 0,
-})
+import { formatColones, usdToColones } from '../../utils/currency'
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'short',
@@ -76,8 +71,8 @@ function getBookingValueFromParams(searchParams) {
   }
 }
 
-function formatPrice(value) {
-  return priceFormatter.format(value)
+function formatPrice(value, locale) {
+  return formatColones(value, locale)
 }
 
 function addDays(date, days) {
@@ -451,7 +446,6 @@ function AirbnbSection({ suite }) {
 
 function BookingPanel({ suite }) {
   const { locale, t } = useLanguage()
-  const priceFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
   const dateFormatter = new Intl.DateTimeFormat(locale, { month: 'short', day: 'numeric' })
   const [searchParams] = useSearchParams()
   const [bookingValue, setBookingValue] = useState(() => getBookingValueFromParams(searchParams))
@@ -514,7 +508,7 @@ function BookingPanel({ suite }) {
         <div className={styles.bookingHeader}>
           <p>
             <span>{t('common.from')}</span>
-            {priceFormatter.format(getLowestNightlyRate(suite))}
+            {formatColones(getLowestNightlyRate(suite), locale)}
           </p>
           <span>/{t('common.night')}</span>
         </div>
@@ -558,45 +552,45 @@ function BookingPanel({ suite }) {
               <span>
                 {t('booking.nightlySubtotal', { count: visibleEstimate.nights.length, unit: visibleEstimate.nights.length === 1 ? t('common.night') : t('common.nights') })}
               </span>
-              <strong>{formatPrice(visibleEstimate.nightlySubtotal)}</strong>
+              <strong>{formatPrice(visibleEstimate.nightlySubtotal, locale)}</strong>
             </div>
             {visibleEstimate.monthlyDiscount > 0 && (
               <div className={styles.lineItem}>
                 <span>{t('booking.monthlyDiscount')}</span>
-                <strong>-{formatPrice(visibleEstimate.monthlyDiscount)}</strong>
+                <strong>-{formatPrice(visibleEstimate.monthlyDiscount, locale)}</strong>
               </div>
             )}
             {visibleEstimate.weeklyDiscount > 0 && (
               <div className={styles.lineItem}>
                 <span>{t('booking.weeklyDiscount')}</span>
-                <strong>-{formatPrice(visibleEstimate.weeklyDiscount)}</strong>
+                <strong>-{formatPrice(visibleEstimate.weeklyDiscount, locale)}</strong>
               </div>
             )}
             {visibleEstimate.lastMinuteDiscount > 0 && (
               <div className={styles.lineItem}>
                 <span>{t('booking.lastMinuteDiscount')}</span>
-                <strong>-{formatPrice(visibleEstimate.lastMinuteDiscount)}</strong>
+                <strong>-{formatPrice(visibleEstimate.lastMinuteDiscount, locale)}</strong>
               </div>
             )}
             {visibleEstimate.extraGuestFee > 0 && (
               <div className={styles.lineItem}>
                 <span>{t('booking.extraGuestFee', { count: visibleEstimate.extraGuests })}</span>
-                <strong>{formatPrice(visibleEstimate.extraGuestFee)}</strong>
+                <strong>{formatPrice(visibleEstimate.extraGuestFee, locale)}</strong>
               </div>
             )}
             {visibleEstimate.petFee > 0 && (
               <div className={styles.lineItem}>
                 <span>{t('booking.petFee', { count: visibleEstimate.petCount })}</span>
-                <strong>{formatPrice(visibleEstimate.petFee)}</strong>
+                <strong>{formatPrice(visibleEstimate.petFee, locale)}</strong>
               </div>
             )}
             <div className={styles.lineItem}>
                 <span>{t('booking.cleaningFee')}</span>
-              <strong>{formatPrice(visibleEstimate.cleaningFee)}</strong>
+              <strong>{formatPrice(visibleEstimate.cleaningFee, locale)}</strong>
             </div>
             <div className={styles.totalLine}>
               <span>{t('booking.estimatedTotal')}</span>
-              <strong>{formatPrice(visibleEstimate.total)}</strong>
+              <strong>{formatPrice(visibleEstimate.total, locale)}</strong>
             </div>
 
             <button
@@ -611,7 +605,7 @@ function BookingPanel({ suite }) {
               {visibleEstimate.nightlyRates.map((night) => (
                 <div key={night.date.toISOString()}>
                   <span>{dateFormatter.format(night.date)}</span>
-                  <span>{formatPrice(night.rate)}</span>
+                  <span>{formatPrice(night.rate, locale)}</span>
                 </div>
               ))}
             </div>
@@ -652,7 +646,7 @@ export default function SuiteDetailPage() {
     image: (suite.featuredGallery?.length ? suite.featuredGallery : [suite.image]).map((image) => `${SITE_URL}${image}`),
     url: `${SITE_URL}/suites/${suite.slug}`,
     telephone: '+506-6145-9916',
-    priceRange: `$${getLowestNightlyRate(suite)}`,
+    priceRange: `₡${Math.round(usdToColones(getLowestNightlyRate(suite)))}`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Punta Uva',
@@ -696,7 +690,7 @@ export default function SuiteDetailPage() {
         </div>
         <p className={styles.heroPrice}>
           <span>{t('common.from')}</span>
-          {new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(getLowestNightlyRate(suite))}
+          {formatColones(getLowestNightlyRate(suite), locale)}
           <span>/{t('common.night')}</span>
         </p>
       </section>
@@ -738,14 +732,14 @@ export default function SuiteDetailPage() {
               <div className={styles.rateCard}>
                 <LuCalendarDays size={20} />
                 <h3>{t('suites.rateHigh')}</h3>
-                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(currentRates.high.weekday)} {t('suites.weekdays')}</p>
-                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(currentRates.high.weekend)} {t('suites.weekends')}</p>
+                <p>{formatColones(currentRates.high.weekday, locale)} {t('suites.weekdays')}</p>
+                <p>{formatColones(currentRates.high.weekend, locale)} {t('suites.weekends')}</p>
               </div>
               <div className={styles.rateCard}>
                 <LuCalendarDays size={20} />
                 <h3>{t('suites.rateLow')}</h3>
-                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(currentRates.low.weekday)} {t('suites.weekdays')}</p>
-                <p>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(currentRates.low.weekend)} {t('suites.weekends')}</p>
+                <p>{formatColones(currentRates.low.weekday, locale)} {t('suites.weekdays')}</p>
+                <p>{formatColones(currentRates.low.weekend, locale)} {t('suites.weekends')}</p>
               </div>
             </div>
 
@@ -755,17 +749,17 @@ export default function SuiteDetailPage() {
                 <ul className={styles.feesList}>
                   <li>
                     <span>{t('booking.cleaningFee')}</span>
-                    <strong>{new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(suite.cleaningFee)}</strong>
+                    <strong>{formatColones(suite.cleaningFee, locale)}</strong>
                   </li>
                   {(suite.maxGuests ?? suite.sleeps) > suite.sleeps && (
                     <li>
                       <span>{t('suites.extraGuestFeeLabel')}</span>
-                      <strong>${EXTRA_GUEST_NIGHTLY_FEE}/{t('common.night')}</strong>
+                      <strong>{formatColones(EXTRA_GUEST_NIGHTLY_FEE, locale)}/{t('common.night')}</strong>
                     </li>
                   )}
                   <li>
                     <span>{t('suites.petFeeLabel')}</span>
-                    <strong>${PET_NIGHTLY_FEE}/{t('common.night')}</strong>
+                    <strong>{formatColones(PET_NIGHTLY_FEE, locale)}/{t('common.night')}</strong>
                   </li>
                 </ul>
               </div>
