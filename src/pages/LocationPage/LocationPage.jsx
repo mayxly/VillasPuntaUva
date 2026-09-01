@@ -144,7 +144,7 @@ export default function LocationPage() {
         </div>
         <div
           className={styles.sisterImage}
-          style={{ backgroundImage: "url('/images/beach/beach-10.webp')" }}
+          style={{ backgroundImage: "url('/images/beach/beach-14.webp')" }}
           role="img"
           aria-label={t('pages.locationSisterHeading')}
         />
