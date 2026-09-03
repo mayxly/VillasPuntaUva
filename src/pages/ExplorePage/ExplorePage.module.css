@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('/images/attractions/attraction.webp') center center / cover no-repeat;
+  background: url('/images/explore/attraction.webp') center center / cover no-repeat;
   overflow: hidden;
 }
 
@@ -197,7 +197,7 @@
   gap: 16px;
 }
 
-.attractionImage {
+.exploreImage {
   width: 100%;
   min-height: 132px;
   aspect-ratio: 4 / 3;

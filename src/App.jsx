@@ -14,7 +14,7 @@ const SuitesPage = lazy(() => import('./pages/SuitesPage/SuitesPage'))
 const SuiteDetailPage = lazy(() => import('./pages/SuiteDetailPage/SuiteDetailPage'))
 const LocationPage = lazy(() => import('./pages/LocationPage/LocationPage'))
 const AboutPage = lazy(() => import('./pages/AboutPage/AboutPage'))
-const AttractionsPage = lazy(() => import('./pages/AttractionsPage/AttractionsPage'))
+const ExplorePage = lazy(() => import('./pages/ExplorePage/ExplorePage'))
 const ContactPage = lazy(() => import('./pages/ContactPage/ContactPage'))
 const FAQPage = lazy(() => import('./pages/FAQPage/FAQPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'))
@@ -27,7 +27,7 @@ const routes = [
   { path: '/suites/:slug', element: <SuiteDetailPage /> },
   { path: '/location', element: <LocationPage /> },
   { path: '/about', element: <AboutPage /> },
-  { path: '/attractions', element: <AttractionsPage /> },
+  { path: '/explore', element: <ExplorePage /> },
   { path: '/contact', element: <ContactPage /> },
   { path: '/faq', element: <FAQPage /> },
 ]

@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
-import { attractions } from '../../data/attractions'
-import styles from './Attractions.module.css'
+import { explore } from '../../data/explore'
+import styles from './Explore.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 
-export default function Attractions() {
+export default function Explore() {
   const { language, t, localizePath } = useLanguage()
-  const attractionNames = {
+  const exploreNames = {
     'Ocean Adventures': 'Aventuras en el océano',
     'Jungle & Wildlife': 'Selva y vida silvestre',
     'Culture & Wellness': 'Cultura y bienestar',
@@ -19,26 +19,26 @@ export default function Attractions() {
           {t('home.exploreText')}
         </p>
         <div className={styles.grid}>
-          {attractions.map((item) => (
+          {explore.map((item) => (
             <Link
               key={item.id}
-              to={localizePath(`/attractions#${item.targetId}`)}
+              to={localizePath(`/explore#${item.targetId}`)}
               className={styles.card}
             >
               <img
                 src={item.image}
-                alt={language === 'es' ? attractionNames[item.name] : item.name}
+                alt={language === 'es' ? exploreNames[item.name] : item.name}
                 className={styles.image}
                 loading="lazy"
                 decoding="async"
               />
               <div className={styles.overlay} />
-              <h3 className={styles.title}>{language === 'es' ? attractionNames[item.name] : item.name}</h3>
+              <h3 className={styles.title}>{language === 'es' ? exploreNames[item.name] : item.name}</h3>
             </Link>
           ))}
         </div>
         <div className={styles.btnWrap}>
-          <Link to={localizePath('/attractions')} className={styles.btn}>{t('home.viewAttractions')}</Link>
+          <Link to={localizePath('/explore')} className={styles.btn}>{t('home.viewExplore')}</Link>
         </div>
       </div>
     </section>

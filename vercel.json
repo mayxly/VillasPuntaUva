@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/attractions", "destination": "/explore", "permanent": true },
+    { "source": "/es/attractions", "destination": "/es/explore", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]

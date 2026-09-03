@@ -1,14 +1,14 @@
-import styles from './AttractionsPage.module.css'
+import styles from './ExplorePage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 import SEO from '../../components/SEO/SEO'
 
 const seoText = {
   en: {
-    title: 'Attractions Near Punta Uva & Puerto Viejo | Villas Punta Uva',
+    title: 'Explore Punta Uva & Puerto Viejo | Villas Punta Uva',
     description: 'Tours, diving, surf lessons, chocolate tours, horseback riding, wildlife sanctuaries, and nightlife near Punta Uva and Puerto Viejo, Costa Rica.',
   },
   es: {
-    title: 'Atracciones en Punta Uva y Puerto Viejo | Villas Punta Uva',
+    title: 'Explora Punta Uva y Puerto Viejo | Villas Punta Uva',
     description: 'Tours, buceo, clases de surf, tours de chocolate, cabalgatas, santuarios de vida silvestre y vida nocturna cerca de Punta Uva y Puerto Viejo, Costa Rica.',
   },
 }
@@ -101,9 +101,9 @@ const activitySections = [
     subtitle: 'Water Activities',
     contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
-      '/images/attractions/outdoor-1.webp',
-      '/images/attractions/outdoor-2.webp',
-      '/images/attractions/outdoor-3.webp',
+      '/images/explore/outdoor-1.webp',
+      '/images/explore/outdoor-2.webp',
+      '/images/explore/outdoor-3.webp',
     ],
     items: [
       {
@@ -130,9 +130,9 @@ const activitySections = [
     provider: 'Punta Uva, Dive Center',
     contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
-      '/images/attractions/dive-1.webp',
-      '/images/attractions/dive-2.webp',
-      '/images/attractions/dive-3.webp',
+      '/images/explore/dive-1.webp',
+      '/images/explore/dive-2.webp',
+      '/images/explore/dive-3.webp',
     ],
     items: [
       {
@@ -158,9 +158,9 @@ const activitySections = [
     subtitle: 'Nativo Adventures',
     contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
-      '/images/attractions/tour-1.webp',
-      '/images/attractions/tour-2.webp',
-      '/images/attractions/tour-3.webp',
+      '/images/explore/tour-1.webp',
+      '/images/explore/tour-2.webp',
+      '/images/explore/tour-3.webp',
     ],
     items: [
       {
@@ -185,9 +185,9 @@ const activitySections = [
     title: 'Surf Lessons',
     contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
-      '/images/attractions/surf-1.webp',
-      '/images/attractions/surf-2.webp',
-      '/images/attractions/surf-3.webp',
+      '/images/explore/surf-1.webp',
+      '/images/explore/surf-2.webp',
+      '/images/explore/surf-3.webp',
     ],
     items: [
       {
@@ -216,9 +216,9 @@ const activitySections = [
     schedule: 'Tours offered every Monday through Saturday at 10 am and 2pm. No tours on Sunday',
     contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
-      '/images/attractions/chocolate-1.webp',
-      '/images/attractions/chocolate-2.webp',
-      '/images/attractions/chocolate-3.webp',
+      '/images/explore/chocolate-1.webp',
+      '/images/explore/chocolate-2.webp',
+      '/images/explore/chocolate-3.webp',
     ],
     items: [
       {
@@ -251,9 +251,9 @@ const activitySections = [
     schedule: 'Monday to Friday from 9am - 5:30pm. Saturday from 9am - 12pm. Sunday closed',
     contact: 'Message +506 6145 9916 on Whatsapp to book',
     images: [
-      '/images/attractions/horse-1.webp',
-      '/images/attractions/horse-2.webp',
-      '/images/attractions/horse-3.webp',
+      '/images/explore/horse-1.webp',
+      '/images/explore/horse-2.webp',
+      '/images/explore/horse-3.webp',
     ],
     items: [
       {
@@ -278,9 +278,9 @@ const activitySections = [
     title: 'Nature',
     subtitle: 'Explore the Caribbean',
     images: [
-      '/images/attractions/nature-1.webp',
-      '/images/attractions/nature-2.webp',
-      '/images/attractions/nature-3.webp',
+      '/images/explore/nature-1.webp',
+      '/images/explore/nature-2.webp',
+      '/images/explore/nature-3.webp',
     ],
     items: [
       {
@@ -305,9 +305,9 @@ const activitySections = [
     title: 'Activities',
     subtitle: 'Explore the Caribbean',
     images: [
-      '/images/attractions/activity-1.webp',
-      '/images/attractions/activity-2.webp',
-      '/images/attractions/activity-3.webp',
+      '/images/explore/activity-1.webp',
+      '/images/explore/activity-2.webp',
+      '/images/explore/activity-3.webp',
     ],
     items: [
       {
@@ -336,9 +336,9 @@ const activitySections = [
     id: 'night-life',
     title: 'Night Life',
     images: [
-      '/images/attractions/cuisine.webp',
-      '/images/attractions/night-1.webp',
-      '/images/attractions/night-3.webp',
+      '/images/explore/cuisine.webp',
+      '/images/explore/night-1.webp',
+      '/images/explore/night-3.webp',
     ],
     contacts: [
       ['Tuktuk Numbers', '+506 8783 4249'],
@@ -369,13 +369,13 @@ const activitySections = [
   },
 ]
 
-function AttractionImage({ label, src }) {
+function ExploreImage({ label, src }) {
   if (src) {
     return (
       <img
         src={src}
         alt={label}
-        className={styles.attractionImage}
+        className={styles.exploreImage}
         loading="lazy"
         decoding="async"
       />
@@ -462,7 +462,7 @@ function ActivitySection({ section, index, language }) {
         <div className={styles.sectionGrid}>
           <div className={styles.mediaStack}>
             {(section.images ?? Array.from({ length: section.imageCount })).map((image, imageIndex) => (
-              <AttractionImage
+              <ExploreImage
                 key={imageIndex}
                 src={image}
                 label={`${localizeActivityText(section.title, language)} ${language === 'es' ? 'imagen' : 'image'} ${imageIndex + 1}`}
@@ -481,12 +481,12 @@ function ActivitySection({ section, index, language }) {
   )
 }
 
-export default function AttractionsPage() {
+export default function ExplorePage() {
   const { language, t } = useLanguage()
   const seo = seoText[language]
   return (
     <div className={styles.page}>
-      <SEO title={seo.title} description={seo.description} path="/attractions" />
+      <SEO title={seo.title} description={seo.description} path="/explore" />
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <img
@@ -494,9 +494,9 @@ export default function AttractionsPage() {
             alt=""
             className={styles.heroIcon}
           />
-          <h1 className={styles.heroTitle}>{t('pages.attractions')}</h1>
+          <h1 className={styles.heroTitle}>{t('pages.explore')}</h1>
           <p className={styles.heroText}>
-            {t('pages.attractionsHero')}
+            {t('pages.exploreHero')}
           </p>
         </div>
       </section>

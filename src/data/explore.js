@@ -1,26 +1,26 @@
-export const attractions = [
+export const explore = [
   {
     id: 1,
     name: 'Ocean Adventures',
-    image: '/images/attractions/snorkeling.webp',
+    image: '/images/explore/snorkeling.webp',
     targetId: 'outdoor-adventures',
   },
   {
     id: 2,
     name: 'Jungle & Wildlife',
-    image: '/images/attractions/wildlife.webp',
+    image: '/images/explore/wildlife.webp',
     targetId: 'nature',
   },
   {
     id: 3,
     name: 'Culture & Wellness',
-    image: '/images/attractions/wellness.webp',
+    image: '/images/explore/wellness.webp',
     targetId: 'activities',
   },
   {
     id: 4,
     name: 'Tours & Nightlife',
-    image: '/images/attractions/night-3.webp',
+    image: '/images/explore/night-3.webp',
     targetId: 'night-life',
   },
 ]

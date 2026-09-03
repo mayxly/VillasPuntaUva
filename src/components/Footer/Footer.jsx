@@ -39,7 +39,7 @@ export default function Footer() {
               <Link to={localizePath('/suites')}>{t('nav.suites')}</Link>
               <Link to={localizePath('/location')}>{t('nav.location')}</Link>
               <Link to={localizePath('/about')}>{t('nav.about')}</Link>
-              <Link to={localizePath('/attractions')}>{t('nav.attractions')}</Link>
+              <Link to={localizePath('/explore')}>{t('nav.explore')}</Link>
               <Link to={localizePath('/contact')}>{t('nav.contact')}</Link>
               <Link to={localizePath('/faq')}>{t('nav.faqs')}</Link>
             </nav>
