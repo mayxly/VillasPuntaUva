@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { LuMapPin } from 'react-icons/lu'
 import styles from './LocationPage.module.css'
 import { useLanguage } from '../../i18n/LanguageContext'
 import SEO from '../../components/SEO/SEO'
@@ -15,6 +16,7 @@ const seoText = {
 }
 
 const GOOGLE_MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Villas+Punta+Uva%2C+Puerto+Viejo%2C+Lim%C3%B3n%2C+Costa+Rica'
+const GOOGLE_MAPS_EMBED_URL = 'https://www.google.com/maps?cid=7772503930306224621&output=embed'
 const PUNTA_UVA_BEACH_MAPS_URL = 'https://maps.app.goo.gl/FcyoXvCmKSrKsCDD7'
 const VILLAS_ARRECIFE_WAZE_URL = 'https://waze.com/ul/hd1tny67yu'
 
@@ -65,6 +67,7 @@ export default function LocationPage() {
   return (
     <div className={styles.page}>
       <SEO title={seo.title} description={seo.description} path="/location" />
+
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <img
@@ -75,6 +78,28 @@ export default function LocationPage() {
           <h1 className={styles.heroTitle}>{t('pages.location')}</h1>
           <p className={styles.heroText}>{t('pages.locationHero')}</p>
         </div>
+      </section>
+
+      <section className={styles.mapSection}>
+        <div className={styles.mapFrame}>
+          <iframe
+            className={styles.mapEmbed}
+            src={GOOGLE_MAPS_EMBED_URL}
+            title={t('pages.locationMapTitle')}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
+        <a
+          href={GOOGLE_MAPS_URL}
+          target="_blank"
+          rel="noreferrer"
+          className={styles.mapSectionBtn}
+        >
+          <LuMapPin size={17} />
+          {t('pages.locationGetDirections')}
+        </a>
       </section>
 
       {/* Section 1: Location to the beach */}

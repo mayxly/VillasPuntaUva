@@ -788,6 +788,11 @@ export default function SuiteDetailPage() {
               <p>{t('suites.cancellationPolicyText')}</p>
             </div>
 
+            <div className={styles.policyCard}>
+              <h3><LuShieldCheck size={18} />{t('suites.longTermCancellationPolicyLabel')}</h3>
+              <p>{t('suites.longTermCancellationPolicyText')}</p>
+            </div>
+
             <p className={styles.rateNote}>{t('suites.holidayPricingNote')}</p>
           </div>
 

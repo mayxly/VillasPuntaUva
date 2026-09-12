@@ -58,7 +58,7 @@ const faqSectionsEn = [
       },
       {
         question: 'Is there a fee for extra guests?',
-        answer: 'Yes, ₡6,750 per night for each guest beyond a villa’s base capacity.',
+        answer: 'Yes, ₡6,750 per night for each guest beyond a villa’s base capacity. An extra beach towel and bath towel are provided for that additional guest.',
       },
       {
         question: 'Can I bring a pet?',
@@ -87,6 +87,10 @@ const faqSectionsEn = [
       {
         question: 'What is your cancellation policy?',
         answer: 'A 50% deposit is required to confirm your reservation and block your dates. Cancel up to 14 days before arrival for a full refund of your deposit. The remaining 50% balance is due exactly 14 days before arrival. Cancellations made within 14 days of arrival are not eligible for a refund.',
+      },
+      {
+        question: 'What is your cancellation policy for long-term stays?',
+        answer: 'A 50% deposit is required to confirm your reservation and block your dates. Cancel up to 1 month before arrival for a full refund of your deposit. The remaining 50% balance is due exactly 1 month before arrival. Cancellations made within 1 month of arrival are not eligible for a refund.',
       },
     ],
   },
@@ -160,7 +164,7 @@ const faqSectionsEs = [
       },
       {
         question: '¿Hay un cargo por huéspedes adicionales?',
-        answer: 'Sí, ₡6 750 por noche por cada huésped adicional a la capacidad base de la villa.',
+        answer: 'Sí, ₡6 750 por noche por cada huésped adicional a la capacidad base de la villa. Se incluye una toalla de playa y una toalla de baño adicionales para ese huésped.',
       },
       {
         question: '¿Puedo llevar una mascota?',
@@ -189,6 +193,10 @@ const faqSectionsEs = [
       {
         question: '¿Cuál es su política de cancelación?',
         answer: 'Se requiere un depósito del 50% para confirmar su reserva y bloquear sus fechas. Puede cancelar hasta 14 días antes de la llegada y recibirá un reembolso completo de su depósito. El 50% restante del pago se solicita exactamente 14 días antes de la llegada. Las cancelaciones realizadas dentro de los 14 días previos a la llegada no son elegibles para reembolso.',
+      },
+      {
+        question: '¿Cuál es su política de cancelación para estadías largas?',
+        answer: 'Se requiere un depósito del 50% para confirmar su reserva y bloquear sus fechas. Puede cancelar hasta 1 mes antes de la llegada y recibirá un reembolso completo de su depósito. El 50% restante del pago se solicita exactamente 1 mes antes de la llegada. Las cancelaciones realizadas dentro de 1 mes de la llegada no son elegibles para reembolso.',
       },
     ],
   },

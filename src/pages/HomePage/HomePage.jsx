@@ -13,7 +13,7 @@ import { useLanguage } from '../../i18n/LanguageContext'
 const seoText = {
   en: {
     title: 'Villas Punta Uva | Luxury Villas, Punta Uva, Costa Rica',
-    description: "Steps from one of Costa Rica's most beautiful beaches, Villas Punta Uva brings families, friends, and couples together for laid-back luxury wrapped in jungle and Caribbean sea air.",
+    description: "Just steps from one of the Caribbean's most beautiful beaches. Luxury villas for families, couples and friends in Punta Uva, Puerto Viejo, Costa Rica.",
   },
   es: {
     title: 'Villas Punta Uva | Villas de Lujo, Punta Uva, Costa Rica',

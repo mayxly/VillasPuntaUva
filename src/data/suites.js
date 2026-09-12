@@ -286,7 +286,7 @@ export const suites = [
       },
       {
         title: 'Kitchen and dining',
-        items: ['Kitchen', 'Refrigerator', 'Microwave', 'Cooking basics', 'Dishes and silverware', 'Freezer', 'Dishwasher', 'Stove', 'Oven', 'Coffee maker', 'Wine glasses', 'Toaster', 'Baking sheet', 'Blender', 'Dining table'],
+        items: ['Kitchen', 'Refrigerator', 'Microwave', 'Cooking basics', 'Dishes and silverware', 'Freezer', 'Stove', 'Oven', 'Coffee maker', 'Wine glasses', 'Toaster', 'Baking sheet', 'Blender', 'Dining table'],
       },
       {
         title: 'Location and outdoor',
