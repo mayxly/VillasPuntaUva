@@ -1,30 +1,22 @@
-name: Prerender for AI/Search Crawlers
+name: Build and Prerender
 
 # Vercel's own build (`vite build`) does not run Playwright, since Chromium
 # has been unreliable to install on Vercel's build image. Instead, this
 # workflow builds the site and runs scripts/prerender.mjs on a GitHub-hosted
 # runner (where `playwright install --with-deps` works reliably), then
-# commits only the generated index.html snapshots into prerendered/. The
-# "build" script in package.json copies prerendered/ on top of dist/ after
-# `vite build`, so Vercel ships these snapshots without ever touching a
-# browser itself.
+# commits the generated index.html snapshots into prerendered/. The
+# "build" script in package.json merges prerendered/ onto dist/ after
+# `vite build` (see scripts/apply-prerendered.mjs), so Vercel ships these
+# snapshots without ever touching a browser itself.
+#
+# No path filter: this also re-runs after every Airbnb sync commit (which
+# pushes to main), so prerendered pages keep reflecting current
+# availability, not just code changes.
 
 on:
   push:
-    branches: [main]
-    paths:
-      - 'src/**'
-      - '!src/data/airbnbAvailability.json'
-      - 'index.html'
-      - 'public/**'
-      - 'scripts/prerender.mjs'
-      - 'package.json'
-  # Re-run after each Airbnb sync so prerendered pages reflect current
-  # availability, without re-running on every unrelated code push twice.
-  workflow_run:
-    workflows: ['Sync Airbnb Availability']
-    types: [completed]
-  workflow_dispatch: {}
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -35,29 +27,28 @@ concurrency:
 
 jobs:
   prerender:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main
 
-      - name: Set up Node
-        uses: actions/setup-node@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
         with:
-          node-version: 'lts/*'
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Chromium
+      - name: Install Playwright
         run: npx playwright install --with-deps chromium
 
-      - name: Build site
+      - name: Build Vite app
         run: npx vite build
 
-      - name: Prerender routes
+      - name: Prerender pages
         run: node scripts/prerender.mjs
 
       - name: Sync prerendered HTML into prerendered/
