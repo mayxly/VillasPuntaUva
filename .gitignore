@@ -4,3 +4,7 @@ dist-ssr
 *.local
 .DS_Store
 airbnb-ical.config.json
+
+# Raw/unedited source footage — too large for git, keep only the
+# compressed, web-ready exports under public/videos.
+assets/videos
